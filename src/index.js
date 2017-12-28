@@ -119,7 +119,8 @@ firebase.auth().onAuthStateChanged( (user) => {
 
      // Think over before remove this like, may cause matchedPropertys = null
      Fb.app.updateUid();
-     MobxStore.router.goTo( views.home , {}, MobxStore )
+     // Once, user login redirect to "List" or "Home"
+     MobxStore.router.goTo( views.list , {}, MobxStore )
   } else {
        console.log( 'user donot sign')
        //MobxStore.app.startLogout();

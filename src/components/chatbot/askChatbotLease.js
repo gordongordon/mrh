@@ -654,7 +654,7 @@ class AskChatbotLease extends React.Component {
         //on.OPTION1 .. n
         id: "isPetAllowedBoolean",
         options: [
-          { value: "true", label: "可以", trigger: "hasHomeHardware" },
+          { value: "true", label: "可以", trigger: "hasHomeHardware"    },
           { value: "false", label: "唔可以", trigger: "hasHomeHardware" }
         ]
       },
@@ -1011,7 +1011,7 @@ class AskChatbotLease extends React.Component {
       <div>
         <ThemeProvider theme={theme}>
           <ChatBot
-            headerTitle="Mr.House"
+            headerTitle="Mr.House - Lease"
             hideSubmitButton="false"
             // hideBotAvatar="false"
             placeholder="請輸入這裏"

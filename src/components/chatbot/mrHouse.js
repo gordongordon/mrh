@@ -265,6 +265,9 @@ class MrHouse extends React.Component {
       break;
       case 'lease':  MobxStore.router.goTo(views.askChatbotLease );
       break;
+      case 'signUp' : MobxStore.router.goTo(views.askChatbotSignUp );
+      break;
+      case 'signIn' : MobxStore.router.goTo(views.askChatbotSignIn );
     }
 
 //    MobxStore.router.goTo(views.askChatbotBuy );
@@ -451,6 +454,8 @@ class MrHouse extends React.Component {
           { value: "sale", label: "我想 賣樓", trigger: "processMessage" },
           { value: "rent", label: "我想 租屋", trigger: "processMessage" },
           { value: "lease", label: "我想 放租", trigger: "processMessage" },
+          { value: "signUp", label: "Go Sign Up", trigger: "processMessage" },
+          { value: "signIn", label: "Go Sign In", trigger: "processMessage" },
           { value: "stop", label: "stop", trigger: "processMessage" }
         ]
       },

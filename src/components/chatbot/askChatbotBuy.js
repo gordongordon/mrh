@@ -174,6 +174,7 @@ class Review extends React.Component {
       getEmailUserInput,
       getPhoneUserInput 
     } = this.state; 
+
     return (
       <div style={{ width: "100%", fontSize: "0.8rem" }}>
         心水樓盤：{getBuildingUserInput.value}
@@ -934,7 +935,7 @@ class AskChatbotBuy extends React.Component {
       <div>
       <ThemeProvider theme={theme}>
         <ChatBot
-          headerTitle="Mr.House"
+          headerTitle="Mr.House - Buy"
           hideSubmitButton="false"
           // hideBotAvatar="false"
           placeholder="請輸入這裏"

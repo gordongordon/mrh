@@ -454,7 +454,7 @@ class ChatAgentBuyRespond extends React.Component {
       <div>
       <ThemeProvider theme={theme}>
         <ChatBot
-          headerTitle="Mr.House"
+          headerTitle="Mr.House - Buy Respond"
           hideSubmitButton="false"
           // hideBotAvatar="false"
           placeholder="請輸入這裏"

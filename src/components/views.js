@@ -52,7 +52,8 @@ import AskChatbotBuy from 'chatbot/AskChatbotBuy';
 import AskChatbotSale from 'chatbot/AskChatbotSale';
 import AskChatbotRent from 'chatbot/AskChatbotRent';
 import AskChatbotLease from 'chatbot/AskChatbotLease';
-
+import AskChatbotSignUp from 'chatbot/AskChatbotSignUp';
+import AskChatbotSignIn from 'chatbot/AskChatbotSignIn';
 
 import Loadable from 'react-loadable';
 //import Loading from  'loading'
@@ -184,7 +185,7 @@ const views = {
       FormAgentFilterLoader.preload();
       ListOfPropertysViewLoader.preload();
       ListOfAgentPropertysViewLoader.preload();
-      ListOfPropertysViewLoader.preload();
+//      ListOfPropertysViewLoader.preload();
       MatchLeasePanelViewLoader.preload();
       FormBuyAgentPropertyAntMobileLoader.preload();
       FormSaleAgentPropertyAntMobileLoader.preload();
@@ -361,7 +362,7 @@ const views = {
 
     },
     beforeExit: (route, params) => {
-      console.log('exiting ListOfPRoperysView!');
+      console.log('exiting lease!');
       console.log('params changed to', params);
       MobxStore.app.previousView = route;
     }
@@ -374,7 +375,7 @@ const views = {
 
     },
     beforeExit: (route, params) => {
-      console.log('exiting ListOfPRoperysView!');
+      console.log('exiting rent!');
       console.log('params changed to', params);
       MobxStore.app.previousView = route;
     }
@@ -386,7 +387,7 @@ const views = {
       MobxStore.app.setTitle( '買家');
     },
     beforeExit: (route, params) => {
-      console.log('exiting ListOfPRoperysView!');
+      console.log('exiting buy!');
       console.log('params changed to', params);
       MobxStore.app.previousView = route;
     }
@@ -441,7 +442,7 @@ const views = {
       }
     },
     beforeExit: (route, params, store, queryParams) => {
-      console.log('exiting ListOfAgentProperysView!');
+      console.log('exiting listAgent!');
       console.log('params changed to', params);
       MobxStore.app.previousView = route;
       MobxStore.app.params = params;
@@ -459,7 +460,7 @@ buyAgentForm : new Route({
 
   },
   beforeExit: (route, params) => {
-    console.log('exiting ListOfPRoperysView!');
+    console.log('exiting buyAgentForm!');
     console.log('params changed to', params);
     MobxStore.app.previousView = route;
   }
@@ -472,7 +473,7 @@ saleAgentForm : new Route({
 
   },
   beforeExit: (route, params) => {
-    console.log('exiting ListOfPRoperysView!');
+    console.log('exiting saleAgentForm!');
     console.log('params changed to', params);
     MobxStore.app.previousView = route;
   }
@@ -485,7 +486,7 @@ rentAgentForm : new Route({
 
   },
   beforeExit: (route, params) => {
-    console.log('exiting ListOfPRoperysView!');
+    console.log('exiting rentAgentForm!');
     console.log('params changed to', params);
     MobxStore.app.previousView = route;
   }
@@ -498,7 +499,7 @@ leaseAgentForm : new Route({
 
   },
   beforeExit: (route, params) => {
-    console.log('exiting ListOfPRoperysView!');
+    console.log('exiting leaseAgentForm!');
     console.log('params changed to', params);
     MobxStore.app.previousView = route;
   }
@@ -511,7 +512,7 @@ leaseAgentForm : new Route({
       MobxStore.app.setTitle( 'Chat Bot 賣 樓');
     },
     beforeExit: (route, params) => {
-      console.log('exiting ListOfPRoperysView!');
+      console.log('exiting mrHouse!');
       console.log('params changed to', params);
       MobxStore.app.pre1viousView = route;
     }
@@ -524,7 +525,7 @@ leaseAgentForm : new Route({
         MobxStore.app.setTitle( 'CBUY_Matching');
       },
       beforeExit: (route, params) => {
-        console.log('exiting ListOfPRoperysView!');
+        console.log('exiting chatMatching!');
         console.log('params changed to', params);
         MobxStore.app.previousView = route;
       }
@@ -537,7 +538,7 @@ leaseAgentForm : new Route({
       MobxStore.app.setTitle( 'CBUY_Matching');
     },
     beforeExit: (route, params) => {
-      console.log('exiting ListOfPRoperysView!');
+      console.log('exiting chatAgentBuyRespond!');
       console.log('params changed to', params);
       MobxStore.app.previousView = route;
     }
@@ -550,7 +551,7 @@ chatAgentSaleRespond : new Route({
       MobxStore.app.setTitle( 'CSALE_Matching');
     },
     beforeExit: (route, params) => {
-      console.log('exiting ListOfPRoperysView!');
+      console.log('exiting chatAgentSaleRespond!');
       console.log('params changed to', params);
       MobxStore.app.previousView = route;
     }
@@ -563,7 +564,7 @@ chatAgentSaleRespond : new Route({
       MobxStore.app.setTitle( 'CSALE_Matching');
     },
     beforeExit: (route, params) => {
-      console.log('exiting ListOfPRoperysView!');
+      console.log('exiting chatAgentRentRespond!');
       console.log('params changed to', params);
       MobxStore.app.previousView = route;
     }
@@ -576,7 +577,7 @@ chatAgentSaleRespond : new Route({
       MobxStore.app.setTitle( 'CSALE_Matching');
     },
     beforeExit: (route, params) => {
-      console.log('exiting ListOfPRoperysView!');
+      console.log('exiting chatAgentLeaseRespond!');
       console.log('params changed to', params);
       MobxStore.app.previousView = route;
     }
@@ -591,7 +592,7 @@ askChatbotBuy : new Route({
       MobxStore.app.setTitle( 'CSALE_Matching');
     },
     beforeExit: (route, params) => {
-      console.log('exiting ListOfPRoperysView!');
+      console.log('exiting askChatbotBuy!');
       console.log('params changed to', params);
       MobxStore.app.previousView = route;
     }
@@ -603,7 +604,7 @@ askChatbotSale : new Route({
     MobxStore.app.setTitle( 'CSALE_Matching');
   },
   beforeExit: (route, params) => {
-    console.log('exiting ListOfPRoperysView!');
+    console.log('exiting askChatbotSale!');
     console.log('params changed to', params);
     MobxStore.app.previousView = route;
   }
@@ -615,7 +616,7 @@ askChatbotRent : new Route({
     MobxStore.app.setTitle( 'CSALE_Matching');
   },
   beforeExit: (route, params) => {
-    console.log('exiting ListOfPRoperysView!');
+    console.log('exiting askChatbotRent!');
     console.log('params changed to', params);
     MobxStore.app.previousView = route;
   }
@@ -627,7 +628,31 @@ askChatbotLease : new Route({
     MobxStore.app.setTitle( 'CSALE_Matching');
   },
   beforeExit: (route, params) => {
-    console.log('exiting ListOfPRoperysView!');
+    console.log('exiting askChatbotLease!');
+    console.log('params changed to', params);
+    MobxStore.app.previousView = route;
+  }
+}),
+askChatbotSignUp : new Route({
+  path: '/askChatbotSignUp', 
+  component: <AskChatbotSignUp />,
+  onEnter: (route, params, store, queryParams) => {
+    MobxStore.app.setTitle( 'CSALE_Matching');
+  },
+  beforeExit: (route, params) => {
+    console.log('exiting askChatbotSignUp!');
+    console.log('params changed to', params);
+    MobxStore.app.previousView = route;
+  }
+}),
+askChatbotSignIn : new Route({
+  path: '/askChatbotSignIn', 
+  component: <AskChatbotSignIn />,
+  onEnter: (route, params, store, queryParams) => {
+    MobxStore.app.setTitle( 'CSALE_Matching');
+  },
+  beforeExit: (route, params) => {
+    console.log('exiting askChatbotSignIn!');
     console.log('params changed to', params);
     MobxStore.app.previousView = route;
   }
@@ -641,6 +666,8 @@ actionSheetExample : new Route({
     beforeExit: (route, params) => {
     }
   }),  
+
+  
   bmi : new Route({
     path: '/bmi',
     component: <BMIChatbot />,
