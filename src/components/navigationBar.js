@@ -65,24 +65,29 @@ export default class NavigationBar extends React.Component {
       buttonIndex => {
         this.setState({ clicked: BUTTONS[buttonIndex] });
 
-        // Buy
+        // Intro
         if (buttonIndex === 0) {
+          MobxStore.router.goTo(views.mrHouse);
+        }
+        // Buy
+        if (buttonIndex === 1) {
           MobxStore.router.goTo(views.askChatbotBuy);
         }
         // Sale
-        if (buttonIndex === 1) {
+        if (buttonIndex === 2) {
           MobxStore.router.goTo(views.askChatbotSale);
         }
         // Rent
-        if (buttonIndex === 2) {
+        if (buttonIndex === 3) {
           MobxStore.router.goTo(views.askChatbotRent);
         }
         // Lease
-        if (buttonIndex === 3) {
+        if (buttonIndex === 4) {
           MobxStore.router.goTo(views.askChatbotLease);
         }
         // Cancel
-        if (buttonIndex === 4) {
+        if (buttonIndex === 6) {
+          MobxStore.router.goTo(views.askChatbotSignIn);
         }
       }
     );
