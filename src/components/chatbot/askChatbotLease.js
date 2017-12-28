@@ -159,7 +159,6 @@ class Review extends React.Component {
       getPhoneUserInput,
 
       hasHomeHardwareBoolean,
-      getLeasingPeriodInput,
       isFreeForSevenDayBoolean,
       getDueDayInput,
       getLeasingPeriodInput
@@ -189,9 +188,13 @@ class Review extends React.Component {
       getDueDayInput,
     } = this.state;
 
+
+    
+    const address = JSON.parse( getBuildingUserInput.value );
+
     return (
       <div style={{ width: "100%", fontSize: "0.8rem" }}>
-        房租單位: {getBuildingUserInput.value}
+        房租單位: {address.label}
         <br />
         實用面積: {getNetSizeUserInput.value} 呎
         <br />
@@ -412,9 +415,10 @@ class AskChatbotLease extends React.Component {
 
     //p.uid = MobxStore.app.uid;
     //     ["NTTV", "MOS", "MOS0001"]
-    p.addressRegion = "NTTV";
-    p.addressLocation = "MOS";
-    p.nameOfBuilding = "MOS0001";
+    const address = JSON.parse( getBuildingUserInput.value );
+    p.addressRegion = address.region;
+    p.addressLocation = address.location;
+    p.nameOfBuilding = address.building;
 
     // p.dueDay = v.dueDay.toJSON();
     // p.earlyTimeToView = v.earlyTimeToView.toJSON();
@@ -550,7 +554,13 @@ class AskChatbotLease extends React.Component {
       {
         //
         id: "validaBuildingUserInput",
-        message: "你選擇左 「{previousValue}」!",
+        message: ({ previousValue, steps }) => {
+          const address = JSON.parse( previousValue);
+
+          return `你選擇左 「${
+              address.label
+          } 」!`;
+        },
         trigger: "validaBuildingBoolean"
       },
       {
@@ -654,7 +664,7 @@ class AskChatbotLease extends React.Component {
         //on.OPTION1 .. n
         id: "isPetAllowedBoolean",
         options: [
-          { value: "true", label: "可以", trigger: "hasHomeHardware"    },
+          { value: "true", label: "可以", trigger: "hasHomeHardware" },
           { value: "false", label: "唔可以", trigger: "hasHomeHardware" }
         ]
       },
@@ -669,8 +679,8 @@ class AskChatbotLease extends React.Component {
         //on.OPTION1 .. n
         id: "hasHomeHardwareBoolean",
         options: [
-          { value:  "true", label: "單位有傢俬提供", trigger: "getLeasePrice" },
-          { value: "false", label: "冇傢俬", trigger: "getLeasePrice" }
+          { value:  "true", label: "單位有傢俬提供", trigger: "getLeasingPeriod" },
+          { value: "false", label: "冇傢俬", trigger: "getLeasingPeriod" }
         ]
       },
       {
@@ -1011,7 +1021,7 @@ class AskChatbotLease extends React.Component {
       <div>
         <ThemeProvider theme={theme}>
           <ChatBot
-            headerTitle="Mr.House - Lease"
+            headerTitle="Mr.House"
             hideSubmitButton="false"
             // hideBotAvatar="false"
             placeholder="請輸入這裏"
