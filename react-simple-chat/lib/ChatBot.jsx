@@ -36,7 +36,7 @@ class ChatBot extends Component {
       inputValue: '',
       inputInvalid: false,
       defaultUserSettings: {},
-      newInputType: 'textarea'
+      newInputType: 'textarea',
     };
 
     this.renderStep = this.renderStep.bind(this);
@@ -106,11 +106,10 @@ class ChatBot extends Component {
     }, () => {
       // focus input if last step cached is a user step
       this.setState({ disabled: false }, () => {
-        console.log( '1this.input', this.input);
-        console.log( '1this.input.type', this.input.type);
-        console.log( '1currentStep', currentStep);
+        console.log('1this.input', this.input);
+        console.log('1this.input.type', this.input.type);
+        console.log('1currentStep', currentStep);
         this.input.pattern = currentStep.pattern;
-        
         this.input.type = currentStep.inputType;
         this.input.focus();
       });
@@ -184,7 +183,6 @@ class ChatBot extends Component {
     } = this.state;
 
     let { currentStep, previousStep } = this.state;
-    
     const isEnd = currentStep.end;
 
     if (data && data.value) {
@@ -256,9 +254,9 @@ class ChatBot extends Component {
         if (nextStep.user) {
           this.setState({ disabled: false }, () => {
 //            this.input.type = currentStep.type;
-console.log( '1this.input', this.input);
-console.log( '1this.input.type', this.input.type);
-console.log( '1currentStep', currentStep);
+  console.log('1this.input', this.input);
+  console.log('1this.input.type', this.input.type);
+  console.log('1currentStep', currentStep);
            this.input.pattern = currentStep.pattern;
            this.input.type = currentStep.inputType;
  

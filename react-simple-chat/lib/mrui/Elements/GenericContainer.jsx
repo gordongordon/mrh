@@ -30,11 +30,13 @@ const GenericContainer = styled.div`
     width: 80%;
   }
 `;
+
 // background: ${({ theme }) => theme.background};
 
-//border-radius: 1.3rem;
+// border-radius: 1.3rem;
 
 // border-bottom-left-radius: 1.3em;
+
 // border-bottom-right-radius: 1.3em;
 
 GenericContainer.defaultProps = {

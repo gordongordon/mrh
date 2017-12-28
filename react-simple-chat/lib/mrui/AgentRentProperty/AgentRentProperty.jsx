@@ -41,6 +41,7 @@ export default class AgentRentProperty extends React.Component {
     }
 
     render() {
+        const onWhatsapp = this.props.onWhatsapp;
         const onCall = this.props.onCall;
         const onTriggetNext = this.props.onTriggetNext;
         // const onSharePhone = this.props.onSharePhone;
@@ -75,6 +76,9 @@ export default class AgentRentProperty extends React.Component {
                 {
                     onCall && <Carousel.Button className="cmui-Button" onClick={ () => onCall( p.contactPhone ) } first> { p.contactPhone} </Carousel.Button>
                 }
+                            {
+                    onWhatsapp && <Carousel.Button className="cmui-Button" onClick={ () => onWhatsapp( p.contactPhone ) } first> Whatsapp { p.contactPhone} </Carousel.Button>
+                }
                 {
                     onTriggetNext && <Carousel.Button className="cmui-Button" onClick={ () => onTriggetNext() } first> triggetNext </Carousel.Button>
                 }
@@ -101,6 +105,7 @@ export default class AgentRentProperty extends React.Component {
 AgentRentProperty.propTypes = {
     steps: PropTypes.object,
     triggerNextStep: PropTypes.func,
+    onWhatsapp : PropTypes.func,
     onClick : PropTypes.func,
     status  : PropTypes.object,
     fStatus : PropTypes.object,

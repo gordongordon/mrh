@@ -1,4 +1,4 @@
-import styled, {keyframes} from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import { invalidInput } from './common/animations';
 
 const freshing = keyframes`
@@ -29,6 +29,7 @@ const Input = styled.input`
   border-bottom-left-radius: ${props => props.floating ? '0' : '20px'};
   border-bottom-right-radius: ${props => props.floating ? '0' : '20px'};
 `;
-//padding: ${props => props.hasButton ? '16px 52px 16px 10px' : '16px 10px'};
+
+// padding: ${props => props.hasButton ? '16px 52px 16px 10px' : '16px 10px'};
 
 export default Input;

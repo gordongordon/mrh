@@ -23,6 +23,7 @@ export default class SlickAgentBuyProperty extends React.Component {
     };
     this.triggetNext = this.triggetNext.bind(this);
     this.onSharePhone = this.onSharePhone.bind(this);
+    this.onWhatsapp = this.onWhatsapp.bind(this);
     this.onCall = this.onCall.bind(this);
     this.display = this.display.bind(this);
   }
@@ -59,6 +60,11 @@ export default class SlickAgentBuyProperty extends React.Component {
       },
     ], 'default', null, ['96181448'])}
   >留電話給對方</Button>
+  }
+
+  onWhatsapp(phone) {
+    window.location.href = "https://api.whatsapp.com/send?phone=?phone=" + phone + "&text=迎海 Double Cove 566呎 2房 1廳 6000元/月 Double cove https://rent.591.com.hk/rent-detail-662082.html?z=3_47_1_2&aid=196 (分享自Mr.House iPhone版)";
+    console.log( `onWhatsapp(${phone});`);
   }
 
   onCall(phone) {
@@ -124,6 +130,7 @@ export default class SlickAgentBuyProperty extends React.Component {
           filter={filter}
           property={property}
           fStatus={fStatus}
+          onWhatsapp={this.onWhatsapp}
           onCall={this.onCall}
           onTriggetNext={this.triggetNext}
           onSharePhone={this.onSharePhone}
@@ -140,6 +147,7 @@ export default class SlickAgentBuyProperty extends React.Component {
           filter={filter}
           property={property}
           fStatus={fStatus}
+          onWhatsapp={this.onWhatsapp}
           onCall={this.onCall}
           onTriggetNext={this.triggetNext}
           onSharePhone={this.onSharePhone}

@@ -30,7 +30,7 @@ const ChatBotContainer = styled.div`
       opacity: .2;
   }
 `;
-//border-radius: ${props => props.floating ? '0' : ''};
+// border-radius: ${props => props.floating ? '0' : ''};
 // position: ${props => props.floating ? 'fixed' : 'relative'};
 
 ChatBotContainer.defaultProps = {
