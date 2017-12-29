@@ -226,7 +226,7 @@ export default class NavigationBar extends React.Component {
     return (
       <div>
         <NavBar
-          iconName="left"
+          iconName="none"
           mode="light"
 
           onLeftClick={ () => {

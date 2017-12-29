@@ -5,7 +5,7 @@ import {extendObservable, action} from 'mobx';
 class AppStore {
   constructor() {
     extendObservable(this, {
-      title: 'HoMatching',
+      title: 'Mr.House',
       user: false,
       previousView : undefined, 
       // User to remember previous page, but no use while in browser! 
