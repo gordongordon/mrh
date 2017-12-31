@@ -59,6 +59,9 @@ export default class ListOfPropertysView extends React.Component {
     Toast.success("成功刪除!!!", 1);
   };
 
+
+
+  
   /**
    * model is userModelView, use to handle all functions , e.g. del
    * propertys is list of propertys for this user

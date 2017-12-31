@@ -1,0 +1,116 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+
+    <script src="//use.typekit.net/iws6ohy.js"></script>
+    <script>try{Typekit.load();}catch(e){}</script>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- font awesome from BootstrapCDN -->
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <script src="auth0-variables.js"> </script>
+    <link href="app.css" rel="stylesheet">
+  </head>
+  <body class="home">
+    <div class="container">
+      <div class="login-page clearfix">
+        <div class="login-box auth0-box before">
+          <img class="logo" src="https://i.cloudup.com/StzWWrY34s.png" />
+          <h3>Auth0 Passwordless Example</h3>
+          <p>Login with SMS</p>
+          <div class="enter-phone">
+            <div class="alert alert-warning">Don't forget to add your page's origin <strong><script type="text/javascript">document.write(location.origin)</script></strong> to your App's <strong>Allowed Origins (CORS)</strong> in the <a target="_blank" href="https://manage.auth0.com">Auth0 dashboard</a>, unless it is already in the list of <strong>Allowed Callback URLs.</strong></div>
+            <label>Enter your mobile number:</label>
+            <input class="phone-number"/>
+            <br><br>
+            <button onclick="sendSMS()" class="btn btn-primary send-sms">Send SMS</button>
+          </div>
+          <div class="enter-code" style="display: none;">
+            <label>Enter the code you received: </label>
+            <input class="code"/>
+            <br><br>
+            <button onclick="login()" class="btn btn-primary">Submit Code</button>
+          </div>
+        </div>
+        <div class="logged-in-box auth0-box logged-in" style="display: none;">
+          <h1 id="logo"><img src="auth0_logo_final_blue_RGB.png" /></h1>
+          <img class="avatar"/>
+          <h2>Welcome <span class="nickname"></span></h2>
+        </div>
+      </div>
+    </div>
+    <script src="https://cdn.auth0.com/js/auth0/8.8.0/auth0.min.js"></script>
+    <script type="text/javascript">
+      // Initialize Auth0 Client instance
+      var webAuth = new auth0.WebAuth({
+        clientID: AUTH0_CLIENT_ID, 
+        domain: AUTH0_DOMAIN,
+        redirectUri: 'http://localhost:3000/custom-sms.html',
+        responseType: 'token'
+      });
+
+      // Submit phone number to begin Passwordless transaction
+      function sendSMS(){
+        var phoneNumber = $('input.phone-number').val();
+        webAuth.passwordlessStart({
+          connection: 'sms',
+          send: 'code',
+          phoneNumber: phoneNumber
+        }, function(err,res) {
+          if (err) {
+            alert('error sending SMS: '+ err.error_description);
+            return;
+          }
+          $('.enter-phone').hide();
+          $('.enter-code').show();
+        });
+      };
+
+      // Submit the passcode to complete authentication
+      function login(){
+        var phoneNumber = $('input.phone-number').val();
+        var code = $('input.code').val();
+        webAuth.passwordlessVerify({
+          connection: 'sms',
+          phoneNumber: phoneNumber,
+          verificationCode: code
+        }, function (err,res) {
+          if (err){
+            console.log('error logging-in',err);
+            alert('Couldn\'t login ' + err.message);
+          }
+        });
+      };
+
+      // Check for returned token and parse 
+      $(document).ready(function() {
+        if(window.location.hash){
+          webAuth.parseHash(window.location.hash, function(err, authResult) {
+            if (err) {
+              return console.log(err);
+            } else if (authResult){
+              localStorage.setItem('accessToken', authResult.accessToken);
+              webAuth.client.userInfo(authResult.accessToken, function(err, user) {
+                if (err){
+                  console.log('err',err);
+                  alert('There was an error retrieving your profile: ' + err.message);
+                } else {
+                  $('.login-box').hide();
+                  $('.logged-in-box').show();
+                  localStorage.setItem('user', user);
+                  $('.nickname').text(user.nickname);
+                  $('.avatar').attr('src', user.picture);
+                }
+              });
+            }
+          });
+        }
+      });
+    </script>
+  </body>
+</html>

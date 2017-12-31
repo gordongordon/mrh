@@ -13,6 +13,8 @@ app.use(compression({
   level: 9
 }));
 
+app.use(cors())
+
 
 // app.use(compression({filter: shouldCompress}))
 // Gordon
