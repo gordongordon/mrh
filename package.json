@@ -77,6 +77,7 @@
   "dependencies": {
     "antd-mobile": "^1.7.1",
     "compression": "^1.7.0",
+    "cors": "^2.8.4",
     "express": "^4.15.4",
     "firebase": "^4.8.0",
     "mobx": "^3.4.1",
