@@ -158,18 +158,21 @@ class AskChatbotProfile extends React.Component {
         .catch(function(error) {
           // An error happened.
         });
+
+      Fb.app.usersProfile.set( { phone : steps.getPhoneInput.value,
+                                 timeStamp: firebase.database.ServerValue.TIMESTAMP 
+                               } );  
     }
     MobxStore.router.goTo(views.list);
   };
 
   render() {
-
-
+    const uid = MobxStore.app.uid;
 
     const Welcome = [
         {
             id: "welcome",
-            message: "Ok, 你想 Update profile 的。",
+            message: `Ok, 你想 Update profile 的。 uid ${uid}`,
             trigger: "getName"
           },
           {

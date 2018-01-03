@@ -451,6 +451,25 @@ class AskChatbotBuy extends React.Component {
     Fb.propertys.child(id).set(p.serialize());
     Fb.buy.child(id).set(p.serialize());
 
+    const user = firebase.auth().currentUser;
+    if (user != null) {
+      user.updateProfile({
+          displayName: getNameInput.value,
+          email: getEmailUserInput.value
+        })
+        .then(function() {
+          // Update successful.
+        })
+        .catch(function(error) {
+          // An error happened.
+        });
+
+      Fb.app.usersProfile.set( { phone : getPhoneInput.value,
+                                 timeStamp: firebase.database.ServerValue.TIMESTAMP 
+                               } );  
+    }
+
+
     // const id2 = Fb.propertys.push().key;
     // Fb.propertys.update( {[id2]:  p.serialize() });
     //    MobxStore.router.goTo(views.matchBuy, { keyID: id });

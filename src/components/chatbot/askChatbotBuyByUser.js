@@ -415,7 +415,9 @@ class AskChatbotBuyByUser extends React.Component {
     //debugger
     // p.contactPhone = parseInt(getPhoneUserInput.value) {;
     p.contactPhone = "85200000000"
+
     p.contactEmail = this.state.user.email;
+    
     // p.contactEmail = getEmailUserInput.value;
     p.isPetAllowed = isPetAllowedBoolean.value;
 
