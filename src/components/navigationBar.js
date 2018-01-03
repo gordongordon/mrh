@@ -46,7 +46,7 @@ export default class NavigationBar extends React.Component {
   showActionSheet = () => {
     // debugger
 
-    const BUTTONS = ["intro", "buy", "sale", "rent", "lease", "cancel","login"];
+    const BUTTONS = ["intro", "buy", "sale", "rent", "lease","profile", "cancel","login"];
 
     console.log( 'handling ShowActionSheet');
 
@@ -84,6 +84,10 @@ export default class NavigationBar extends React.Component {
         // Lease
         if (buttonIndex === 4) {
           MobxStore.router.goTo(views.askChatbotLease);
+        }
+        // Cancel
+        if (buttonIndex === 5) {
+          MobxStore.router.goTo(views.askChatbotProfile);
         }
         // Cancel
         if (buttonIndex === 6) {

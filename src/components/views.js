@@ -55,6 +55,7 @@ import AskChatbotLease from 'chatbot/AskChatbotLease';
 import AskChatbotSignUp from 'chatbot/AskChatbotSignUp';
 import AskChatbotSignIn from 'chatbot/AskChatbotSignIn';
 import AskChatbotBuyByUser from 'chatbot/AskChatbotBuyByUser';
+import AskChatbotProfile from 'chatbot/AskChatbotProfile';
 
 import Loadable from 'react-loadable';
 //import Loading from  'loading'
@@ -666,6 +667,18 @@ askChatbotBuyByUser : new Route({
   },
   beforeExit: (route, params) => {
     console.log('exiting askChatbotBuyByUser!');
+    console.log('params changed to', params);
+    MobxStore.app.previousView = route;
+  }
+}),
+askChatbotProfile : new Route({
+  path: '/askChatbotProfile', 
+  component: <AskChatbotProfile />,
+  onEnter: (route, params, store, queryParams) => {
+    MobxStore.app.setTitle( 'CSALE_Matching');
+  },
+  beforeExit: (route, params) => {
+    console.log('exiting askChatbotProfile!');
     console.log('params changed to', params);
     MobxStore.app.previousView = route;
   }

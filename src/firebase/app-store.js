@@ -8,8 +8,10 @@ export default class AppStore {
 
     constructor() {
       this.usersRef = undefined;
+      this.usersProfile = undefined;
       this.matchedPropertysRef = undefined;
       this.agentsRef = undefined;
+      this.agentsProfile = undefined;
       this.agentsFilterRef = undefined;
       this.agentSaleRef = undefined;
       this.agentBuyRef = undefined;
@@ -24,9 +26,11 @@ export default class AppStore {
 
        // users database
        this.usersRef = firebase.database().ref(`users/${uid}/propertys`);
+       this.usersProfile = firebase.database().ref(`users/${uid}/profile`);
        this.matchedPropertysRef = firebase.database().ref(`users/${uid}/matchedPropertys`);
        // agents database
        this.agentsRef = firebase.database().ref(`agents/${uid}/propertys`);
+       this.agentsProfile = firebase.database().ref(`agents/${uid}/profile`);
        // Use in agent match panel for filtering!
        this.agentsFilterRef = firebase.database().ref(`agents/${uid}/filters`);
 
