@@ -188,7 +188,7 @@ class Review extends React.Component {
         <br />
         實用面積: {getNetSizeUserInput.value} 呎
         <br />
-        單位間隔: {getNumOfRoom.value}房,{getNumOfBathroom.vlaue}廁,{
+        單位間隔: {getNumOfRoom.value}房,{getNumOfBathroom.value}廁,{
           getNumOfLivingroom.value
         }廳
         <br />

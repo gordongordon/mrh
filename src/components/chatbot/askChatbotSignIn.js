@@ -209,6 +209,19 @@ class AskChatbotSignIn extends React.Component {
 
   handleEnd = ({ steps, values }) => {
 
+    var user = firebase.auth().currentUser;
+
+    if (user != null) {
+      user.providerData.forEach(function (profile) {
+        console.log("Sign-in provider: " + profile.providerId);
+        console.log("  Provider-specific UID: " + profile.uid);
+        console.log("  Name: " + profile.displayName);
+        console.log("  Email: " + profile.email);
+        console.log("  Photo URL: " + profile.photoURL);
+      });
+    } else {
+      console.log("user === null")
+    }
     MobxStore.router.goTo(views.list );
 
   }  
@@ -245,7 +258,21 @@ class AskChatbotSignIn extends React.Component {
         message  : ( {previouis, steps } ) => {
           if ( this.toggleSignIn( steps.getUserIdInput.value, steps.getUserPasswordInput.value) )
           {   
-             return "Successful signup";
+             // return "Successful signup";
+             
+             var user = firebase.auth().currentUser;
+             var message = "empty";
+             if (user != null) {
+                 user.providerData.forEach(function (profile) {
+                 message += "Sign-in provider: " + profile.providerId;
+                 message += "  Provider-specific UID: " + profile.uid;
+                 message += "  Name: " + profile.displayName;
+                 message += "  Email: " + profile.email;
+                 message += "  Photo URL: " + profile.photoURL;
+                 return message;
+               });
+             }  
+            return "Successful signup";
           } else {
              return "invalid user id or password, please try again";
           }

@@ -206,7 +206,7 @@ class Review extends React.Component {
         <br />
         租金預算上限: {getRentBudgetMaxInput.value}
         <br />
-        間隔: {getNumOfRoom.value}房,{getNumOfBathroom.vlaue}廁,{getNumOfLivingroom.value}廳
+        間隔: {getNumOfRoom.value}房,{getNumOfBathroom.value}廁,{getNumOfLivingroom.value}廳
         <br />
         養貓狗需要: {isPetAllowedBoolean.value}
         <br />

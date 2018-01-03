@@ -71,7 +71,7 @@ export default class NavigationBar extends React.Component {
         }
         // Buy
         if (buttonIndex === 1) {
-          MobxStore.router.goTo(views.askChatbotBuy);
+          MobxStore.router.goTo(views.askChatbotBuyByUser);
         }
         // Sale
         if (buttonIndex === 2) {

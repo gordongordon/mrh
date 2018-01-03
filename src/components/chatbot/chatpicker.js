@@ -1,10 +1,9 @@
 import { Picker, List } from "antd-mobile";
-import React, { Component } from 'react';
-import { DISTRICK } from 'DISTRICK';
+import React, { Component } from "react";
+import { DISTRICK } from "DISTRICK";
 
-import { createForm } from 'rc-form';
-import PropTypes from 'prop-types';
-
+import { createForm } from "rc-form";
+import PropTypes from "prop-types";
 
 const seasons = [
   [
@@ -37,7 +36,6 @@ class Chatpicker extends Component {
       value: null,
       trigger: false
     };
-      
 
     this.triggetNext = this.triggetNext.bind(this);
     //this.nameOfBuildingLabel = this.nameOfBuildingLabel.bind(this);
@@ -71,27 +69,26 @@ class Chatpicker extends Component {
   //   return building.label;
   // }
 
-
-  getPickerLabel = (data, first, second, third) => {
+  getPickerLabel = (data, region, location, building) => {
     // debugger
     //var region = DISTRICK.find(element => element.value === region);
 
-    first = data.find(element => element.value === first);
+    region = data.find(element => element.value === region);
     // console.log( 'region', region)
-    if (first === undefined) {
-      return 'first doesn\'t exist!';
+    if (region === undefined) {
+      return "first doesn't exist!";
     }
 
-    second = first.children.find(element => element.value === second);
-    
-    if (second === undefined) {
-      return 'second doesn\'t exist!';
+    location = region.children.find(element => element.value === location);
+
+    if (location === undefined) {
+      return "second doesn't exist!";
     }
 
     // console.log( 'location', location )
-    third = second.children.find(element => element.value === third);
+    building = location.children.find(element => element.value === building);
 
-    return third.label + ' , ' + second.label;
+    return building.label + " , " + location.label;
   };
 
   triggetNext() {
@@ -99,26 +96,30 @@ class Chatpicker extends Component {
     const region = v.districk[0];
     const location = v.districk[1];
     const building = v.districk[2];
-    const label =  this.getPickerLabel( DISTRICK, region, location, building );
-    const address = region + ',' + location + ',' + building;
-    // const obj = {
+    const label = this.getPickerLabel(DISTRICK, region, location, building);
 
-    //   location : location,
-    //   building : building
-    // }
+    // Save json for firebase!
+    let address = {
+      region: region,
+      location: location,
+      building: building,
+      label: label
+    };
+    const jsonAddress = JSON.stringify(address);
+
     this.setState({ trigger: true }, () => {
-      this.props.triggerNextStep( { value: address, label : label });
+      this.props.triggerNextStep({ value: jsonAddress, label: label });
     });
   }
 
   render() {
     const { getFieldProps } = this.props.form;
-//    大廈/屋苑
-    
+    //    大廈/屋苑
+
     return (
       <Picker
         data={DISTRICK}
-        onOk={ () => this.triggetNext() }
+        onOk={() => this.triggetNext()}
         cols={3}
         {...getFieldProps("districk", {
           initialValue: ["NTTV", "MOS", "MOS0001"]
@@ -126,10 +127,9 @@ class Chatpicker extends Component {
         className="forss"
         title="請選擇大廈/屋苑"
         extra="請選擇大廈/屋苑"
-        itemStyle={ {overflow: 'unset'} }
+        itemStyle={{ overflow: "unset" }}
       >
-        <List.Item arrow="horizontal" >
-        </List.Item>
+        <List.Item arrow="horizontal" />
       </Picker>
     );
   }
@@ -137,12 +137,12 @@ class Chatpicker extends Component {
 
 Chatpicker.propTypes = {
   steps: PropTypes.object,
-  triggerNextStep: PropTypes.func,
+  triggerNextStep: PropTypes.func
 };
 
 Chatpicker.defaultProps = {
   steps: undefined,
-  triggerNextStep: undefined,
+  triggerNextStep: undefined
 };
 
 //export default Chatpicker;
