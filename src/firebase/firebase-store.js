@@ -84,9 +84,7 @@ const startLoginAnonyhmously = () => {
       function(snapshot) {
         // The callback succeeded; do something with the final result.
         console.log("signInAnonymously completed");
-
         //Fb.app.updateUid();
-
         return true;
       },
       function(error) {

@@ -86,7 +86,13 @@ export default class ListOfPropertysView extends React.Component {
     console.log("list size ", list.size);
     var element = [];
     list.forEach((property, keyID) => {
-      if (property.typeTo === "lease") {
+      const size = property.responsedPropertys.size;
+      var color = "#ff5b05";
+      if ( size > 0) {
+         color = "green";
+      }
+      
+        if (property.typeTo === "lease") {
         element.push(
           <div key={keyID}>
             <SwipeAction
@@ -128,7 +134,7 @@ export default class ListOfPropertysView extends React.Component {
                 onClick={() =>
                   MobxStore.router.goTo(views.chatAgentRentRespond, { keyID })}
                 multipleLine
-                extra={<Badge text={"回覆" + property.responsedPropertys.size} />}
+                extra={ <Badge text={"回覆" + size}  style={ { backgroundColor: color } } /> }
               >
                 {property.typeToLabel}:{property.addressLocationLabel}/{property.nameOfBuildingLabel}
                 <Brief>
@@ -142,6 +148,7 @@ export default class ListOfPropertysView extends React.Component {
       } // end of lease //  MobxStore.router.goTo(views.matchLease, { keyID })}
 
       if (property.typeTo === "rent") {
+
         element.push(
           <div key={keyID}>
             <SwipeAction
@@ -182,8 +189,9 @@ export default class ListOfPropertysView extends React.Component {
                 arrow="horizontal"
                 onClick={() =>
                   MobxStore.router.goTo(views.chatAgentLeaseRespond, { keyID })}
+
                 multipleLine
-                extra={<Badge text={"回覆" + property.responsedPropertys.size} />}
+                extra={ <Badge text={"回覆" + size}  style={ { backgroundColor: color } } /> }
               >
                 {property.typeToLabel}:{property.addressLocationLabel}/{property.nameOfBuildingLabel}
                 <Brief>
@@ -237,7 +245,7 @@ export default class ListOfPropertysView extends React.Component {
                 arrow="horizontal"
                 onClick={() => MobxStore.router.goTo(views.chatAgentSaleRespond, { keyID })}
                 multipleLine
-                extra={<Badge text={"回覆" + property.responsedPropertys.size} />}
+                extra={ <Badge text={"回覆" + size}  style={ { backgroundColor: color } } /> }
               >
                 {property.typeToLabel}:{property.addressLocationLabel}/{property.nameOfBuildingLabel}
                 <Brief>
@@ -292,7 +300,7 @@ export default class ListOfPropertysView extends React.Component {
                 onClick={() =>
                   MobxStore.router.goTo(views.chatAgentBuyRespond, { keyID })}
                 multipleLine
-                extra={<Badge text={"回覆" + property.responsedPropertys.size} />}
+                extra={ <Badge text={"回覆" + size}  style={ { backgroundColor: color } } /> }
               >
                 {property.typeToLabel}:{property.addressLocationLabel}/{property.nameOfBuildingLabel}
                 <Brief>
