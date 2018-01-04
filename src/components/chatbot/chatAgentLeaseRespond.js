@@ -432,7 +432,7 @@ class ChatAgentLeaseRespond extends React.Component {
 
     // const id2 = Fb.propertys.push().key;
     // Fb.propertys.update( {[id2]:  p.serialize() });
-    MobxStore.router.goTo(views.matchBuy, { keyID: id });
+    MobxStore.router.goTo(views.list, { uid: p.uid });
 
     // console.log(steps);
     // console.log(values);

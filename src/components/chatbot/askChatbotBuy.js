@@ -421,59 +421,108 @@ class AskChatbotBuy extends React.Component {
     p.contactEmail = getEmailUserInput.value;
     p.isPetAllowed = isPetAllowedBoolean.value;
 
-    if (MobxStore.app.uid === null) {
-      if (Fb.startLoginAnonyhmously()) {
-        id = Fb.app.usersRef.push().key;
-//         var user = firebase.auth().currentUser;
+    firebase
+    .auth()
+    .signInAnonymously()
+    .then(
+      function(snapshot) {
+         id = Fb.app.usersRef.push().key;
+        
+        // The callback succeeded; do something with the final result.
+        console.log("signInAnonymously completed");
 
-// user.updateProfile({
-//   displayName: getNameInput.value,
-//   photoURL: "https://example.com/jane-q-user/profile.jpg"
-// }).then(function() {
-//   // Update successful.
-//   console.log( 'updateProfile successful')
-// }).catch(function(error) {
-//   // An error happened.
-//   console.log( 'an erro happened while update profile of name')
-// });
-
+        //Fb.app.updateUid();
+        p.uid = MobxStore.app.uid;
+        p.typeFor = "sale";
+        p.typeTo = "buy";
+        p.fbid = id; // Assign a reference
+    
+        Fb.app.usersRef.update({ [id]: p.serialize() });
+    
+        Fb.propertys.child(id).set(p.serialize());
+        Fb.buy.child(id).set(p.serialize());
+    
+        const user = firebase.auth().currentUser;
+        if (user != null) {
+          user.updateProfile({
+              displayName: getNameInput.value,
+              email: getEmailUserInput.value
+            })
+            .then(function() {
+              // Update successful.
+            })
+            .catch(function(error) {
+              // An error happened.
+            });
+    
+          Fb.app.usersProfile.set( { phone : getPhoneUserInput.value,
+                                     timeStamp: firebase.database.ServerValue.TIMESTAMP 
+                                   } );  
+        }
+        
+        // const id2 = Fb.propertys.push().key;
+        // Fb.propertys.update( {[id2]:  p.serialize() });
+        //    MobxStore.router.goTo(views.matchBuy, { keyID: id });
+        MobxStore.router.goTo(views.chatAgentSaleRespond, { keyID: id });
+        console.log( 'finished property set ')
+        return true;
+      },
+      function(error) {
+        return false;
+        // The callback failed.
+        console.error(error);
       }
-    } else {
-      id = Fb.app.usersRef.push().key;
-    }
-    p.uid = MobxStore.app.uid;
-    p.typeFor = "sale";
-    p.typeTo = "buy";
-    p.fbid = id; // Assign a reference
-
-    Fb.app.usersRef.update({ [id]: p.serialize() });
-
-    Fb.propertys.child(id).set(p.serialize());
-    Fb.buy.child(id).set(p.serialize());
-
-    const user = firebase.auth().currentUser;
-    if (user != null) {
-      user.updateProfile({
-          displayName: getNameInput.value,
-          email: getEmailUserInput.value
-        })
-        .then(function() {
-          // Update successful.
-        })
-        .catch(function(error) {
-          // An error happened.
-        });
-
-      Fb.app.usersProfile.set( { phone : getPhoneInput.value,
-                                 timeStamp: firebase.database.ServerValue.TIMESTAMP 
-                               } );  
-    }
+    );
 
 
-    // const id2 = Fb.propertys.push().key;
-    // Fb.propertys.update( {[id2]:  p.serialize() });
-    //    MobxStore.router.goTo(views.matchBuy, { keyID: id });
-    MobxStore.router.goTo(views.chatAgentSaleRespond, { keyID: id });
+
+    // if (MobxStore.app.uid === null) {
+    //   if (Fb.startLoginAnonyhmously()) {
+    //     id = Fb.app.usersRef.push().key;
+    //    debugger
+    //  // try wait for complete befor doing id
+
+    //  p.uid = MobxStore.app.uid;
+    //  p.typeFor = "sale";
+    //  p.typeTo = "buy";
+    //  p.fbid = id; // Assign a reference
+ 
+    //  Fb.app.usersRef.update({ [id]: p.serialize() });
+ 
+    //  Fb.propertys.child(id).set(p.serialize());
+    //  Fb.buy.child(id).set(p.serialize());
+ 
+    //  const user = firebase.auth().currentUser;
+    //  if (user != null) {
+    //    user.updateProfile({
+    //        displayName: getNameInput.value,
+    //        email: getEmailUserInput.value
+    //      })
+    //      .then(function() {
+    //        // Update successful.
+    //      })
+    //      .catch(function(error) {
+    //        // An error happened.
+    //      });
+ 
+    //    Fb.app.usersProfile.set( { phone : getPhoneInput.value,
+    //                               timeStamp: firebase.database.ServerValue.TIMESTAMP 
+    //                             } );  
+    //  }
+ 
+ 
+    //  // const id2 = Fb.propertys.push().key;
+    //  // Fb.propertys.update( {[id2]:  p.serialize() });
+    //  //    MobxStore.router.goTo(views.matchBuy, { keyID: id });
+    //  MobxStore.router.goTo(views.chatAgentSaleRespond, { keyID: id });
+
+
+    //   }
+    // } else {
+    //   id = Fb.app.usersRef.push().key;
+    //   console.log( 'Fb.startLoginAnonyhmously() == false')
+    // }
+
 
     // console.log(steps);
     // console.log(values);
@@ -730,7 +779,6 @@ class AskChatbotBuy extends React.Component {
       {
         // getXXX
         id: "getPhone",
-
         message: ({ previousValue, steps }) => {
           return `OK, ${
             steps.getNameInput.value

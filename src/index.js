@@ -107,9 +107,9 @@ firebase.auth().onAuthStateChanged(user => {
     //Fb.startLogin();
     MobxStore.app.uid = user.uid;
     if (isAnonymous) {
-      MobxStore.app.displayName = "anonymous";
+      MobxStore.app.displayName = "anonymous - " + user.displayName;
       MobxStore.app.email = "anonymous";
-      MobxStore.app.providerId = "anonymous";
+      MobxStore.app.providerId = user.displayName;
     } else {
       MobxStore.app.displayName = user.displayName;
       MobxStore.app.email = user.email;
@@ -126,9 +126,9 @@ firebase.auth().onAuthStateChanged(user => {
     // Think over before remove this like, may cause matchedPropertys = null
     Fb.app.updateUid();
     // Once, user login redirect to "List" or "Home"
-    MobxStore.router.goTo(views.list, {}, MobxStore);
+    MobxStore.router.goTo(views.list, { uid : user.uid }, MobxStore);
   } else {
-    console.log("user donot sign");
+    console.log("user haven't sign");
     //MobxStore.app.startLogout();
     Fb.startLogout();
 

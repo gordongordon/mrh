@@ -71,23 +71,23 @@ export default class NavigationBar extends React.Component {
         }
         // Buy
         if (buttonIndex === 1) {
-          MobxStore.router.goTo(views.askChatbotBuyByUser);
+          MobxStore.router.goTo(views.askChatbotBuyByUser, {uid : MobxStore.app.uid} );
         }
         // Sale
         if (buttonIndex === 2) {
-          MobxStore.router.goTo(views.askChatbotSale);
+          MobxStore.router.goTo(views.askChatbotSale, {uid : MobxStore.app.uid} );
         }
         // Rent
         if (buttonIndex === 3) {
-          MobxStore.router.goTo(views.askChatbotRent);
+          MobxStore.router.goTo(views.askChatbotRent, {uid : MobxStore.app.uid} );
         }
         // Lease
         if (buttonIndex === 4) {
-          MobxStore.router.goTo(views.askChatbotLease);
+          MobxStore.router.goTo(views.askChatbotLease, {uid : MobxStore.app.uid} );
         }
         // Cancel
         if (buttonIndex === 5) {
-          MobxStore.router.goTo(views.askChatbotProfile);
+          MobxStore.router.goTo(views.askChatbotProfile, {uid : MobxStore.app.uid} );
         }
         // Cancel
         if (buttonIndex === 6) {

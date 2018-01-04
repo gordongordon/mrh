@@ -118,7 +118,6 @@ class Review extends React.Component {
       isFreeForSevenDayBoolean: "no",
       getDueDayInput : "10th Oct, 2017",
       getLeasingPeriodInput : ""
-
     };
   }
 
