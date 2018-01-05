@@ -363,6 +363,34 @@ class AskChatbotBuy extends React.Component {
   //   return id;
   // }
 
+  toggleSignIn = (email, password) => {
+    var isSign = true; // default to true, unless singup error
+
+    console.log(`email ${email}, password ${password}`);
+    // Sign in with email and pass.
+    // [START authwithemail]
+    firebase
+      .auth()
+      .signInWithEmailAndPassword(email, password)
+      .catch(function(error) {
+        // Handle Errors here.
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        // [START_EXCLUDE]
+        if (errorCode === "auth/wrong-password") {
+          alert("Wrong password.");
+          isSign = false;
+        } else {
+          alert(errorMessage);
+          isSign = false;
+        }
+        console.log(error);
+        // [END_EXCLUDE]
+      });
+
+    return isSign;
+  };
+
   handleEnd = ({ steps, values }) => {
     var p = new Property();
     //var id;

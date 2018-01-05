@@ -14,7 +14,7 @@ const prompt = Modal.prompt;
 @observer
 export default class SlickAgentLeaseProperty extends React.Component {
   constructor( props ) {
-    super( props )
+    super( props );
     this.state = {
       data: ['', '', ''],
       initialHeight: 450,
