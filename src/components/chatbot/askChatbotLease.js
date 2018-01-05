@@ -6,18 +6,19 @@ import styled from "styled-components";
 
 // import ChatBot from '../react-simple-chatbot/dist/react-simple-chatbot';
 import ChatBot from "react-simple-chatbot";
-import Chatpicker   from "./chatpicker";
-import TabExample   from "./TabExample";
+import Chatpicker from "./chatpicker";
+import TabExample from "./TabExample";
 import { ThemeProvider } from "styled-components";
-import MobxStore    from "mobxStore";
-import views        from "views";
+import MobxStore from "mobxStore";
+import views from "views";
 import PartitionPicker from "./partitionPicker";
-import { Fb }       from "firebase-store";
+import { Fb } from "firebase-store";
 import { Property } from "property";
 import Key from "./key";
 
 import Slick from "./slick";
 import RCarouse from "./rcarousel";
+import firebase from "firebase";
 
 //import Generic from './chatbot-message-ui';
 
@@ -116,8 +117,8 @@ class Review extends React.Component {
       getEmailUserInput: "",
       getPhoneUserInput: "",
       isFreeForSevenDayBoolean: "no",
-      getDueDayInput : "10th Oct, 2017",
-      getLeasingPeriodInput : ""
+      getDueDayInput: "10th Oct, 2017",
+      getLeasingPeriodInput: ""
     };
   }
 
@@ -184,12 +185,10 @@ class Review extends React.Component {
       hasHomeHardwareBoolean,
       getLeasingPeriodInput,
       isFreeForSevenDayBoolean,
-      getDueDayInput,
+      getDueDayInput
     } = this.state;
 
-
-    
-    const address = JSON.parse( getBuildingUserInput.value );
+    const address = JSON.parse(getBuildingUserInput.value);
 
     return (
       <div style={{ width: "100%", fontSize: "0.8rem" }}>
@@ -199,7 +198,9 @@ class Review extends React.Component {
         <br />
         租金: {getLeasePriceInput.value}
         <br />
-        單位間隔: {getNumOfRoom.value}房,{getNumOfBathroom.value}廁,{getNumOfLivingroom.value}廳
+        單位間隔: {getNumOfRoom.value}房,{getNumOfBathroom.value}廁,{
+          getNumOfLivingroom.value
+        }廳
         <br />
         歡迎貓狗: {isPetAllowedBoolean.value}
         <br />
@@ -243,7 +244,8 @@ class AskChatbotLease extends React.Component {
       clicked1: "none",
       clicked2: "none"
     };
-    Fb.startLoginAnonyhmously();
+    // Fb.startLoginAnonyhmously();
+    this.toggleSignUp = this.toggleSignUp.bind( this );
     //this.addPropertyForBuy = this.addPropertyForBuy.bind(this);
   }
 
@@ -382,37 +384,37 @@ class AskChatbotLease extends React.Component {
 
   //   return id;
   // }
-  toggleSignIn = ( email, password )  => {
+  toggleSignUp = ( email, password )  => {
 
     var isSign = true; // default to true, unless singup error 
 
     console.log( `email ${email}, password ${password}`)
-        // Sign in with email and pass.
+    // Sign in with email and pass.
     // [START authwithemail]
-    firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
-        // Handle Errors here.
-        var errorCode = error.code;
-        var errorMessage = error.message;
-        // [START_EXCLUDE]
-        if (errorCode === 'auth/wrong-password') {
-          alert('Wrong password.');
-          isSign = false;
-        } else {
-          alert(errorMessage);
-          isSign = false;
-        }
-        console.log(error);
-        // [END_EXCLUDE]
+
+    firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
+      // Handle Errors here.
+      var errorCode = error.code;
+      var errorMessage = error.message;
+      // [START_EXCLUDE]
+      if (errorCode == 'auth/weak-password') {
+        alert('The password is too weak.');
+        isSign = false;
+      } else {
+        alert(errorMessage);
+        isSign = false;
+      }
+      console.log(error);
+      // [END_EXCLUDE]
     });
 
-    return isSign;
+    return isSign
 
 }
 
-
-
   handleEnd = ({ steps, values }) => {
     var p = new Property();
+    const user = firebase.auth().currentUser;
     var id;
 
     const {
@@ -430,7 +432,6 @@ class AskChatbotLease extends React.Component {
       isFreeForSevenDayBoolean,
       getDueDayInput,
 
-
       getLeasePriceInput,
       getNameInput,
       getSexUserInput,
@@ -443,7 +444,7 @@ class AskChatbotLease extends React.Component {
 
     //p.uid = MobxStore.app.uid;
     //     ["NTTV", "MOS", "MOS0001"]
-    const address = JSON.parse( getBuildingUserInput.value );
+    const address = JSON.parse(getBuildingUserInput.value);
     p.addressRegion = address.region;
     p.addressLocation = address.location;
     p.nameOfBuilding = address.building;
@@ -458,7 +459,6 @@ class AskChatbotLease extends React.Component {
     p.numOfBathroom = parseInt(getNumOfBathroom.value);
     p.numOfLivingroom = parseInt(getNumOfLivingroom.value);
 
-
     //p.isBuyWithLease = isBuyWithLeaseBoolean.value;
     p.netSize = parseInt(getNetSizeUserInput.value);
     //debugger
@@ -467,15 +467,14 @@ class AskChatbotLease extends React.Component {
     p.hasHomeHardware = hasHomeHardwareBoolean.value;
     p.leasingPeriod = parseInt(getLeasingPeriodInput.value);
 
-
     /**
-     * Handle later, still beta! 
+     * Handle later, still beta!
      */
     //p.dueDay = parseInt( getDueDayInput.value );
     p.isFreeForSevenDay = isFreeForSevenDayBoolean.value;
     //    p.buyBudgetMax = 100;
 
-    p.leasingPeriodInput = parseInt( getLeasePriceInput.value );
+    p.leasingPeriodInput = parseInt(getLeasePriceInput.value);
 
     //p.isPreferPayAnnually = v.isPreferPayAnnually;
     //p.isRentAbleNow = v.isRentAbleNow;
@@ -495,8 +494,8 @@ class AskChatbotLease extends React.Component {
     //     id = Fb.app.usersRef.push().key;
     //   }
     // } else {
-      id = Fb.app.usersRef.push().key;
-   // }
+    id = Fb.app.usersRef.push().key;
+    // }
     p.uid = MobxStore.app.uid;
     p.typeFor = "lease";
     p.typeTo = "rent";
@@ -506,6 +505,23 @@ class AskChatbotLease extends React.Component {
 
     Fb.propertys.child(id).set(p.serialize());
     Fb.lease.child(id).set(p.serialize());
+ 
+
+    user
+      .updateProfile({
+        displayName: getNameInput.value,
+      })
+      .then(function() {
+        // Update successful.
+      })
+      .catch(function(error) {
+        // An error happened.
+      });
+
+    Fb.app.usersProfile.set({
+      phone: getPhoneUserInput.value,
+      timeStamp: firebase.database.ServerValue.TIMESTAMP
+    });
 
     // const id2 = Fb.propertys.push().key;
     // Fb.propertys.update( {[id2]:  p.serialize() });
@@ -586,11 +602,9 @@ class AskChatbotLease extends React.Component {
         //
         id: "validaBuildingUserInput",
         message: ({ previousValue, steps }) => {
-          const address = JSON.parse( previousValue);
+          const address = JSON.parse(previousValue);
 
-          return `你選擇左 「${
-              address.label
-          } 」!`;
+          return `你選擇左 「${address.label} 」!`;
         },
         trigger: "validaBuildingBoolean"
       },
@@ -637,7 +651,7 @@ class AskChatbotLease extends React.Component {
           { value: "1300", label: "1300", trigger: "getPartition" },
           { value: "1500", label: "1500", trigger: "getPartition" },
           { value: "1700", label: "1700", trigger: "getPartition" },
-          { value: "2000", label: "2000+", trigger: "getPartition" },
+          { value: "2000", label: "2000+", trigger: "getPartition" }
         ]
         //trigger: "getPartition"
       },
@@ -645,7 +659,7 @@ class AskChatbotLease extends React.Component {
       {
         // getPartition
         id: "getPartition",
-        message: "你想要咩間隔？ e.g. 1房,1廁,1廳 Gordon",
+        message: "你想要咩間隔？ e.g. 1房,1廁,1廳",
         trigger: "getNumOfRoom"
         // MISSED " validation = false"
       },
@@ -688,7 +702,7 @@ class AskChatbotLease extends React.Component {
       {
         //
         id: "isPetAllowed",
-        message: " 比唔比養貓😺🐶豿呢? Gordon",
+        message: " 比唔比養貓😺🐶豿呢?",
         trigger: "isPetAllowedBoolean"
       },
       {
@@ -710,7 +724,11 @@ class AskChatbotLease extends React.Component {
         //on.OPTION1 .. n
         id: "hasHomeHardwareBoolean",
         options: [
-          { value:  "true", label: "單位有傢俬提供", trigger: "getLeasingPeriod" },
+          {
+            value: "true",
+            label: "單位有傢俬提供",
+            trigger: "getLeasingPeriod"
+          },
           { value: "false", label: "冇傢俬", trigger: "getLeasingPeriod" }
         ]
       },
@@ -726,7 +744,7 @@ class AskChatbotLease extends React.Component {
           { value: "12", label: "12月", trigger: "getDueDay" },
           { value: "6", label: "6月", trigger: "getDueDay" },
           { value: "4", label: "4月", trigger: "getDueDay" },
-          { value: "2", label: "2月", trigger: "getDueDay" },
+          { value: "2", label: "2月", trigger: "getDueDay" }
         ]
       },
       {
@@ -757,9 +775,9 @@ class AskChatbotLease extends React.Component {
       },
       {
         id: "isFreeForSevenDayBoolean",
-        options : [
-          { value : "true", label: "會(YES)", trigger: "getPhone"},
-          { value : "false", label: "唔會(NO)", trigger: "getPhone"}
+        options: [
+          { value: "true", label: "會(YES)", trigger: "getPhone" },
+          { value: "false", label: "唔會(NO)", trigger: "getPhone" }
         ]
       },
       // Input Field
@@ -834,9 +852,20 @@ class AskChatbotLease extends React.Component {
           {
             value: "false",
             label: "冇呀，謝謝！請帶我到下一步",
-            trigger: "redirectMessage"
+           // trigger: "redirectMessage"
+            trigger: ({ value, steps }) => {
+              this.toggleSignUp(
+                steps.getEmailUserInput.value,
+                steps.getPhoneUserInput.value
+              );
+              return "redirectMessage"
+            }
           },
-          { value: "true", label: "我要更改資料", trigger: "update-yes" }
+          {
+            value: "true",
+            label: "我要更改資料",
+            trigger: "update-yes"
+          }
         ]
       },
       {
