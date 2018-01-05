@@ -161,10 +161,12 @@ export default class SlickAgentSaleProperty extends React.Component {
     const hProp = this.state.initialHeight ? { height: this.state.initialHeight } : {};
     const keyID = this.props.keyID;  
 
+    console.log( 'slickAgentSaleProperty keyID', keyID );
     //filter={property} inDirectCall={property.inDirectCall} propertys={property.matchedPropertys}
 
     // Buy Property ID
     const property = propertys.propertys.get( keyID );
+    console.log( 'slickAgentSaleProperty property', property );
 //    const property = propertys.propertys.get( '-Ktw-IOu3RDyKZybeB-A' );
 
     /**
@@ -182,6 +184,7 @@ export default class SlickAgentSaleProperty extends React.Component {
     // )
 
     return (
+      property && 
         <Carousel
           className="my-carousel"
           autoplay={false}

@@ -84,6 +84,8 @@ initReactFastclick();
 // //disableScroll();
 
 firebase.auth().onAuthStateChanged(user => {
+
+  console.log( 'onAuthStateChanged' );
   // update currentUser login or not
   MobxStore.app.user = firebase.auth().currentUser;
   // MobxStore.app.user = true;
@@ -125,8 +127,12 @@ firebase.auth().onAuthStateChanged(user => {
 
     // Think over before remove this like, may cause matchedPropertys = null
     Fb.app.updateUid();
+
     // Once, user login redirect to "List" or "Home"
-    MobxStore.router.goTo(views.list, { uid : user.uid }, MobxStore);
+    console.log( "currentPath ", MobxStore.router.currentPath );
+    if ( MobxStore.router.currentPath === '/' ) {
+       MobxStore.router.goTo(views.list, { uid : user.uid }, MobxStore);
+    } 
   } else {
     console.log("user haven't sign");
     //MobxStore.app.startLogout();
@@ -139,6 +145,8 @@ firebase.auth().onAuthStateChanged(user => {
 
     MobxStore.router.goTo(views.home, {}, MobxStore);
   }
+  console.log( 'end of onAuthStateChanged' );
+  // debugger
 });
 
 //<MobxRouter/>

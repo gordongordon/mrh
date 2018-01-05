@@ -163,7 +163,7 @@ class AskChatbotProfile extends React.Component {
                                  timeStamp: firebase.database.ServerValue.TIMESTAMP 
                                } );  
     }
-    MobxStore.router.goTo(views.list);
+    MobxStore.router.goTo(views.list, { uid : user.uid });
   };
 
   render() {

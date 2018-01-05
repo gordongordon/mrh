@@ -19,7 +19,8 @@ import Key from "./key";
 
 import Slick from "./slick";
 import RCarouse from "./rcarousel";
-import firebase from 'firebase';
+import firebase from "firebase";
+import { CarouselProvider } from "pure-react-carousel";
 
 //import Generic from './chatbot-message-ui';
 
@@ -364,7 +365,7 @@ class AskChatbotBuy extends React.Component {
 
   handleEnd = ({ steps, values }) => {
     var p = new Property();
-    var id;
+    //var id;
 
     const {
       getBuildingUserInput,
@@ -422,59 +423,70 @@ class AskChatbotBuy extends React.Component {
     p.isPetAllowed = isPetAllowedBoolean.value;
 
     firebase
-    .auth()
-    .signInAnonymously()
-    .then(
-      function(snapshot) {
-         id = Fb.app.usersRef.push().key;
-        
-        // The callback succeeded; do something with the final result.
-        console.log("signInAnonymously completed");
+      .auth()
+      .signInAnonymously()
+      .then(
+        function(snapshot) {
+          console.log("signInAnonymously completed");
 
-        //Fb.app.updateUid();
-        p.uid = MobxStore.app.uid;
-        p.typeFor = "sale";
-        p.typeTo = "buy";
-        p.fbid = id; // Assign a reference
-    
-        Fb.app.usersRef.update({ [id]: p.serialize() });
-    
-        Fb.propertys.child(id).set(p.serialize());
-        Fb.buy.child(id).set(p.serialize());
-    
-        const user = firebase.auth().currentUser;
-        if (user != null) {
-          user.updateProfile({
-              displayName: getNameInput.value,
-              email: getEmailUserInput.value
-            })
-            .then(function() {
-              // Update successful.
-            })
-            .catch(function(error) {
-              // An error happened.
+          const user = firebase.auth().currentUser;
+          
+          if (user != null) {
+            const pid = Fb.app.usersRef.push().key;
+            console.log( 'pid = ', pid );
+            // The callback succeeded; do something with the final result.
+            console.log( 'askChatbotBuy - user.uid ', user.uid );
+            console.log( 'askChatbotBuy - MobxStore.app.uid ', MobxStore.app.uid );
+            //Fb.app.updateUid();
+            // handling uid == null ??? 
+            //p.uid = MobxStore.app.uid;
+            p.uid = user.uid;
+            p.typeFor = "sale";
+            p.typeTo = "buy";
+            p.fbid = pid; // Assign a reference
+
+            Fb.app.usersRef.update({ [pid]: p.serialize() });
+
+            Fb.propertys.child(pid).set(p.serialize());
+            Fb.buy.child(pid).set(p.serialize());
+
+            user
+              .updateProfile({
+                displayName: getNameInput.value,
+                email: getEmailUserInput.value
+              })
+              .then(function() {
+                // Update successful.
+              })
+              .catch(function(error) {
+                // An error happened.
+              });
+
+            Fb.app.usersProfile.set({
+              phone: getPhoneUserInput.value,
+              timeStamp: firebase.database.ServerValue.TIMESTAMP
             });
-    
-          Fb.app.usersProfile.set( { phone : getPhoneUserInput.value,
-                                     timeStamp: firebase.database.ServerValue.TIMESTAMP 
-                                   } );  
+
+            MobxStore.router.goTo(views.chatAgentSaleRespond, { keyID: pid });
+            console.log("finished property set ");
+  
+          } else {
+            console.log("user === null");
+          }
+
+          // const id2 = Fb.propertys.push().key;
+          // Fb.propertys.update( {[id2]:  p.serialize() });
+          //    MobxStore.router.goTo(views.matchBuy, { keyID: id });
+          //MobxStore.router.goTo(views.chatAgentSaleRespond, { keyID: pid });
+          console.log("finished property set ");
+          return true;
+        },
+        function(error) {
+          return false;
+          // The callback failed.
+          console.error(error);
         }
-        
-        // const id2 = Fb.propertys.push().key;
-        // Fb.propertys.update( {[id2]:  p.serialize() });
-        //    MobxStore.router.goTo(views.matchBuy, { keyID: id });
-        MobxStore.router.goTo(views.chatAgentSaleRespond, { keyID: id });
-        console.log( 'finished property set ')
-        return true;
-      },
-      function(error) {
-        return false;
-        // The callback failed.
-        console.error(error);
-      }
-    );
-
-
+      );
 
     // if (MobxStore.app.uid === null) {
     //   if (Fb.startLoginAnonyhmously()) {
@@ -486,12 +498,12 @@ class AskChatbotBuy extends React.Component {
     //  p.typeFor = "sale";
     //  p.typeTo = "buy";
     //  p.fbid = id; // Assign a reference
- 
+
     //  Fb.app.usersRef.update({ [id]: p.serialize() });
- 
+
     //  Fb.propertys.child(id).set(p.serialize());
     //  Fb.buy.child(id).set(p.serialize());
- 
+
     //  const user = firebase.auth().currentUser;
     //  if (user != null) {
     //    user.updateProfile({
@@ -504,25 +516,22 @@ class AskChatbotBuy extends React.Component {
     //      .catch(function(error) {
     //        // An error happened.
     //      });
- 
+
     //    Fb.app.usersProfile.set( { phone : getPhoneInput.value,
-    //                               timeStamp: firebase.database.ServerValue.TIMESTAMP 
-    //                             } );  
+    //                               timeStamp: firebase.database.ServerValue.TIMESTAMP
+    //                             } );
     //  }
- 
- 
+
     //  // const id2 = Fb.propertys.push().key;
     //  // Fb.propertys.update( {[id2]:  p.serialize() });
     //  //    MobxStore.router.goTo(views.matchBuy, { keyID: id });
     //  MobxStore.router.goTo(views.chatAgentSaleRespond, { keyID: id });
-
 
     //   }
     // } else {
     //   id = Fb.app.usersRef.push().key;
     //   console.log( 'Fb.startLoginAnonyhmously() == false')
     // }
-
 
     // console.log(steps);
     // console.log(values);
@@ -627,7 +636,6 @@ class AskChatbotBuy extends React.Component {
         //
         id: "validaBuildingUserInput",
         message: ({ previousValue, steps }) => {
-          
           const address = JSON.parse(previousValue);
 
           return `你選擇左 「${address.label} 」!`;

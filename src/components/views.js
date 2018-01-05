@@ -588,7 +588,7 @@ chatAgentSaleRespond : new Route({
 // Buy, Sale, Rent, Lease Chatbot
   // For Chat bot example
 askChatbotBuy : new Route({
-    path: '/askChatbotBuy/:uid',
+    path: '/askChatbotBuy',
     component: <AskChatbotBuy />,
     onEnter: (route, params, store, queryParams) => {
       MobxStore.app.setTitle( 'CSALE_Matching');
@@ -600,7 +600,7 @@ askChatbotBuy : new Route({
     }
 }),
 askChatbotSale : new Route({
-  path: '/askChatbotSale/:uid',
+  path: '/askChatbotSale',
   component: <AskChatbotSale />,
   onEnter: (route, params, store, queryParams) => {
     MobxStore.app.setTitle( 'CSALE_Matching');
@@ -612,7 +612,7 @@ askChatbotSale : new Route({
   }
 }),
 askChatbotRent : new Route({
-  path: '/askChatbotRent/:uid',
+  path: '/askChatbotRent',
   component: <AskChatbotRent />,
   onEnter: (route, params, store, queryParams) => {
     MobxStore.app.setTitle( 'CSALE_Matching');
@@ -624,7 +624,7 @@ askChatbotRent : new Route({
   }
 }),
 askChatbotLease : new Route({
-  path: '/askChatbotLease/:uid', 
+  path: '/askChatbotLease', 
   component: <AskChatbotLease />,
   onEnter: (route, params, store, queryParams) => {
     MobxStore.app.setTitle( 'CSALE_Matching');

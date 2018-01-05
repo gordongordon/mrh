@@ -21,9 +21,14 @@ export default class AppStore {
  
     // Catch user login before assign any database reference
     updateUid = () => {
+      console.log( 'updateUid')
        const uid = MobxStore.app.uid;
-       console.log( 'MobxStore.app.uid ', uid)
 
+       // Testing only
+       const user = firebase.auth().currentUser;
+       console.log( 'updateUid user.uid ', user.uid);
+       console.log( 'updateUid MobxStore.app.uid ', uid)
+       console.log( 'updateUid usersRef ', `users/${uid}/propertys`);
        // users database
        this.usersRef = firebase.database().ref(`users/${uid}/propertys`);
        this.usersProfile = firebase.database().ref(`users/${uid}/profile`);
@@ -45,5 +50,7 @@ export default class AppStore {
        propertys.init();
        // Agent only
        agentModel.init();
+       console.log( 'end of updateUid')
+
     }
 }
