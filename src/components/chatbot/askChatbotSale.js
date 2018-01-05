@@ -454,8 +454,8 @@ class AskChatbotSale extends React.Component {
 
     // const id2 = Fb.propertys.push().key;
     // Fb.propertys.update( {[id2]:  p.serialize() });
-    //    MobxStore.router.goTo(views.matchBuy, { keyID: id });
-    MobxStore.router.goTo(views.chatAgentBuyRespond, { keyID: id });
+    MobxStore.router.goTo(views.matchBuy, { keyID: id });
+    //MobxStore.router.goTo(views.chatAgentBuyRespond, { keyID: id });
 
     // console.log(steps);
     // console.log(values);

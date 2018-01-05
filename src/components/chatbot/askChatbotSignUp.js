@@ -14,7 +14,6 @@ import views from "views";
 import { Fb } from "firebase-store";
 import Key from './key';
 import firebase from 'firebase';
-//import { isStringTypeAnnotation } from "../../../../../AppData/Local/Microsoft/TypeScript/2.6/node_modules/@types/babel-types";
 
 //import Generic from './chatbot-message-ui';
 
@@ -185,7 +184,7 @@ class AskChatbotSignUp extends React.Component {
         var isSign = true; // default to true, unless singup error 
 
         console.log( `email ${email}, password ${password}`)
-            // Sign in with email and pass.
+        // Sign in with email and pass.
         // [START authwithemail]
 
         firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {

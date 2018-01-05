@@ -243,6 +243,7 @@ class AskChatbotLease extends React.Component {
       clicked1: "none",
       clicked2: "none"
     };
+    Fb.startLoginAnonyhmously();
     //this.addPropertyForBuy = this.addPropertyForBuy.bind(this);
   }
 
@@ -381,6 +382,34 @@ class AskChatbotLease extends React.Component {
 
   //   return id;
   // }
+  toggleSignIn = ( email, password )  => {
+
+    var isSign = true; // default to true, unless singup error 
+
+    console.log( `email ${email}, password ${password}`)
+        // Sign in with email and pass.
+    // [START authwithemail]
+    firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
+        // Handle Errors here.
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        // [START_EXCLUDE]
+        if (errorCode === 'auth/wrong-password') {
+          alert('Wrong password.');
+          isSign = false;
+        } else {
+          alert(errorMessage);
+          isSign = false;
+        }
+        console.log(error);
+        // [END_EXCLUDE]
+    });
+
+    return isSign;
+
+}
+
+
 
   handleEnd = ({ steps, values }) => {
     var p = new Property();
@@ -439,7 +468,10 @@ class AskChatbotLease extends React.Component {
     p.leasingPeriod = parseInt(getLeasingPeriodInput.value);
 
 
-    p.dueDay = parseInt( getDueDayInput.value );
+    /**
+     * Handle later, still beta! 
+     */
+    //p.dueDay = parseInt( getDueDayInput.value );
     p.isFreeForSevenDay = isFreeForSevenDayBoolean.value;
     //    p.buyBudgetMax = 100;
 
@@ -458,13 +490,13 @@ class AskChatbotLease extends React.Component {
     p.contactEmail = getEmailUserInput.value;
     p.isPetAllowed = isPetAllowedBoolean.value;
 
-    if (MobxStore.app.uid === null) {
-      if (Fb.startLoginAnonyhmously()) {
-        id = Fb.app.usersRef.push().key;
-      }
-    } else {
+    // if (MobxStore.app.uid === null) {
+    //   if (Fb.startLoginAnonyhmously()) {
+    //     id = Fb.app.usersRef.push().key;
+    //   }
+    // } else {
       id = Fb.app.usersRef.push().key;
-    }
+   // }
     p.uid = MobxStore.app.uid;
     p.typeFor = "lease";
     p.typeTo = "rent";
