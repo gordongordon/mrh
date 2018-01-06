@@ -14,6 +14,7 @@ import views from "views";
 
 import PartitionPicker from "./partitionPicker";
 import { Fb } from "firebase-store";
+import firebase from "firebase";
 import { Property } from "property";
 import Key from "./key";
 
@@ -463,8 +464,7 @@ class AskChatbotRent extends React.Component {
   };
 
   handleEnd = ({ steps, values }) => {
-    var p = new Property();
-    var id;
+    const p = new Property();
 
     const {
       getBuildingUserInput,
@@ -533,27 +533,21 @@ class AskChatbotRent extends React.Component {
     p.contactEmail = getEmailUserInput.value;
     p.isPetAllowed = isPetAllowedBoolean.value;
 
-    if (MobxStore.app.uid === null) {
-      if (Fb.startLoginAnonyhmously()) {
-        id = Fb.app.usersRef.push().key;
-      }
-    } else {
-      id = Fb.app.usersRef.push().key;
-    }
+    const pid = Fb.app.usersRef.push().key;
     p.uid = MobxStore.app.uid;
     p.typeFor = "lease";
     p.typeTo = "rent";
-    p.fbid = id; // Assign a reference
+    p.fbid = pid; // Assign a reference
 
-    Fb.app.usersRef.update({ [id]: p.serialize() });
+    Fb.app.usersRef.update({ [pid]: p.serialize() });
 
-    Fb.propertys.child(id).set(p.serialize());
-    Fb.rent.child(id).set(p.serialize());
+    Fb.propertys.child(pid).set(p.serialize());
+    Fb.rent.child(pid).set(p.serialize());
 
     // const id2 = Fb.propertys.push().key;
     // Fb.propertys.update( {[id2]:  p.serialize() });
     //    MobxStore.router.goTo(views.matchBuy, { keyID: id });
-    MobxStore.router.goTo(views.chatAgentLeaseRespond, { keyID: id });
+    MobxStore.router.goTo(views.chatAgentLeaseRespond, { keyID: pid });
 
     // console.log(steps);
     // console.log(values);
@@ -1155,7 +1149,7 @@ class AskChatbotRent extends React.Component {
       <div>
         <ThemeProvider theme={theme}>
           <ChatBot
-            headerTitle="Mr.House"
+            headerTitle="Mr.House - rent"
             hideSubmitButton="false"
             // hideBotAvatar="false"
             placeholder="請輸入這裏"

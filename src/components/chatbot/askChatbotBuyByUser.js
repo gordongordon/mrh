@@ -190,11 +190,12 @@ Review.defaultProps = {
 };
 
 class AskChatbotBuyByUser extends React.Component {
+  static displayName = "AskChatbotBuyerByUser";
+
   constructor(props) {
     super(props);
 
-    this.displayName = "MrHouse";
-    var user = firebase.auth().currentUser;
+    const user = firebase.auth().currentUser;
     var name, email, photoUrl, uid, emailVerified;
     
     if (user != null) {
@@ -358,8 +359,7 @@ class AskChatbotBuyByUser extends React.Component {
   // }
 
   handleEnd = ({ steps, values }) => {
-    var p = new Property();
-    var id;
+    const p = new Property();
 
     const {
       getBuildingUserInput,
@@ -412,6 +412,7 @@ class AskChatbotBuyByUser extends React.Component {
     } else {
        p.contactName = this.state.user.displayName;
     }
+
     //debugger
     // p.contactPhone = parseInt(getPhoneUserInput.value) {;
     p.contactPhone = "85200000000"
@@ -421,27 +422,23 @@ class AskChatbotBuyByUser extends React.Component {
     // p.contactEmail = getEmailUserInput.value;
     p.isPetAllowed = isPetAllowedBoolean.value;
 
-    if (MobxStore.app.uid === null) {
-      if (Fb.startLoginAnonyhmously()) {
-        id = Fb.app.usersRef.push().key;
-      }
-    } else {
-      id = Fb.app.usersRef.push().key;
-    }
+    // assing property id 
+    const pid = Fb.app.usersRef.push().key;
+
     p.uid = MobxStore.app.uid;
     p.typeFor = "sale";
     p.typeTo = "buy";
-    p.fbid = id; // Assign a reference
+    p.fbid = pid; // Assign a reference
 
-    Fb.app.usersRef.update({ [id]: p.serialize() });
+    Fb.app.usersRef.update({ [pid]: p.serialize() });
 
-    Fb.propertys.child(id).set(p.serialize());
-    Fb.buy.child(id).set(p.serialize());
+    Fb.propertys.child(pid).set(p.serialize());
+    Fb.buy.child(pid).set(p.serialize());
 
     // const id2 = Fb.propertys.push().key;
     // Fb.propertys.update( {[id2]:  p.serialize() });
     //    MobxStore.router.goTo(views.matchBuy, { keyID: id });
-    MobxStore.router.goTo(views.chatAgentSaleRespond, { keyID: id });
+    MobxStore.router.goTo(views.chatAgentSaleRespond, { keyID: pid });
 
     // console.log(steps);
     // console.log(values);

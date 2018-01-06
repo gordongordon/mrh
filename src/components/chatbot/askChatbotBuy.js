@@ -14,12 +14,11 @@ import views from "views";
 
 import PartitionPicker from "./partitionPicker";
 import { Fb } from "firebase-store";
+import firebase from "firebase";
 import { Property } from "property";
 import Key from "./key";
-
 import Slick from "./slick";
 import RCarouse from "./rcarousel";
-import firebase from "firebase";
 import { CarouselProvider } from "pure-react-carousel";
 
 //import Generic from './chatbot-message-ui';
@@ -230,64 +229,6 @@ class AskChatbotBuy extends React.Component {
     //this.addPropertyForBuy = this.addPropertyForBuy.bind(this);
   }
 
-  showActionSheet = () => {
-    const BUTTONS = ["操作一", "操作二", "操作三", "删除", "取消"];
-    ActionSheet.showActionSheetWithOptions(
-      {
-        options: BUTTONS,
-        cancelButtonIndex: BUTTONS.length - 1,
-        destructiveButtonIndex: BUTTONS.length - 2,
-        // title: '标题',
-        message: "我是描述我是描述",
-        maskClosable: true,
-        "data-seed": "logId",
-        wrapProps
-      },
-      buttonIndex => {
-        this.setState({ clicked: BUTTONS[buttonIndex] });
-      }
-    );
-  };
-  showShareActionSheet = () => {
-    const icons = [...iconList];
-    icons.length = 4;
-    ActionSheet.showShareActionSheetWithOptions(
-      {
-        options: icons,
-        // title: '标题',
-        message: "我是描述我是描述",
-        className: "my-action-sheet"
-      },
-      buttonIndex => {
-        this.setState({
-          clicked1: buttonIndex > -1 ? icons[buttonIndex].title : "cancel"
-        });
-        // also support Promise
-        return new Promise(resolve => {
-          Toast.info("1000ms 后关闭");
-          setTimeout(resolve, 1000);
-        });
-      }
-    );
-  };
-  showShareActionSheetMulpitleLine = () => {
-    const icons = [[...iconList], [iconList[5], iconList[6], iconList[7]]];
-    ActionSheet.showShareActionSheetWithOptions(
-      {
-        options: icons,
-        // title: '标题',
-        message: "我是描述我是描述",
-        className: "my-action-sheet"
-      },
-      (buttonIndex, rowIndex) => {
-        this.setState({
-          clicked2:
-            buttonIndex > -1 ? icons[rowIndex][buttonIndex].title : "cancel"
-        });
-      }
-    );
-  };
-
   componentDidMount() {
     //this.handleEnd = this.handleEnd.bind(this);
   }
@@ -396,7 +337,7 @@ class AskChatbotBuy extends React.Component {
         user.sendEmailVerification();
         // You can also call this.
         firebase.auth().currentUser.sendEmailVerification();
-//        return isSign;
+        //        return isSign;
         // Email sent.
       },
       function(error) {
@@ -427,17 +368,14 @@ class AskChatbotBuy extends React.Component {
         // var formatedTime=myDate.toJSON();
         // debugger
         // console.log( 'formatedTime ', formatedTime );
-            
-
       })
       .catch(function(error) {
         // An error happened.
       });
-
   };
 
   handleEnd = ({ steps, values }) => {
-    var p = new Property();
+    const p = new Property();
     //var id;
 
     const {
@@ -495,71 +433,31 @@ class AskChatbotBuy extends React.Component {
     p.contactEmail = getEmailUserInput.value;
     p.isPetAllowed = isPetAllowedBoolean.value;
 
-    firebase
-      .auth()
-      .signInAnonymously()
-      .then(
-        function(snapshot) {
-          console.log("signInAnonymously completed");
+    const pid = Fb.app.usersRef.push().key;
+    console.log("pid = ", pid);
+    // The callback succeeded; do something with the final result.
+    console.log("askChatbotBuy - user.uid ", user.uid);
+    console.log("askChatbotBuy - MobxStore.app.uid ", MobxStore.app.uid);
+    //Fb.app.updateUid();
+    // handling uid == null ???
+    //p.uid = MobxStore.app.uid;
+    p.uid = user.uid;
+    p.typeFor = "sale";
+    p.typeTo = "buy";
+    p.fbid = pid; // Assign a reference
 
-          const user = firebase.auth().currentUser;
-          
-          if (user != null) {
-            const pid = Fb.app.usersRef.push().key;
-            console.log( 'pid = ', pid );
-            // The callback succeeded; do something with the final result.
-            console.log( 'askChatbotBuy - user.uid ', user.uid );
-            console.log( 'askChatbotBuy - MobxStore.app.uid ', MobxStore.app.uid );
-            //Fb.app.updateUid();
-            // handling uid == null ??? 
-            //p.uid = MobxStore.app.uid;
-            p.uid = user.uid;
-            p.typeFor = "sale";
-            p.typeTo = "buy";
-            p.fbid = pid; // Assign a reference
+    Fb.app.usersRef.update({ [pid]: p.serialize() });
 
-            Fb.app.usersRef.update({ [pid]: p.serialize() });
+    Fb.propertys.child(pid).set(p.serialize());
+    Fb.buy.child(pid).set(p.serialize());
 
-            Fb.propertys.child(pid).set(p.serialize());
-            Fb.buy.child(pid).set(p.serialize());
+    MobxStore.router.goTo(views.chatAgentSaleRespond, { keyID: pid });
+    console.log("finished property set ");
 
-            user
-              .updateProfile({
-                displayName: getNameInput.value,
-                email: getEmailUserInput.value
-              })
-              .then(function() {
-                // Update successful.
-              })
-              .catch(function(error) {
-                // An error happened.
-              });
-
-            Fb.app.usersProfile.set({
-              phone: getPhoneUserInput.value,
-              timeStamp: firebase.database.ServerValue.TIMESTAMP
-            });
-
-            MobxStore.router.goTo(views.chatAgentSaleRespond, { keyID: pid });
-            console.log("finished property set ");
-  
-          } else {
-            console.log("user === null");
-          }
-
-          // const id2 = Fb.propertys.push().key;
-          // Fb.propertys.update( {[id2]:  p.serialize() });
-          //    MobxStore.router.goTo(views.matchBuy, { keyID: id });
-          //MobxStore.router.goTo(views.chatAgentSaleRespond, { keyID: pid });
-          console.log("finished property set ");
-          return true;
-        },
-        function(error) {
-          return false;
-          // The callback failed.
-          console.error(error);
-        }
-      );
+    // const id2 = Fb.propertys.push().key;
+    // Fb.propertys.update( {[id2]:  p.serialize() });
+    //    MobxStore.router.goTo(views.matchBuy, { keyID: id });
+    //MobxStore.router.goTo(views.chatAgentSaleRespond, { keyID: pid });
 
     // if (MobxStore.app.uid === null) {
     //   if (Fb.startLoginAnonyhmously()) {
@@ -927,13 +825,13 @@ class AskChatbotBuy extends React.Component {
           {
             value: "false",
             label: "冇呀，謝謝！請帶我到下一步",
-           // trigger: "redirectMessage"
+            // trigger: "redirectMessage"
             trigger: ({ value, steps }) => {
               this.toggleSignUp(
                 steps.getEmailUserInput.value,
                 steps.getPhoneUserInput.value
               );
-              return "redirectMessage"
+              return "redirectMessage";
             }
           },
           { value: "true", label: "我要更改資料", trigger: "update-yes" }
@@ -1118,7 +1016,7 @@ class AskChatbotBuy extends React.Component {
       <div>
         <ThemeProvider theme={theme}>
           <ChatBot
-            headerTitle="Mr.House"
+            headerTitle="Mr.House - Buy"
             hideSubmitButton="false"
             // hideBotAvatar="false"
             placeholder="請輸入這裏"

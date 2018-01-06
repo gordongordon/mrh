@@ -19,6 +19,8 @@ import Key from "./key";
 
 import Slick from "./slick";
 import RCarouse from "./rcarousel";
+import firebase from "firebase";
+ 
 
 //import Generic from './chatbot-message-ui';
 
@@ -443,8 +445,7 @@ class AskChatbotSale extends React.Component {
   };
 
   handleEnd = ({ steps, values }) => {
-    var p = new Property();
-    var id;
+    const p = new Property();
 
     const {
       getBuildingUserInput,
@@ -508,27 +509,21 @@ class AskChatbotSale extends React.Component {
     p.contactEmail = getEmailUserInput.value;
     p.isPetAllowed = isPetAllowedBoolean.value;
 
-    if (MobxStore.app.uid === null) {
-      if (Fb.startLoginAnonyhmously()) {
-        id = Fb.app.usersRef.push().key;
-      }
-    } else {
-      id = Fb.app.usersRef.push().key;
-    }
+    const pid = Fb.app.usersRef.push().key;
     p.uid = MobxStore.app.uid;
     p.typeFor = "buy";
     p.typeTo = "sale";
-    p.fbid = id; // Assign a reference
+    p.fbid = pid; // Assign a reference
 
-    Fb.app.usersRef.update({ [id]: p.serialize() });
+    Fb.app.usersRef.update({ [pid]: p.serialize() });
 
-    Fb.propertys.child(id).set(p.serialize());
-    Fb.sale.child(id).set(p.serialize());
+    Fb.propertys.child(pid).set(p.serialize());
+    Fb.sale.child(pid).set(p.serialize());
 
     // const id2 = Fb.propertys.push().key;
     // Fb.propertys.update( {[id2]:  p.serialize() });
-    MobxStore.router.goTo(views.matchBuy, { keyID: id });
-    //MobxStore.router.goTo(views.chatAgentBuyRespond, { keyID: id });
+    //MobxStore.router.goTo(views.list, { keyID: pid });
+    MobxStore.router.goTo(views.chatAgentBuyRespond, { keyID: pid });
 
     // console.log(steps);
     // console.log(values);
@@ -1042,7 +1037,7 @@ class AskChatbotSale extends React.Component {
       <div>
         <ThemeProvider theme={theme}>
           <ChatBot
-            headerTitle="Mr.House"
+            headerTitle="Mr.House - Sale"
             hideSubmitButton="false"
             // hideBotAvatar="false"
             placeholder="請輸入這裏"
