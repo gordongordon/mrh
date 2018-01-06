@@ -234,10 +234,12 @@ Review.defaultProps = {
 };
 
 class AskChatbotLease extends React.Component {
+  static displayName = "askChatbotLease";
+
   constructor(props) {
     super(props);
 
-    this.displayName = "MrHouse";
+    // this.displayName = "MrHouse";
 
     this.state = {
       clicked: "none",
@@ -245,186 +247,61 @@ class AskChatbotLease extends React.Component {
       clicked2: "none"
     };
     // Fb.startLoginAnonyhmously();
-    this.toggleSignUp = this.toggleSignUp.bind( this );
+    this.toggleSignUp = this.toggleSignUp.bind(this);
+    this.updateProfile = this.updateProfile.bind(this);
     //this.addPropertyForBuy = this.addPropertyForBuy.bind(this);
   }
-
-  showActionSheet = () => {
-    const BUTTONS = ["操作一", "操作二", "操作三", "删除", "取消"];
-    ActionSheet.showActionSheetWithOptions(
-      {
-        options: BUTTONS,
-        cancelButtonIndex: BUTTONS.length - 1,
-        destructiveButtonIndex: BUTTONS.length - 2,
-        // title: '标题',
-        message: "我是描述我是描述",
-        maskClosable: true,
-        "data-seed": "logId",
-        wrapProps
-      },
-      buttonIndex => {
-        this.setState({ clicked: BUTTONS[buttonIndex] });
-      }
-    );
-  };
-  showShareActionSheet = () => {
-    const icons = [...iconList];
-    icons.length = 4;
-    ActionSheet.showShareActionSheetWithOptions(
-      {
-        options: icons,
-        // title: '标题',
-        message: "我是描述我是描述",
-        className: "my-action-sheet"
-      },
-      buttonIndex => {
-        this.setState({
-          clicked1: buttonIndex > -1 ? icons[buttonIndex].title : "cancel"
-        });
-        // also support Promise
-        return new Promise(resolve => {
-          Toast.info("1000ms 后关闭");
-          setTimeout(resolve, 1000);
-        });
-      }
-    );
-  };
-  showShareActionSheetMulpitleLine = () => {
-    const icons = [[...iconList], [iconList[5], iconList[6], iconList[7]]];
-    ActionSheet.showShareActionSheetWithOptions(
-      {
-        options: icons,
-        // title: '标题',
-        message: "我是描述我是描述",
-        className: "my-action-sheet"
-      },
-      (buttonIndex, rowIndex) => {
-        this.setState({
-          clicked2:
-            buttonIndex > -1 ? icons[rowIndex][buttonIndex].title : "cancel"
-        });
-      }
-    );
-  };
 
   componentDidMount() {
     //this.handleEnd = this.handleEnd.bind(this);
   }
 
-  // addPropertyForBuy = ( steps ) =>
-  // {
-  //   var p = new Property();
-  //   var id;
+  toggleSignUp = (email, password) => {
+    var isSign = true; // default to true, unless singup error
 
-  //   const {
-  //     getBuildingUserInput,
-  //     getNetSizeMinUserInput,
-  //     getPartitionUserInput,
-  //     isPetAllowedBoolean,
-  //     isBuyWithLeaseBoolean,
-  //     getBuyBudgetMaxInput,
-  //     getLastNameUserInput,
-  //     getEmailUserInput,
-  //     getPhoneUserInput
-  //   } = steps;
-
-  //   //p.uid = MobxStore.app.uid;
-  //   //     ["NTTV", "MOS", "MOS0001"]
-  //   p.addressRegion = "NTTV";
-  //   p.addressLocation = "MOS";
-  //   p.nameOfBuilding = "MOS0001";
-
-  //   // p.dueDay = v.dueDay.toJSON();
-  //   // p.earlyTimeToView = v.earlyTimeToView.toJSON();
-  //   // p.salePriceMax = parseInt( v.salePriceMax )
-
-  //   //p.leasePrice = parseInt(v.leasePrice);
-  //   //debugger
-  //   p.numOfRoom = parseInt("0");
-  //   p.numOfBathroom = parseInt("1");
-  //   p.numOfLivingroom = parseInt("1");
-
-  //   p.isBuyWithLease = isBuyWithLeaseBoolean;
-  //   p.netSizeMin = parseInt(getNetSizeMinUserInput);
-  //   p.buyBudgetMax = parseInt( getBuyBudgetMaxInput);
-
-  //   //p.isPreferPayAnnually = v.isPreferPayAnnually;
-  //   //p.isRentAbleNow = v.isRentAbleNow;
-  //   //p.isFreeForSevenDay = v.isFreeForSevenDay;
-
-  //   //p.hasHomeHardware = v.hasHomeHardware;
-  //   //p.isViewAble = v.isViewAble;
-  //   //    p.howToContact = parseInt( howToContact[0] );
-  //   p.contactName = getLastNameUserInput;
-  //   debugger
-  //   p.contactPhone = parseInt(getPhoneUserInput);
-  //   p.contactEmail = getEmailUserInput;
-  //   p.isPetAllowed = isPetAllowedBoolean;
-
-  //   if (MobxStore.app.uid === null) {
-  //     if (Fb.startLoginAnonyhmously()) {
-  //       id = Fb.app.usersRef.push().key;
-  //     }
-  //   } else {
-  //     id = Fb.app.usersRef.push().key;
-  //   }
-  //   p.uid = MobxStore.app.uid;
-  //   p.typeFor = 'sale';
-  //   p.typeTo = 'buy';
-  //   p.fbid = id; // Assign a reference
-
-  //   Fb.app.usersRef.update({ [id]: p.serialize() });
-
-  //   Fb.propertys.child(id).set(p.serialize());
-  //   Fb.buy.child(id).set(p.serialize());
-
-  //   // const id2 = Fb.propertys.push().key;
-  //   // Fb.propertys.update( {[id2]:  p.serialize() });
-  //   MobxStore.router.goTo(views.matchBuy, { keyID: id });
-
-  //   return id;
-  // }
-  toggleSignUp = ( email, password )  => {
-
-    var isSign = true; // default to true, unless singup error 
-
-    console.log( `email ${email}, password ${password}`)
+    console.log(`email ${email}, password ${password}`);
     // Sign in with email and pass.
     // [START authwithemail]
 
-    firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
-      // Handle Errors here.
-      var errorCode = error.code;
-      var errorMessage = error.message;
-      // [START_EXCLUDE]
-      if (errorCode == 'auth/weak-password') {
-        alert('The password is too weak.');
-        isSign = false;
-      } else {
-        alert(errorMessage);
+    var promise = firebase
+      .auth()
+      .createUserWithEmailAndPassword(email, password) //
+      .catch(function(error) {
+        // Handle Errors here.
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        // [START_EXCLUDE]
+        if (errorCode == "auth/weak-password") {
+          alert("The password is too weak.");
+        } else {
+          alert(errorMessage);
+        }
+        console.log(error);
+        // [END_EXCLUDE]-
+      });
+
+    promise.then(
+      function(user) {
+        // You are forgetting this reference.
+        user.sendEmailVerification();
+        // You can also call this.
+        firebase.auth().currentUser.sendEmailVerification();
+//        return isSign;
+        // Email sent.
+      },
+      function(error) {
+        // An error happened.
         isSign = false;
       }
-      console.log(error);
-      // [END_EXCLUDE]-
-    });
+    );
 
-    var user = firebase.auth().currentUser;
-
-    user.sendEmailVerification().then(function() {
-      console.log( "email - verification")
-      // Email sent.
-    }).catch(function(error) {
-      // An error happened.
-    });
-
-    return isSign
-
-}
+    return isSign;
+  };
 
   handleEnd = ({ steps, values }) => {
-    var p = new Property();
-    const user = firebase.auth().currentUser;
-    var id;
+    const p = new Property();
+    // const user = firebase.auth().currentUser;
+    //var id;
 
     const {
       getBuildingUserInput,
@@ -503,7 +380,7 @@ class AskChatbotLease extends React.Component {
     //     id = Fb.app.usersRef.push().key;
     //   }
     // } else {
-    id = Fb.app.usersRef.push().key;
+    const id = Fb.app.usersRef.push().key;
     // }
     p.uid = MobxStore.app.uid;
     p.typeFor = "lease";
@@ -514,23 +391,8 @@ class AskChatbotLease extends React.Component {
 
     Fb.propertys.child(id).set(p.serialize());
     Fb.lease.child(id).set(p.serialize());
- 
 
-    user
-      .updateProfile({
-        displayName: getNameInput.value,
-      })
-      .then(function() {
-        // Update successful.
-      })
-      .catch(function(error) {
-        // An error happened.
-      });
-
-    Fb.app.usersProfile.set({
-      phone: getPhoneUserInput.value,
-      timeStamp: firebase.database.ServerValue.TIMESTAMP
-    });
+    this.updateProfile(getNameInput.value, getPhoneUserInput.value);
 
     // const id2 = Fb.propertys.push().key;
     // Fb.propertys.update( {[id2]:  p.serialize() });
@@ -548,6 +410,33 @@ class AskChatbotLease extends React.Component {
     //MobxStore.router.goTo( views.matchBuy, { keyID } )
   };
 
+  updateProfile = (displayName, phone) => {
+    const user = firebase.auth().currentUser;
+
+    user
+      .updateProfile({
+        displayName
+      })
+      .then(function() {
+        // Update successful.
+
+        Fb.app.usersProfile.set({
+          phone,
+          timeStamp: firebase.database.ServerValue.TIMESTAMP
+        });
+
+        // var myDate = new Date(firebase.database.ServerValue.TIMESTAMP*1000);
+        // var formatedTime=myDate.toJSON();
+        // debugger
+        // console.log( 'formatedTime ', formatedTime );
+            
+
+      })
+      .catch(function(error) {
+        // An error happened.
+      });
+
+  };
   // setIdWelcome2 = ( trigger ) => {
   //    return {
   //       id: "welcome2",
@@ -862,13 +751,13 @@ class AskChatbotLease extends React.Component {
           {
             value: "false",
             label: "冇呀，謝謝！請帶我到下一步",
-           // trigger: "redirectMessage"
+            // trigger: "redirectMessage"
             trigger: ({ value, steps }) => {
               this.toggleSignUp(
                 steps.getEmailUserInput.value,
                 steps.getPhoneUserInput.value
               );
-              return "redirectMessage"
+              return "redirectMessage";
             }
           },
           {
@@ -1091,7 +980,7 @@ class AskChatbotLease extends React.Component {
       <div>
         <ThemeProvider theme={theme}>
           <ChatBot
-            headerTitle="Mr.House"
+            headerTitle="Mr.House - Leasing"
             hideSubmitButton="false"
             // hideBotAvatar="false"
             placeholder="請輸入這裏"

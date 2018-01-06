@@ -2,7 +2,7 @@
 import React from "react";
 import { ActionSheet, Button, Toast, Icon } from "antd-mobile";
 import PropTypes from "prop-types";
-import styled from 'styled-components';
+import styled from "styled-components";
 
 //import ChatBot from '../react-simple-chatbot/dist/react-simple-chatbot';
 import ChatBot from "react-simple-chatbot";
@@ -12,11 +12,10 @@ import { ThemeProvider } from "styled-components";
 import MobxStore from "mobxStore";
 import views from "views";
 import { Fb } from "firebase-store";
-import Key from './key';
-import firebase from 'firebase';
+import Key from "./key";
+import firebase from "firebase";
 
 //import Generic from './chatbot-message-ui';
-
 
 // Green
 const theme = {
@@ -28,7 +27,7 @@ const theme = {
   botBubbleColor: "#e6e6e6",
   botFontColor: "#000",
   userBubbleColor: "#fecea8",
-  userFontColor: "#000" 
+  userFontColor: "#000"
 };
 
 // fix touch to scroll background page on iOS
@@ -95,26 +94,20 @@ const iconList = [
   //  { icon: <Icon type={require('./complaints.svg')} />, title: '投诉' },
 ];
 
-  
-
-
-
 class AskChatbotSignIn extends React.Component {
-
   constructor(props) {
     super(props);
 
     this.displayName = "MrHouse";
-    
+
     this.state = {
       clicked: "none",
       clicked1: "none",
       clicked2: "none"
     };
     //this.addPropertyForBuy = this.addPropertyForBuy.bind(this);
-    this.toggleSignIn  = this.toggleSignIn.bind( this );
-    this.handleEnd = this.handleEnd.bind( this );
-    
+    this.toggleSignIn = this.toggleSignIn.bind(this);
+    this.handleEnd = this.handleEnd.bind(this);
   }
 
   showActionSheet = () => {
@@ -179,40 +172,67 @@ class AskChatbotSignIn extends React.Component {
     //this.handleEnd = this.handleEnd.bind(this);
   }
 
+  toggleSignIn = (email, password) => {
+    var isSign = true; // default to true, unless singup error
 
-  toggleSignIn = ( email, password )  => {
+    console.log(`email ${email}, password ${password}`);
+    // Sign in with email and pass.
+    // [START authwithemail]
+    var promise = firebase
+      .auth()
+      .signInWithEmailAndPassword(email, password)
+      .catch(function(error) {
+        // Handle Errors here.
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        // [START_EXCLUDE]
+        if (errorCode === "auth/wrong-password") {
+          alert("Wrong password.");
+          isSign = false;
+        } else {
+          alert(errorMessage);
+          isSign = false;
+        }
+        console.log(error);
+        // [END_EXCLUDE]
+      });
 
-        var isSign = true; // default to true, unless singup error 
+      promise.then(
+        function(user) {
+          // Email sent.
+          return isSign;
+        },
+        function(error) {
+          // An error happened.
+          return isSign;
+        }
+      );
 
-        console.log( `email ${email}, password ${password}`)
-            // Sign in with email and pass.
-        // [START authwithemail]
-        firebase.auth().signInWithEmailAndPassword(email, password).catch(function(error) {
-            // Handle Errors here.
-            var errorCode = error.code;
-            var errorMessage = error.message;
-            // [START_EXCLUDE]
-            if (errorCode === 'auth/wrong-password') {
-              alert('Wrong password.');
-              isSign = false;
-            } else {
-              alert(errorMessage);
-              isSign = false;
-            }
-            console.log(error);
-            // [END_EXCLUDE]
-        });
+    // return isSign;
+  };
 
-        return isSign;
-    
-  }
+  // to be program
+  resetPassword = (email) => {
+    const auth = firebase.auth();
+     
+    const emailAddress = email;
+
+    auth
+      .sendPasswordResetEmail(emailAddress)
+      .then(function() {
+        console.log( "email sent", email)
+        // Email sent.
+      })
+      .catch(function(error) {
+        // An error happened.
+      });
+  };
 
   handleEnd = ({ steps, values }) => {
-
     var user = firebase.auth().currentUser;
 
     if (user != null) {
-      user.providerData.forEach(function (profile) {
+      user.providerData.forEach(function(profile) {
         console.log("Sign-in provider: " + profile.providerId);
         console.log("  Provider-specific UID: " + profile.uid);
         console.log("  Name: " + profile.displayName);
@@ -220,20 +240,52 @@ class AskChatbotSignIn extends React.Component {
         console.log("  Photo URL: " + profile.photoURL);
       });
     } else {
-      console.log("user === null")
+      console.log("user === null");
     }
-    MobxStore.router.goTo(views.list );
 
-  }  
+    MobxStore.router.goTo(views.list, { uid : user.uid });
+  };
 
   render() {
-
     const Welcome = [
       {
         // welcome
+        id: "getUserSignIn",
+        message: "please choice the following actionrs?",
+        trigger: "getUserSignInOptions"
+      },
+      {
+        id: "getUserSignInOptions",
+        options : [
+          { value: "signIn", label: "sign in", trigger: "getUserId" },
+          { value: "resetPassword", label: "reset password", trigger: "getUserEmail" }
+        ]
+      },
+      {
+        id: "getUserEmail",
+        message: "Please give us your email in order to recover your password?",
+        trigger: "getUserEmailInput"
+      },
+      {
+        id: "getUserEmailInput",
+        user : true,
+        inputType: "email",
+        trigger: ({ value, steps }) => {
+          this.resetPassword(
+            value
+          );
+          return "resetPasswordMessage";
+        }        
+      },
+      {
+        id: "resetPasswordMessage",
+        message: "please check your email address! and come back https://mr.house",
+        trigger: "getUserSignIn"
+      },
+      { 
         id: "getUserId",
-        message: "please sign with your email id",
-        trigger: "getUserIdInput" 
+        message: "Please enter email!",
+        trigger : "getUserIdInput"
       },
       {
         // on.FILLED
@@ -242,7 +294,8 @@ class AskChatbotSignIn extends React.Component {
         inputType: "text",
         trigger: "getUserPassword"
       },
-      { id: "getUserPassword",
+      {
+        id: "getUserPassword",
         message: "please input your password!",
         trigger: "getUserPasswordInput"
       },
@@ -251,41 +304,51 @@ class AskChatbotSignIn extends React.Component {
         id: "getUserPasswordInput",
         user: true,
         inputType: "password",
-        trigger: "signUp"
+        trigger: ({ value, steps }) => {
+          const bool =  this.toggleSignIn( steps.getUserIdInput.value, steps.getUserPasswordInput.value) ;
+                    console.log( "bool", bool);
+          if ( bool ) {
+            return "signUp";
+          }
+          return "getUserSignIn";
+        }        
+        
       },
       {
         id: "signUp",
-        message  : ( {previouis, steps } ) => {
-          if ( this.toggleSignIn( steps.getUserIdInput.value, steps.getUserPasswordInput.value) )
-          {   
-             // return "Successful signup";
-             
-             var user = firebase.auth().currentUser;
-             var message = "empty";
-             if (user != null) {
-                 user.providerData.forEach(function (profile) {
-                 message += "Sign-in provider: " + profile.providerId;
-                 message += "  Provider-specific UID: " + profile.uid;
-                 message += "  Name: " + profile.displayName;
-                 message += "  Email: " + profile.email;
-                 message += "  Photo URL: " + profile.photoURL;
-                 return message;
-               });
-             }  
+        message: ({ previouis, steps }) => {
+          if (
+            this.toggleSignIn(
+              steps.getUserIdInput.value,
+              steps.getUserPasswordInput.value
+            )
+          ) {
+            // return "Successful signup";
+
+            var user = firebase.auth().currentUser;
+            var message = "empty";
+            if (user != null) {
+              user.providerData.forEach(function(profile) {
+                message += "Sign-in provider: " + profile.providerId;
+                message += "  Provider-specific UID: " + profile.uid;
+                message += "  Name: " + profile.displayName;
+                message += "  Email: " + profile.email;
+                message += "  Photo URL: " + profile.photoURL;
+                return message;
+              });
+            }
             return "Successful signup";
           } else {
-             return "invalid user id or password, please try again";
+            return "invalid user id or password, please try again";
           }
         },
         trigger: "stop"
       }
     ];
 
+    const AboutMrHouse = [];
 
-    const AboutMrHouse = [
-    ];
-   
-   const EndOfSteps = [   
+    const EndOfSteps = [
       {
         // stop
         id: "stop",
@@ -300,38 +363,35 @@ class AskChatbotSignIn extends React.Component {
     // const redirectSteps = [];
 
     // Concat mesage into conversation
-    let ms1 = Welcome.concat( AboutMrHouse );
-    let conversation = ms1.concat( EndOfSteps );
+    let ms1 = Welcome.concat(AboutMrHouse);
+    let conversation = ms1.concat(EndOfSteps);
 
     //  garbage collection
     ms1 = null;
     //ms2 = null;
-    
+
     // console.log( conversation );
     //console.log( this.addPropertyForBuy );
     // debugger
     return (
       <div>
-      <ThemeProvider theme={theme}>
-        <ChatBot
-          headerTitle="Mr.House - Sign In"
-          hideSubmitButton="false"
-          // hideBotAvatar="false"
-          placeholder="請輸入這裏"
-          handleEnd={this.handleEnd}
-          //cache="true"
-          //cacheName="mrhouse"
-          //floating="true"
-//          bubbleStyle={{ overflow: "visible", fontSize: "0.3rem" }}
-          steps={
-            conversation
-          }
-        />
-      </ThemeProvider>
+        <ThemeProvider theme={theme}>
+          <ChatBot
+            headerTitle="Mr.House - Sign In"
+            hideSubmitButton="false"
+            // hideBotAvatar="false"
+            placeholder="請輸入這裏"
+            handleEnd={this.handleEnd}
+            //cache="true"
+            //cacheName="mrhouse"
+            //floating="true"
+            //          bubbleStyle={{ overflow: "visible", fontSize: "0.3rem" }}
+            steps={conversation}
+          />
+        </ThemeProvider>
       </div>
     );
   }
 }
 
 export default AskChatbotSignIn;
-

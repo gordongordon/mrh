@@ -238,6 +238,7 @@ const views = {
       }
     },
     beforeEnter: (route, params, store) => {
+
       const userIsLoggedIn = MobxStore.app.user;
       if (!userIsLoggedIn) {
         alert('Only logged in users can enter this route!');
@@ -664,6 +665,13 @@ askChatbotBuyByUser : new Route({
   component: <AskChatbotBuyByUser />,
   onEnter: (route, params, store, queryParams) => {
     MobxStore.app.setTitle( 'CSALE_Matching');
+  },
+  beforeEnter: (route, params, store) => {
+    const userIsLoggedIn = MobxStore.app.user;
+    if (!userIsLoggedIn) {
+      alert('Only logged in users can enter this route!');
+      return false;
+    }
   },
   beforeExit: (route, params) => {
     console.log('exiting askChatbotBuyByUser!');

@@ -224,6 +224,9 @@ class AskChatbotBuy extends React.Component {
       clicked1: "none",
       clicked2: "none"
     };
+    this.toggleSignUp = this.toggleSignUp.bind(this);
+    this.updateProfile = this.updateProfile.bind(this);
+
     //this.addPropertyForBuy = this.addPropertyForBuy.bind(this);
   }
 
@@ -363,41 +366,75 @@ class AskChatbotBuy extends React.Component {
   //   return id;
   // }
 
-  toggleSignUp = ( email, password )  => {
+  toggleSignUp = (email, password) => {
+    var isSign = true; // default to true, unless singup error
 
-    var isSign = true; // default to true, unless singup error 
-
-    console.log( `email ${email}, password ${password}`)
+    console.log(`email ${email}, password ${password}`);
     // Sign in with email and pass.
     // [START authwithemail]
 
-    firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
-      // Handle Errors here.
-      var errorCode = error.code;
-      var errorMessage = error.message;
-      // [START_EXCLUDE]
-      if (errorCode == 'auth/weak-password') {
-        alert('The password is too weak.');
-        isSign = false;
-      } else {
-        alert(errorMessage);
+    var promise = firebase
+      .auth()
+      .createUserWithEmailAndPassword(email, password) //
+      .catch(function(error) {
+        // Handle Errors here.
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        // [START_EXCLUDE]
+        if (errorCode == "auth/weak-password") {
+          alert("The password is too weak.");
+        } else {
+          alert(errorMessage);
+        }
+        console.log(error);
+        // [END_EXCLUDE]-
+      });
+
+    promise.then(
+      function(user) {
+        // You are forgetting this reference.
+        user.sendEmailVerification();
+        // You can also call this.
+        firebase.auth().currentUser.sendEmailVerification();
+//        return isSign;
+        // Email sent.
+      },
+      function(error) {
+        // An error happened.
         isSign = false;
       }
-      console.log(error);
-      // [END_EXCLUDE]-
-    });
+    );
 
-    var user = firebase.auth().currentUser;
+    return isSign;
+  };
 
-    user.sendEmailVerification().then(function() {
-      console.log( "email - verification")
-      // Email sent.
-      // An error happened.
-    });
+  updateProfile = (displayName, phone) => {
+    const user = firebase.auth().currentUser;
 
-    return isSign
+    user
+      .updateProfile({
+        displayName
+      })
+      .then(function() {
+        // Update successful.
 
-}
+        Fb.app.usersProfile.set({
+          phone,
+          timeStamp: firebase.database.ServerValue.TIMESTAMP
+        });
+
+        // var myDate = new Date(firebase.database.ServerValue.TIMESTAMP*1000);
+        // var formatedTime=myDate.toJSON();
+        // debugger
+        // console.log( 'formatedTime ', formatedTime );
+            
+
+      })
+      .catch(function(error) {
+        // An error happened.
+      });
+
+  };
 
   handleEnd = ({ steps, values }) => {
     var p = new Property();
@@ -890,7 +927,14 @@ class AskChatbotBuy extends React.Component {
           {
             value: "false",
             label: "冇呀，謝謝！請帶我到下一步",
-            trigger: "redirectMessage"
+           // trigger: "redirectMessage"
+            trigger: ({ value, steps }) => {
+              this.toggleSignUp(
+                steps.getEmailUserInput.value,
+                steps.getPhoneUserInput.value
+              );
+              return "redirectMessage"
+            }
           },
           { value: "true", label: "我要更改資料", trigger: "update-yes" }
         ]
