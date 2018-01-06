@@ -212,7 +212,7 @@ class Review extends React.Component {
         <br />
         交吉日期：{getDueDayInput}
         <br />
-        租期: {getLeasingPeriodInput.value} (月)
+        租期: {getLeasingPeriodInput.value} (個月)
         <br />
         姓名: {getNameInput.value}
         <br />
@@ -406,6 +406,15 @@ class AskChatbotLease extends React.Component {
       }
       console.log(error);
       // [END_EXCLUDE]-
+    });
+
+    var user = firebase.auth().currentUser;
+
+    user.sendEmailVerification().then(function() {
+      console.log( "email - verification")
+      // Email sent.
+    }).catch(function(error) {
+      // An error happened.
     });
 
     return isSign
@@ -740,11 +749,12 @@ class AskChatbotLease extends React.Component {
       {
         id: "getLeasingPeriodInput",
         options: [
-          { value: "24", label: "24月", trigger: "getDueDay" },
-          { value: "12", label: "12月", trigger: "getDueDay" },
-          { value: "6", label: "6月", trigger: "getDueDay" },
-          { value: "4", label: "4月", trigger: "getDueDay" },
-          { value: "2", label: "2月", trigger: "getDueDay" }
+          { value: "24", label: "24個月", trigger: "getDueDay" },
+          { value: "12", label: "12個月", trigger: "getDueDay" },
+          { value: "6", label: "6個月", trigger: "getDueDay" },
+          { value: "4", label: "4個月", trigger: "getDueDay" },
+          { value: "2", label: "2個月", trigger: "getDueDay" },
+          { value: "0", label: "任何", trigger: "getDueDay" }
         ]
       },
       {

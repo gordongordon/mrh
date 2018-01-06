@@ -389,33 +389,41 @@ class AskChatbotRent extends React.Component {
   //   return id;
   // }
 
-  toggleSignIn = (email, password) => {
-    var isSign = true; // default to true, unless singup error
+  toggleSignUp = ( email, password )  => {
 
-    console.log(`email ${email}, password ${password}`);
+    var isSign = true; // default to true, unless singup error 
+
+    console.log( `email ${email}, password ${password}`)
     // Sign in with email and pass.
     // [START authwithemail]
-    firebase
-      .auth()
-      .signInWithEmailAndPassword(email, password)
-      .catch(function(error) {
-        // Handle Errors here.
-        var errorCode = error.code;
-        var errorMessage = error.message;
-        // [START_EXCLUDE]
-        if (errorCode === "auth/wrong-password") {
-          alert("Wrong password.");
-          isSign = false;
-        } else {
-          alert(errorMessage);
-          isSign = false;
-        }
-        console.log(error);
-        // [END_EXCLUDE]
-      });
 
-    return isSign;
-  };
+    firebase.auth().createUserWithEmailAndPassword(email, password).catch(function(error) {
+      // Handle Errors here.
+      var errorCode = error.code;
+      var errorMessage = error.message;
+      // [START_EXCLUDE]
+      if (errorCode == 'auth/weak-password') {
+        alert('The password is too weak.');
+        isSign = false;
+      } else {
+        alert(errorMessage);
+        isSign = false;
+      }
+      console.log(error);
+      // [END_EXCLUDE]-
+    });
+
+    var user = firebase.auth().currentUser;
+
+    user.sendEmailVerification().then(function() {
+      console.log( "email - verification")
+      // Email sent.
+      // An error happened.
+    });
+
+    return isSign
+
+}
   
   handleEnd = ({ steps, values }) => {
     var p = new Property();
