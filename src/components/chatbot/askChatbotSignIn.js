@@ -173,43 +173,69 @@ class AskChatbotSignIn extends React.Component {
   }
 
   toggleSignIn = (email, password) => {
-    var isSign = true; // default to true, unless singup error
-
     console.log(`email ${email}, password ${password}`);
     // Sign in with email and pass.
     // [START authwithemail]
-    var promise = firebase
+    return firebase
       .auth()
-      .signInWithEmailAndPassword(email, password)
-      .catch(function(error) {
-        // Handle Errors here.
-        var errorCode = error.code;
-        var errorMessage = error.message;
-        // [START_EXCLUDE]
-        if (errorCode === "auth/wrong-password") {
-          alert("Wrong password.");
-          isSign = false;
-        } else {
-          alert(errorMessage);
-          isSign = false;
-        }
-        console.log(error);
-        // [END_EXCLUDE]
-      });
+      .signInWithEmailAndPassword(email, password);
+      // .catch(function(error) {
+      //   // Handle Errors here.
+      //   var errorCode = error.code;
+      //   var errorMessage = error.message;
+      //   // [START_EXCLUDE]
+      //   if (errorCode === "auth/wrong-password") {
+      //     alert("Wrong password.");
+      //     isSign = false;
+      //   } else {
+      //     alert(errorMessage);
+      //     isSign = false;
+      //   }
+      //   console.log(error);
+      //   // [END_EXCLUDE]
+      // });
 
-      promise.then(
-        function(user) {
-          // Email sent.
-          return isSign;
-        },
-        function(error) {
-          // An error happened.
-          return isSign;
-        }
-      );
-
-    // return isSign;
   };
+
+
+  // toggleSignIn = (email, password) => {
+  //   var isSign = true; // default to true, unless singup error
+
+  //   console.log(`email ${email}, password ${password}`);
+  //   // Sign in with email and pass.
+  //   // [START authwithemail]
+  //   var promise = firebase
+  //     .auth()
+  //     .signInWithEmailAndPassword(email, password)
+  //     .catch(function(error) {
+  //       // Handle Errors here.
+  //       var errorCode = error.code;
+  //       var errorMessage = error.message;
+  //       // [START_EXCLUDE]
+  //       if (errorCode === "auth/wrong-password") {
+  //         alert("Wrong password.");
+  //         isSign = false;
+  //       } else {
+  //         alert(errorMessage);
+  //         isSign = false;
+  //       }
+  //       console.log(error);
+  //       // [END_EXCLUDE]
+  //     });
+
+  //     promise.then(
+  //       function(user) {
+  //         // Email sent.
+  //         return isSign;
+  //       },
+  //       function(error) {
+  //         // An error happened.
+  //         return isSign;
+  //       }
+  //     );
+
+  //   // return isSign;
+  // };
 
   // to be program
   resetPassword = (email) => {
@@ -304,15 +330,15 @@ class AskChatbotSignIn extends React.Component {
         id: "getUserPasswordInput",
         user: true,
         inputType: "password",
-        trigger: ({ value, steps }) => {
-          const bool =  this.toggleSignIn( steps.getUserIdInput.value, steps.getUserPasswordInput.value) ;
-                    console.log( "bool", bool);
-          if ( bool ) {
-            return "signUp";
-          }
-          return "getUserSignIn";
-        }        
-        
+        trigger: "signUp"
+        // trigger: async ({ value, steps }) => {
+        //      //var flag = true;
+        //      return await this.toggleSignIn( steps.getUserIdInput.value, steps.getUserPasswordInput.value ).then( function( result) {
+        //         return "signUp";
+        //      }).catch( function(error) {
+        //         return "getUserPasswordInput";
+        //      })
+        //}
       },
       {
         id: "signUp",

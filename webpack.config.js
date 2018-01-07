@@ -1,4 +1,5 @@
 var path = require("path");
+require("babel-polyfill");
 var webpack = require("webpack");
 const pxtorem = require("postcss-pxtorem");
 const CopyWebpackPlugin = require('copy-webpack-plugin');
@@ -21,12 +22,18 @@ module.exports = {
   //devtool: 'eval',
   //
   //context: __dirname + "/public",
-  entry: {
-//    "webpack-dev-server/client?http://localhost:3000",
-//    "webpack/hot/only-dev-server",
-//    "./src/index"
-     index : './src/index.js'
-  },
+   entry: { index: [ "babel-polyfill", "./src/index.js" ] },
+   /**
+    * Without babel-polyfill
+    */
+    //    entry: { index: "./src/index.js" },   
+
+  //entry: {
+  //    "webpack-dev-server/client?http://localhost:3000",
+  //    "webpack/hot/only-dev-server",
+  //   "./src/index"
+   //index : './src/index.js'
+  //},
 
   output: {
     publicPath: '/',

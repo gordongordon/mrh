@@ -1,7 +1,7 @@
 {
   "presets": [
     "react",
-    ["es2015",     {
+    ["es2015", {
       "modules": false
     }],
     "stage-0",
@@ -9,7 +9,9 @@
   ],
   "plugins": [
   	"transform-decorators-legacy",
-    ["import", { "style": "css", "libraryName": "antd-mobile" }]
+    ["import", { "style": "css", "libraryName": "antd-mobile" }],
+    "transform-async-to-generator"
   ]
 }
+// "transform-regenerator"
 

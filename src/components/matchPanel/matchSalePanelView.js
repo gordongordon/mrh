@@ -27,6 +27,8 @@ import MobxStore from 'mobxStore';
 @observer
 export default class MatchSalePanelView extends React.Component {
 
+  static displayName = "MatchSalePanelView";
+
   constructor(props) {
     super(props)
     this.state = {
