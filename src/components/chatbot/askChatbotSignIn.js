@@ -108,6 +108,7 @@ class AskChatbotSignIn extends React.Component {
     //this.addPropertyForBuy = this.addPropertyForBuy.bind(this);
     this.toggleSignIn = this.toggleSignIn.bind(this);
     this.handleEnd = this.handleEnd.bind(this);
+    this.trythis = this.trythis.bind(this);
   }
 
   showActionSheet = () => {
@@ -171,6 +172,17 @@ class AskChatbotSignIn extends React.Component {
   componentDidMount() {
     //this.handleEnd = this.handleEnd.bind(this);
   }
+
+  trythis = async ( {value, steps} ) => {
+         return await firebase
+          .auth()
+          //steps.getUserIdInput.value, steps.getUserPasswordInput.value 
+          .signInWithEmailAndPassword(steps.getUserIdInput.value, steps.getUserPasswordInput.value )
+          .catch( error => {
+            return "getUserSignIn";
+          })
+//          console.log( "finish await", post ); 
+        }
 
   toggleSignIn = ( {value, steps} ) => {
 //  toggleSignIn = (email, password) => {
@@ -338,40 +350,41 @@ class AskChatbotSignIn extends React.Component {
         id: "getUserPasswordInput",
         user: true,
         inputType: "password",
+        trigger: ( {value, steps}) => this.trythis( {value, steps}).then( result => { return "getUserId"} )
 //        trigger: "signUp"
-        trigger : async ( {value, steps} ) => {
-  //  toggleSignIn = (email, password) => {
-      //console.log(`email ${email}, password ${password}`);
-      // Sign in with email and pass.
-      // [START authwithemail]
-       await firebase
-        .auth()
-        //steps.getUserIdInput.value, steps.getUserPasswordInput.value 
-        .signInWithEmailAndPassword(steps.getUserIdInput.value, steps.getUserPasswordInput.value );
-  //      .signInWithEmailAndPassword(email, password)
-      //   .then( function( result ) {
-      //     return "signUp";
-      //   })
-      //   .catch(function(error) {
-      //     // Handle Errors here.
-      //     var errorCode = error.code;
-      //     var errorMessage = error.message;
-      //     // [START_EXCLUDE]
-      //     if (errorCode === "auth/wrong-password") {
-      // //      alert("Wrong password.");
-      //       //isSign = false;
-      //     } else {
-      //       //alert(errorMessage);
-      //       //isSign = false;
-      //     }
-      //     console.log(error);
-      //     console.log(error);
-      //     // [END_EXCLUDE]
-      //     return "signUp";
-      //   })
-        console.log( "finish await"); 
-        return "signUp";
-      }
+  //       trigger : async ( {value, steps} ) => {
+  // //  toggleSignIn = (email, password) => {
+  //     //console.log(`email ${email}, password ${password}`);
+  //     // Sign in with email and pass.
+  //     // [START authwithemail]
+  //      const post = await firebase
+  //       .auth()
+  //       //steps.getUserIdInput.value, steps.getUserPasswordInput.value 
+  //       .signInWithEmailAndPassword(steps.getUserIdInput.value, steps.getUserPasswordInput.value );
+  // //      .signInWithEmailAndPassword(email, password)
+  //     //   .then( function( result ) {
+  //     //     return "signUp";
+  //     //   })
+  //     //   .catch(function(error) {
+  //     //     // Handle Errors here.
+  //     //     var errorCode = error.code;
+  //     //     var errorMessage = error.message;
+  //     //     // [START_EXCLUDE]
+  //     //     if (errorCode === "auth/wrong-password") {
+  //     // //      alert("Wrong password.");
+  //     //       //isSign = false;
+  //     //     } else {
+  //     //       //alert(errorMessage);
+  //     //       //isSign = false;
+  //     //     }
+  //     //     console.log(error);
+  //     //     console.log(error);
+  //     //     // [END_EXCLUDE]
+  //     //     return "signUp";
+  //     //   })
+  //       console.log( "finish await", post ); 
+  //       return "getUserSignIn";
+  //     }
   
         //trigger: this.toggleSignIn( {value, steps })
         // trigger: ({value, steps}) => {
