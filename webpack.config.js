@@ -26,7 +26,7 @@ module.exports = {
    /**
     * Without babel-polyfill
     */
-   //     entry: { index: "./src/index.js" },   
+   // entry: { index: "./src/index.js" },   
 
   //entry: {
   //    "webpack-dev-server/client?http://localhost:3000",

@@ -172,30 +172,36 @@ class AskChatbotSignIn extends React.Component {
     //this.handleEnd = this.handleEnd.bind(this);
   }
 
-  toggleSignIn = async (email, password) => {
-    console.log(`email ${email}, password ${password}`);
+  toggleSignIn = ( {value, steps} ) => {
+//  toggleSignIn = (email, password) => {
+    //console.log(`email ${email}, password ${password}`);
     // Sign in with email and pass.
     // [START authwithemail]
-     await firebase
+     return firebase
       .auth()
-      .signInWithEmailAndPassword(email, password);
-      // .catch(function(error) {
-      //   // Handle Errors here.
-      //   var errorCode = error.code;
-      //   var errorMessage = error.message;
-      //   // [START_EXCLUDE]
-      //   if (errorCode === "auth/wrong-password") {
-      //     alert("Wrong password.");
-      //     isSign = false;
-      //   } else {
-      //     alert(errorMessage);
-      //     isSign = false;
-      //   }
-      //   console.log(error);
-      //   // [END_EXCLUDE]
-      // });
-
-    return "signUp";
+      //steps.getUserIdInput.value, steps.getUserPasswordInput.value 
+      .signInWithEmailAndPassword(steps.getUserIdInput.value, steps.getUserPasswordInput.value )
+//      .signInWithEmailAndPassword(email, password)
+      .then( function( result ) {
+        return "signUp";
+      })
+      .catch(function(error) {
+        // Handle Errors here.
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        // [START_EXCLUDE]
+        if (errorCode === "auth/wrong-password") {
+          alert("Wrong password.");
+          //isSign = false;
+        } else {
+          alert(errorMessage);
+          //isSign = false;
+        }
+        console.log(error);
+        console.log(error);
+        // [END_EXCLUDE]
+        return "signUp";
+      });
 
   };
 
@@ -333,9 +339,44 @@ class AskChatbotSignIn extends React.Component {
         user: true,
         inputType: "password",
 //        trigger: "signUp"
-        trigger: ({value, steps}) => {
-          return this.toggleSignIn( steps.getUserIdInput.value, steps.getUserPasswordInput.value );
-          }
+        trigger : async ( {value, steps} ) => {
+  //  toggleSignIn = (email, password) => {
+      //console.log(`email ${email}, password ${password}`);
+      // Sign in with email and pass.
+      // [START authwithemail]
+       await firebase
+        .auth()
+        //steps.getUserIdInput.value, steps.getUserPasswordInput.value 
+        .signInWithEmailAndPassword(steps.getUserIdInput.value, steps.getUserPasswordInput.value );
+  //      .signInWithEmailAndPassword(email, password)
+      //   .then( function( result ) {
+      //     return "signUp";
+      //   })
+      //   .catch(function(error) {
+      //     // Handle Errors here.
+      //     var errorCode = error.code;
+      //     var errorMessage = error.message;
+      //     // [START_EXCLUDE]
+      //     if (errorCode === "auth/wrong-password") {
+      // //      alert("Wrong password.");
+      //       //isSign = false;
+      //     } else {
+      //       //alert(errorMessage);
+      //       //isSign = false;
+      //     }
+      //     console.log(error);
+      //     console.log(error);
+      //     // [END_EXCLUDE]
+      //     return "signUp";
+      //   })
+        console.log( "finish await"); 
+        return "signUp";
+      }
+  
+        //trigger: this.toggleSignIn( {value, steps })
+        // trigger: ({value, steps}) => {
+        //   return this.toggleSignIn( steps.getUserIdInput.value, steps.getUserPasswordInput.value );
+        //   }
           // .then( function( result) {
           //       return "signUp";
           //    }).catch( function(error) {
@@ -345,7 +386,7 @@ class AskChatbotSignIn extends React.Component {
       },
       {
         id: "signUp",
-        message: ({ previouis, steps }) => {
+        message: ({ previousValue, steps }) => {
           if (
             this.toggleSignIn(
               steps.getUserIdInput.value,
