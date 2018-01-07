@@ -172,11 +172,11 @@ class AskChatbotSignIn extends React.Component {
     //this.handleEnd = this.handleEnd.bind(this);
   }
 
-  toggleSignIn = (email, password) => {
+  toggleSignIn = async (email, password) => {
     console.log(`email ${email}, password ${password}`);
     // Sign in with email and pass.
     // [START authwithemail]
-    return firebase
+     await firebase
       .auth()
       .signInWithEmailAndPassword(email, password);
       // .catch(function(error) {
@@ -194,6 +194,8 @@ class AskChatbotSignIn extends React.Component {
       //   console.log(error);
       //   // [END_EXCLUDE]
       // });
+
+    return "signUp";
 
   };
 
@@ -330,15 +332,16 @@ class AskChatbotSignIn extends React.Component {
         id: "getUserPasswordInput",
         user: true,
         inputType: "password",
-        trigger: "signUp"
-        // trigger: async ({ value, steps }) => {
-        //      //var flag = true;
-        //      return await this.toggleSignIn( steps.getUserIdInput.value, steps.getUserPasswordInput.value ).then( function( result) {
-        //         return "signUp";
-        //      }).catch( function(error) {
-        //         return "getUserPasswordInput";
-        //      })
-        //}
+//        trigger: "signUp"
+        trigger: ({value, steps}) => {
+          return this.toggleSignIn( steps.getUserIdInput.value, steps.getUserPasswordInput.value );
+          }
+          // .then( function( result) {
+          //       return "signUp";
+          //    }).catch( function(error) {
+          //       return "getUserPasswordInput";
+          //    })
+          //   }
       },
       {
         id: "signUp",

@@ -22,11 +22,11 @@ module.exports = {
   //devtool: 'eval',
   //
   //context: __dirname + "/public",
-   entry: { index: [ "babel-polyfill", "./src/index.js" ] },
+  entry: { index: [ "babel-polyfill", "./src/index.js" ] },
    /**
     * Without babel-polyfill
     */
-    //    entry: { index: "./src/index.js" },   
+   //     entry: { index: "./src/index.js" },   
 
   //entry: {
   //    "webpack-dev-server/client?http://localhost:3000",
