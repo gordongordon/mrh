@@ -1,8 +1,10 @@
 import React from 'react';
 import { ThemeProvider } from 'styled-components';
-import ChatBot from '../../lib/index';
-import Generic from '../../lib/mrui/index';
-import Toggle from '../../lib/mrui/Toggle';
+//import ChatBot from '../../lib/index';
+//import Generic from '../../lib/mrui/index';
+import Toggle from '../../lib/mrui/Elements/Toggle';
+import HouseView from '../../lib/mrui/HouseView';
+import { Provider } from 'rebass';
 
 const otherFontTheme = {
   background: '#f5f8fb',
@@ -43,14 +45,26 @@ const steps = [
 
 
 // const ThemedExample = () => (
-//   <ThemeProvider theme={otherFontTheme}>
+//   <Provider>
 //     <ChatBot steps={steps} />
-//   </ThemeProvider>
+//   </Provider>
 
 // );
 
-const ThemedExample = () => (
-  <Toggle />
-);
+
+// const ThemedExample = () => (
+//   <Provider>
+//   <ThemeProvider theme={otherFontTheme}>
+//     <ChatBot steps={steps} />
+//   </ThemeProvider>
+//   </Provider>
+
+// );
+
+ const ThemedExample = () => (
+    <Provider>
+   <HouseView />
+</Provider>
+ );
 
 export default ThemedExample;

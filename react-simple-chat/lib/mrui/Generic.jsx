@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-
+import React from 'react';
 
 // import Title from './Title';
 // import SubTitle from './SubTitle';
@@ -58,11 +58,12 @@ export default class Generic extends React.Component {
         const isLast = this.props.isLast;
         
         return (
-             <Carousel 
+             <Carousel
                className="cmui-GenericContainer"
                opened="true"
                width="100%"
              >
+             <Carousel.GenericContainer>
                 <Carousel.Title className="cmui-Title" isFirst={isFirst} isLast={isLast}>{p.addressLocationLabel}/{p.nameOfBuildingLabel}</Carousel.Title>
                 <Carousel.SubTitle className="cmui-SubTitle">{p.roleName} : {p.contactNameLabel}</Carousel.SubTitle>
                 <Carousel.Content>
@@ -91,7 +92,8 @@ export default class Generic extends React.Component {
                 {
                     onTriggetNext && <Carousel.Button className="cmui-Button" onClick={ () => onTriggetNext() } first> triggetNext </Carousel.Button>
                 }
-            </Carousel.GenericContainer>
+                </Carousel.GenericContainer>
+            </Carousel>
         );
 
     }

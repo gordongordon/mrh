@@ -14,6 +14,8 @@ import FloatButton from './FloatButton';
 import Footer from './Footer';
 import Input from './Input';
 import SubmitButton from './SubmitButton';
+import { Provider } from "rebass";
+
 import {
   ChatIcon,
   CloseIcon,
@@ -588,7 +590,7 @@ class ChatBot extends Component {
                 invalid={inputInvalid}
                 disabled={disabled}
               >
-                <SubmitIcon />
+                <SubmitIcon size={10} />
               </SubmitButton>
           </Footer>
         </ChatBotContainer>

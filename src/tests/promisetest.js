@@ -6,7 +6,7 @@ function resolveAfter2Seconds(x) {
     });
   }
   
-  
+
   async function add1(x) {
     const a = await resolveAfter2Seconds(20);
     const b = await resolveAfter2Seconds(30);

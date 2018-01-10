@@ -22,6 +22,7 @@ import { Fb } from "firebase-store";
 //import FormSaleChatbot from 'chatbot/formSaleChatbot'
 //import FormSaleChatbot from './components/chatbot/formSaleChatbot';
 import MrHouse from "./components/chatbot/mrHouse";
+import {Provider as RebassProvider } from "rebass";
 // import { AppContainer } from 'react-hot-loader';
 // import App from 'app';
 // import { BrowserRouter } from 'react-router-dom';
@@ -167,7 +168,9 @@ ReactDOM.render(
       <NavigationBar />
       <MobxRouter />
     </div>
-  </Provider>,
+  </Provider>  	
+
+  ,
   document.getElementById("root")
 );
 

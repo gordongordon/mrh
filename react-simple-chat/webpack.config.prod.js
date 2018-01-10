@@ -29,6 +29,9 @@ module.exports = {
     //   comments: false,
     // }),
   ],
+  // Two instances of styled-components conflict when loaded on the same page #1032
+  // Solution:  https://github.com/styled-components/styled-components/issues/1305
+  externals: { 'react': 'react', 'react-dom': 'react-dom', 'styled-components': 'styled-components' },
   devtool: 'source-map',
   module: {
     rules: [
