@@ -1,176 +1,162 @@
 // src/blocks/Card/index.js
-import React from 'react';
-import defaultTheme from '../theme';
-import PropTypes from 'prop-types';
-import Carousel from '../Carousel/index';
-import {Small, Label, Checkbox, Border, Divider, Card, Flex, Box, Text, ButtonCircle } from "rebass";
+import React from "react";
+import defaultTheme from "../theme";
+import PropTypes from "prop-types";
+import Carousel from "../Carousel/index";
+import {
+  ButtonOutline,
+  Small,
+  Label,
+  Checkbox,
+  Border,
+  Divider,
+  Card,
+  Flex,
+  Box,
+  Text,
+  ButtonCircle
+} from "rebass";
+import Cell from "./Cell";
+import LineText from '../Elements/LineText';
 
 
 export default class AgentBuyProperty extends React.Component {
-    constructor( props ) {
-        super( props );
+  constructor(props) {
+    super(props);
 
-        this.triggetNext = this.triggetNext.bind(this);
+    this.triggetNext = this.triggetNext.bind(this);
 
-        // this.state = {
-        //   value: null,
-        //   trigger: false
-        // };
-        
-    }
+    // this.state = {
+    //   value: null,
+    //   trigger: false
+    // };
+  }
 
-    // update property's timestamp in order to display howFresh.. 
-    componentWillMount() {
-        //const p = this.props;
-        //    const t = moment().format('YYYY-MM-DD HH:mm:ss');
-        //  this.props.property.realTime = moment( t );
+  // update property's timestamp in order to display howFresh..
+  componentWillMount() {
+    //const p = this.props;
+    //    const t = moment().format('YYYY-MM-DD HH:mm:ss');
+    //  this.props.property.realTime = moment( t );
+    // Will be active while production
+    //this.props.property.setTimeStamp();
+    //    console.log( 'realTime will mount', this.props.property.realTime)
+  }
 
-        // Will be active while production
-        //this.props.property.setTimeStamp();
-    
-        //    console.log( 'realTime will mount', this.props.property.realTime)
-      }    
+  // // For Chatbot Custom Component Return
+  triggetNext() {
+    const label = "gordon";
+    console.log("triggetNext() ");
+    this.setState({ trigger: true }, () => {
+      this.props.triggerNextStep({ value: label, label: label });
+    });
+  }
 
-    // // For Chatbot Custom Component Return 
-    triggetNext() {
-        
-        const label = 'gordon';
-        console.log( 'triggetNext() ');
-        this.setState({ trigger: true }, () => {
-          this.props.triggerNextStep( { value: label, label : label });
+  render() {
+    const onCall = this.props.onCall;
+    const onWhatsapp = this.props.onWhatsapp;
+    const onTriggetNext = this.props.onTriggetNext;
+    // const onSharePhone = this.props.onSharePhone;
+    const status = this.props.status;
+    const fStatus = this.props.fStatus;
+    const p = this.props.property;
+    const isFirst = this.props.isFirst;
+    const isLast = this.props.isLast;
 
-        });
+    return (
+      <Card w={19 / 20}>
+        <Flex wrap mx={-2} my={0}>
+          <Box px={1} py={1} width={1} my={0}>
+            <Text p={1} color="white" bg={["blue", "green"]}>
+              心水樓盤：{p.addressLocationLabel}/{p.nameOfBuildingLabel}
+            </Text>
+          </Box>
+          <Box px={2} py={1} width={1 / 3} my={0}>
+            <Text p={1} color="black">
+              姓名:
+            </Text>
+          </Box>
 
-    }
+          <Box px={2} py={1} width={1 / 3} my={0} />
 
-    render() {
-        const onCall = this.props.onCall;
-        const onWhatsapp = this.props.onWhatsapp;
-        const onTriggetNext = this.props.onTriggetNext;
-        // const onSharePhone = this.props.onSharePhone;
-        const status  = this.props.status;
-        const fStatus = this.props.fStatus;
-        const p = this.props.property;
-        const isFirst = this.props.isFirst;
-        const isLast = this.props.isLast;
-        
-        return (
-<Card w={9/10}>
-  <Flex wrap mx={-2} my={0}>
-    <Box px={1} py={1} width={1} my={0} >
-      <Text p={1} color="white" bg={[ 'blue', 'green' ]} >
-      心水樓盤：{p.addressLocationLabel}/{p.nameOfBuildingLabel}
-      </Text>
-    </Box>
-    <Divider
-	w={1}
-	color='blue'
-/>
-    <Box px={2} py={1} width={1 / 3} my={0}>
-      <Text p={1} color="white" bg="blue">
-      姓名: 
-      </Text>
-    </Box>
+          <Box px={2} py={1} width={1 / 3} my={0}>
+            <Text p={1} color="black">
+              Gordon
+            </Text>
+          </Box>
+          <LineText> <Text f={3}>特徵</Text> </LineText>
+          <Cell px={4} width={1 / 3}>
+            <Label f={4}>會養物</Label>
 
+            <Text color="black" f="1rem">{p.isPetAllowedLabel}</Text>
+          </Cell>
 
-    <Box px={2} py={1} width={1 / 3} my={0} />
+          <Cell px={4} width={1 / 3}>
+            <Label f={4}>-會養物-</Label>
 
-    <Box px={2} py={1} width={1 / 3} my={0}>
-      <Text p={1} color="white" bg="blue">
-      {p.contactNameLabel}   </Text>
-    </Box>
-
-
-    <Box px={2} py={1} width={1 / 3}>
-    <Label f={3}>
-    你會唔會養物: 
-  </Label>
-
-    <Text>
-    {p.isPetAllowedLabel}
-      </Text>
-    </Box>
-    <Box px={2} py={1} width={1 / 3}>
-    <Label f={3}>
-    你會唔會養物: 
-  </Label>
-
-    <Text>
-    Yes
-      </Text>
-    </Box>
-    <Box px={2} py={1} width={1 / 3}>
-      <Text p={1} color="white" bg="blue">
-      最少實用面積: 
-      </Text>
-      <Text p={1} color="white" bg="blue">
-        300
-      </Text>
-    </Box>
-
-
-    <Box px={2} py={1} width={1 / 3}>
-    <Text p={1} color="white" bg="blue">Date Post:</Text>
-      <Text p={1} color="white" bg="blue">
-        2nd Jan, 2017
-      </Text>
-    </Box>
-    <Box px={2} py={1} width={1 / 3}>
-      <Text p={1} color="white" bg="blue">
-      放售形式：
-      </Text>
-      <Text p={1} color="white" bg="blue">
-      買
-      </Text>
-    </Box>
-    <Box px={2} py={1} width={1 / 3}>
-      <Text p={1} color="white" bg="blue">
-      買已出租的樓盤:
-      </Text>
-      <Text p={1} color="white" bg="blue">
-      {p.isSaleWithLeaseLabel}
-      </Text>
-    </Box>
-    <Box px={2} py={1/5} width={1 / 3}>
-    <Text p={1} color="white" bg="blue">Date Post:</Text>
-      <Text p={1} color="white" bg="blue">
-      {p.dayListed}
-      </Text>
-    </Box>
-    <Box px={2} py={1} width={1 / 3}>
-      <Small p={1} color="white" bg="blue">
-      單位間隔:
-      </Small>
-      <Text p={1} color="white" bg="blue">
-      {p.partitionLabel}
-      </Text>
-    </Box>
-    <Box px={2} py={1} width={1 / 3}>
-      <Small p={1} color="white" bg="blue">
-      預算上限:
-      </Small>
-      <Text p={1} color="white" bg="blue">
-      {p.buyBudgetMaxLabel}
-      </Text>
-    </Box>
-    <Box px={1} py={5} width={1} my={0}>
-      <ButtonCircle width={1} children="96181448" />
-    </Box>
-    <Box px={1} py={5} width={1} my={0}>
-      <ButtonCircle width={1} children="Whatsapp" />
-    </Box>
-    <Box px={1} py={5} width={1} my={0}>
-      <ButtonCircle width={1} children="Exit" />
-    </Box>
-  </Flex>
-</Card>
-
-        );
-
-    }
+            <Text color="black" f="1rem">會</Text>
+          </Cell>
+          <Cell px={4} py={1} width={1 / 3}>
+              <Label f={4}>實用面積</Label>
+            <Text color="black" f="1rem">
+              300呎
+            </Text>
+          </Cell>
+          <LineText> <Text f={3}>特定日期</Text> </LineText>
+          <Cell px={4} py={1} width={1 / 3}>
+            <Label f={4}> 發布日期</Label>
+            <Text color="black" f=".5rem">
+            17年2月2日
+            </Text>
+          </Cell>
+          <Cell px={2} py={1} width={1 / 3}>
+            <Label f={4}> 放售形式 </Label>
+            <Text color="black" f="1rem">
+              買
+            </Text>
+          </Cell>
+          <Cell px={2} py={1} width={1 / 3}>
+            <Label f={4}>出租樓盤</Label>
+            <Text color="black" f="1rem">
+              No
+            </Text>
+          </Cell>
+          <LineText> <Text f={3}>其他</Text> </LineText>          
+          <Cell px={2} py={1 / 5} width={1 / 3}>
+            <Label f={4}>發布日期</Label>
+            <Text color="black" f="1rem">
+              {p.dayListed}
+            </Text>
+          </Cell>
+          <Cell px={2} py={1} width={1 / 3}>
+            <Label f={4}> 單位間隔 </Label>
+            <Text color="black" f="1rem">
+            開放式
+            </Text>
+          </Cell>
+          <Cell px={2} py={1} width={1 / 3}>
+            <Label color="black" f={4}>預算上限</Label>
+            <Text color="black" f="1rem">
+              $300萬
+            </Text>
+          </Cell>
+          <LineText> <Text f={3}>你的决定</Text> </LineText>          
+          <Box px={5} py={5} width={1} my={0}>
+            <ButtonOutline width={1} children="96181448" f={5}/>
+          </Box>
+          <Box px={10} py={10} width={1} my={0}>
+            <ButtonCircle width={1} children="Whatsapp"  f={5} bg="white" />
+          </Box>
+          <Box px={5} py={5} width={1} my={0}>
+            <ButtonOutline width={1} children="Exit"  f={5}/>
+          </Box>
+        </Flex>
+      </Card>
+    );
+  }
 }
 
-             {/* <Carousel.GenericContainer 
+{
+  /* <Carousel.GenericContainer 
                className="cmui-GenericContainer"
                opened="true"
                width="100%">
@@ -199,10 +185,11 @@ export default class AgentBuyProperty extends React.Component {
                 {
                     onTriggetNext && <Carousel.Button className="cmui-Button" onClick={ () => onTriggetNext() } first> triggetNext </Carousel.Button>
                 }
-            </Carousel.GenericContainer> */}
+            </Carousel.GenericContainer> */
+}
 
-
-                {/* <Title className="cmui-Title">迎海 Double Cove</Title>
+{
+  /* <Title className="cmui-Title">迎海 Double Cove</Title>
                 <SubTitle className="cmui-SubTitle">烏溪沙路8號 地區：馬鞍山</SubTitle>
                 <Content>
                 <ContentItem>最少實用面積: </ContentItem><ContentItem left>330</ContentItem>
@@ -213,34 +200,36 @@ export default class AgentBuyProperty extends React.Component {
                 </Content>
                 <Button className="cmui-Button" onClick={ () => onClick() } first>Set Phone </Button>
                 <Button className="cmui-Button" onClick={ () => onClick() } first>Text Me </Button>
-                <Button className="cmui-Button" onClick={ () => onClick() } first> Call 96181448 </Button> */}
-
+                <Button className="cmui-Button" onClick={ () => onClick() } first> Call 96181448 </Button> */
+}
 
 AgentBuyProperty.propTypes = {
-    steps: PropTypes.object,
-    triggerNextStep: PropTypes.func,
-    onWhatsapp : PropTypes.func,
-    onClick : PropTypes.func,
-    status  : PropTypes.object,
-    fStatus : PropTypes.object,
-    property: PropTypes.object,
-    isFirst : PropTypes.bool,
-    isLast  : PropTypes.bool,
-  };
-  
-AgentBuyProperty.defaultProps = {
-    steps: undefined,
-    triggerNextStep: false,
-    status  : undefined,
-    fStatus : undefined,
-    property: undefined,
-    isFirst : false,
-    isLast  : false,
-  };
+  steps: PropTypes.object,
+  triggerNextStep: PropTypes.func,
+  onWhatsapp: PropTypes.func,
+  onClick: PropTypes.func,
+  status: PropTypes.object,
+  fStatus: PropTypes.object,
+  property: PropTypes.object,
+  isFirst: PropTypes.bool,
+  isLast: PropTypes.bool
+};
 
-           {/* <GenericContainer className="cmui-GenericContainer">
+AgentBuyProperty.defaultProps = {
+  steps: undefined,
+  triggerNextStep: false,
+  status: undefined,
+  fStatus: undefined,
+  property: undefined,
+  isFirst: false,
+  isLast: false
+};
+
+{
+  /* <GenericContainer className="cmui-GenericContainer">
                <Title className="cmui-Title">Title</Title>
                <SubTitle className="cmui-SubTitle">SubTitle</SubTitle>
                <Content className="cmui-Content">Content</Content>
                <Footer className="cmui-Footer">Footer</Footer>
-           </GenericContainer> */}
+           </GenericContainer> */
+}
