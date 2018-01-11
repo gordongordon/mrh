@@ -3,7 +3,7 @@ import React from 'react';
 import defaultTheme from '../theme';
 import PropTypes from 'prop-types';
 import Carousel from '../Carousel/index';
-import { Flex, Box, Text, ButtonCircle } from "rebass";
+import {Small, Label, Checkbox, Border, Divider, Card, Flex, Box, Text, ButtonCircle } from "rebass";
 
 
 export default class AgentBuyProperty extends React.Component {
@@ -58,31 +58,37 @@ export default class AgentBuyProperty extends React.Component {
         const isLast = this.props.isLast;
         
         return (
-
+<Card w={9/10}>
   <Flex wrap mx={-2} my={0}>
     <Box px={1} py={1} width={1} my={0} >
       <Text p={1} color="white" bg={[ 'blue', 'green' ]} >
       {p.addressLocationLabel}/{p.nameOfBuildingLabel}
       </Text>
     </Box>
+    <Divider
+	w={1}
+	color='blue'
+/>
     <Box px={2} py={1} width={1 / 3} my={0}>
       <Text p={1} color="white" bg="blue">
         Name
       </Text>
     </Box>
+
+
     <Box px={2} py={1} width={1 / 3} my={0} />
+
     <Box px={2} py={1} width={1 / 3} my={0}>
       <Text p={1} color="white" bg="blue">
       {p.contactNameLabel}   </Text>
     </Box>
 
+
     <Box px={2} py={1} width={1 / 3}>
-      <Text p={1} color="white" bg="blue">
-        Date Post:
-      </Text>
-      <Text p={1} color="white" bg="blue">
-        2nd Jan, 2017
-      </Text>
+    <Label f={3}>
+    <Checkbox defaultChecked />
+    可養寵物
+  </Label>
     </Box>
     <Box px={2} py={1} width={1 / 3}>
       <Text p={1} color="white" bg="blue">
@@ -100,6 +106,8 @@ export default class AgentBuyProperty extends React.Component {
         2nd Jan, 2017
       </Text>
     </Box>
+
+
     <Box px={2} py={1} width={1 / 3}>
     <Text p={1} color="white" bg="blue">Date Post:</Text>
       <Text p={1} color="white" bg="blue">
@@ -129,19 +137,19 @@ export default class AgentBuyProperty extends React.Component {
       </Text>
     </Box>
     <Box px={2} py={1} width={1 / 3}>
+      <Small p={1} color="white" bg="blue">
+        Partition
+      </Small>
       <Text p={1} color="white" bg="blue">
-        Trade Day:
-      </Text>
-      <Text p={1} color="white" bg="blue">
-        2nd Jan, 2017
+      {p.partitionLabel}
       </Text>
     </Box>
     <Box px={2} py={1} width={1 / 3}>
+      <Small p={1} color="white" bg="blue">
+        Budget:
+      </Small>
       <Text p={1} color="white" bg="blue">
-        View Day:
-      </Text>
-      <Text p={1} color="white" bg="blue">
-        2nd Jan, 2017
+      {p.buyBudgetMaxLabel}
       </Text>
     </Box>
     <Box px={1} py={5} width={1} my={0}>
@@ -154,7 +162,7 @@ export default class AgentBuyProperty extends React.Component {
       <ButtonCircle width={1} children="Exit" />
     </Box>
   </Flex>
-
+</Card>
 
         );
 
@@ -169,7 +177,7 @@ export default class AgentBuyProperty extends React.Component {
                 <Carousel.SubTitle className="cmui-SubTitle">{p.roleName} : {p.contactNameLabel}</Carousel.SubTitle>
                 <Carousel.Content>
                 <Carousel.LineText> Agent Buy Property </Carousel.LineText>
-                <Carousel.ContentItem>: {p.buyBujdgetMaxLabel}</Carousel.ContentItem>
+                <Carousel.ContentItem>: {p.buyBudgetMaxLabel}</Carousel.ContentItem>
                 <Carousel.ContentItem>: {p.partitionLabel}</Carousel.ContentItem>
                 <Carousel.ContentItem>: {p.isPetAllowedLabel}</Carousel.ContentItem>
                 <Carousel.ContentItem>: {p.isViewAbleLabel}</Carousel.ContentItem>

@@ -696,10 +696,10 @@ class AskChatbotBuy extends React.Component {
         id: "getNumOfRoom",
         options: [
           { value: "0", label: "開放式", trigger: "getNumOfBathroom" },
-          { value: "1", label: "1房", trigger: "getNumOfBathroom" },
-          { value: "2", label: "2房", trigger: "getNumOfBathroom" },
-          { value: "3", label: "3房", trigger: "getNumOfBathroom" },
-          { value: "4", label: "4房", trigger: "getNumOfBathroom" }
+          { value: "1", label: "1房"  , trigger: "getNumOfBathroom" },
+          { value: "2", label: "2房"  , trigger: "getNumOfBathroom" },
+          { value: "3", label: "3房"  , trigger: "getNumOfBathroom" },
+          { value: "4", label: "4房"  , trigger: "getNumOfBathroom" }
         ]
       },
       {
