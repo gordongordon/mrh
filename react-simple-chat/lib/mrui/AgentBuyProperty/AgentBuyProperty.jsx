@@ -44,9 +44,6 @@ export default class AgentBuyProperty extends React.Component {
     }
 
     render() {
-
-
-        
         const onCall = this.props.onCall;
         const onWhatsapp = this.props.onWhatsapp;
         const onTriggetNext = this.props.onTriggetNext;
@@ -62,7 +59,7 @@ export default class AgentBuyProperty extends React.Component {
   <Flex wrap mx={-2} my={0}>
     <Box px={1} py={1} width={1} my={0} >
       <Text p={1} color="white" bg={[ 'blue', 'green' ]} >
-      {p.addressLocationLabel}/{p.nameOfBuildingLabel}
+      心水樓盤：{p.addressLocationLabel}/{p.nameOfBuildingLabel}
       </Text>
     </Box>
     <Divider
@@ -71,7 +68,7 @@ export default class AgentBuyProperty extends React.Component {
 />
     <Box px={2} py={1} width={1 / 3} my={0}>
       <Text p={1} color="white" bg="blue">
-        Name
+      姓名: 
       </Text>
     </Box>
 
@@ -86,24 +83,28 @@ export default class AgentBuyProperty extends React.Component {
 
     <Box px={2} py={1} width={1 / 3}>
     <Label f={3}>
-    <Checkbox defaultChecked />
-    可養寵物
+    你會唔會養物: 
   </Label>
-    </Box>
-    <Box px={2} py={1} width={1 / 3}>
-      <Text p={1} color="white" bg="blue">
-        Trade Day:
-      </Text>
-      <Text p={1} color="white" bg="blue">
-        2nd Jan, 2017
+
+    <Text>
+    {p.isPetAllowedLabel}
       </Text>
     </Box>
     <Box px={2} py={1} width={1 / 3}>
+    <Label f={3}>
+    你會唔會養物: 
+  </Label>
+
+    <Text>
+    Yes
+      </Text>
+    </Box>
+    <Box px={2} py={1} width={1 / 3}>
       <Text p={1} color="white" bg="blue">
-        View Day:
+      最少實用面積: 
       </Text>
       <Text p={1} color="white" bg="blue">
-        2nd Jan, 2017
+        300
       </Text>
     </Box>
 
@@ -116,29 +117,29 @@ export default class AgentBuyProperty extends React.Component {
     </Box>
     <Box px={2} py={1} width={1 / 3}>
       <Text p={1} color="white" bg="blue">
-        Trade Day:
+      放售形式：
       </Text>
       <Text p={1} color="white" bg="blue">
-        2nd Jan, 2017
+      買
       </Text>
     </Box>
     <Box px={2} py={1} width={1 / 3}>
       <Text p={1} color="white" bg="blue">
-        View Day:
+      買已出租的樓盤:
       </Text>
       <Text p={1} color="white" bg="blue">
-        2nd Jan, 2017
+      {p.isSaleWithLeaseLabel}
       </Text>
     </Box>
     <Box px={2} py={1/5} width={1 / 3}>
     <Text p={1} color="white" bg="blue">Date Post:</Text>
       <Text p={1} color="white" bg="blue">
-        2nd Jan, 2017
+      {p.dayListed}
       </Text>
     </Box>
     <Box px={2} py={1} width={1 / 3}>
       <Small p={1} color="white" bg="blue">
-        Partition
+      單位間隔:
       </Small>
       <Text p={1} color="white" bg="blue">
       {p.partitionLabel}
@@ -146,7 +147,7 @@ export default class AgentBuyProperty extends React.Component {
     </Box>
     <Box px={2} py={1} width={1 / 3}>
       <Small p={1} color="white" bg="blue">
-        Budget:
+      預算上限:
       </Small>
       <Text p={1} color="white" bg="blue">
       {p.buyBudgetMaxLabel}
