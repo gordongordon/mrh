@@ -4,7 +4,10 @@ import defaultTheme from "../theme";
 import PropTypes from "prop-types";
 import Carousel from "../Carousel/index";
 import {
+  Star,
   ButtonOutline,
+  Row, 
+  Column,
   Small,
   Label,
   Checkbox,
@@ -18,6 +21,8 @@ import {
 } from "rebass";
 import Cell from "./Cell";
 import LineText from '../Elements/LineText';
+import MrCard from '../Elements/MrCard';
+import TextHeader from '../Elements/TextHeader';
 
 
 export default class AgentBuyProperty extends React.Component {
@@ -63,6 +68,7 @@ export default class AgentBuyProperty extends React.Component {
     const isLast = this.props.isLast;
 
     return (
+<<<<<<< HEAD
       <Card w={19 / 20}>
         <Flex wrap mx={-2} my={0}>
           <Box px={4} py={1} width={1} my={0}>
@@ -74,71 +80,73 @@ export default class AgentBuyProperty extends React.Component {
             <Text color="black">
               姓名:
             </Text>
+=======
+      <MrCard w={19 / 20}>
+        <Flex wrap mx={1} my={1}>
+          <Box px={2} py={1} width={1} my={0}>
+            <TextHeader p={1} color="white" bg={["blue", "#F55869"]}>
+            出售樓盤: ：龍苑, 九龍塘
+            </TextHeader>
+>>>>>>> 8106b096a873a2311186a65a6744493c27db0d68
           </Box>
+          <LineText> <Text f={3}>重點</Text> </LineText>
+          <Cell px={2} py={1} width={1 / 3}>
+            <Label f={4}>出售價(萬元):</Label>
 
-          <Box px={2} py={1} width={1 / 3} my={0} />
-
-          <Box px={2} py={1} width={1 / 3} my={0}>
-            <Text p={1} color="black">
-              Gordon
+            <Text color="black" f="1rem">$588</Text>
+          </Cell>
+          <Cell px={2} py={1} width={1 / 3}>
+            <Label color="black" f={4}>實用面積:</Label>
+            <Text color="black" f="1rem">
+              344呎
             </Text>
-          </Box>
+          </Cell>
+          <Cell px={2} py={1} width={1 / 3}>
+              <Label f={4}>單位間隔: </Label>
+            <Text color="black" f="1rem">
+            2房1廳
+            </Text>
+          </Cell>
           <LineText> <Text f={3}>特徵</Text> </LineText>
-          <Cell px={4} width={1 / 3}>
-            <Label f={4}>會養物</Label>
-
-            <Text color="black" f="1rem">{p.isPetAllowedLabel}</Text>
-          </Cell>
-
-          <Cell px={4} width={1 / 3}>
-            <Label f={4}>-會養物-</Label>
-
-            <Text color="black" f="1rem">會</Text>
-          </Cell>
-          <Cell px={4} py={1} width={1 / 3}>
-              <Label f={4}>實用面積</Label>
+          <Cell px={2} py={1} width={1 / 3}>
+            <Label f={4}> 樓層: </Label>
             <Text color="black" f="1rem">
-              300呎
-            </Text>
-          </Cell>
-          <LineText> <Text f={3}>特定日期</Text> </LineText>
-          <Cell px={4} py={1} width={1 / 3}>
-            <Label f={4}> 發布日期</Label>
-            <Text color="black" f=".5rem">
-            17年2月2日
+            中層
             </Text>
           </Cell>
           <Cell px={2} py={1} width={1 / 3}>
-            <Label f={4}> 放售形式 </Label>
+            <Label f={4}> 養寵物: </Label>
             <Text color="black" f="1rem">
-              買
+            ✔
             </Text>
           </Cell>
-          <Cell px={2} py={1} width={1 / 3}>
-            <Label f={4}>出租樓盤</Label>
-            <Text color="black" f="1rem">
-              No
-            </Text>
-          </Cell>
+<<<<<<< HEAD
           <LineText> <Text f={3}>其他</Text> </LineText>          
           <Cell px={4} py={1} width={1 / 3}>
             <Label f={4}>發布日期</Label>
+=======
+          <Cell px={2} py={1} width={1 / 3}>
+            <Label f={4}>睇樓:</Label>
+>>>>>>> 8106b096a873a2311186a65a6744493c27db0d68
             <Text color="black" f="1rem">
-              {p.dayListed}
+            ✔
+            </Text>
+          </Cell>
+
+          <LineText> <Text f={3}>其他</Text> </LineText>
+          <Cell px={2} py={1} width={1 / 3}>
+            <Label f={4}> 出售形式: </Label>
+            <Text color="black" f="1rem">
+            連租約 
             </Text>
           </Cell>
           <Cell px={2} py={1} width={1 / 3}>
-            <Label f={4}> 單位間隔 </Label>
+            <Label f={4}> 睇樓日期： </Label>
             <Text color="black" f="1rem">
-            開放式
+            1月20日 
             </Text>
           </Cell>
-          <Cell px={2} py={1} width={1 / 3}>
-            <Label color="black" f={4}>預算上限</Label>
-            <Text color="black" f="1rem">
-              $300萬
-            </Text>
-          </Cell>
+<<<<<<< HEAD
           <LineText> <Text f={3}>你的决定</Text> </LineText>          
           <Box px={3} py={1} width={1} my={0}>
             <ButtonOutline width={4/5} children="96181448" f={5}/>
@@ -148,9 +156,48 @@ export default class AgentBuyProperty extends React.Component {
           </Box>
           <Box px={3} py={1} width={1} my={0}>
             <ButtonOutline width={4/5} children="Exit"  f={5}/>
+=======
+          <Cell px={2} py={1} width={1 / 3}>
+            <Label f={4}>更新時間:</Label>
+            <Text color="black" f="1rem">
+            2分鐘前
+            </Text>
+          </Cell>       
+          <LineText> <Text f={3}>聯絡方式</Text> </LineText>     
+          <Cell px={2} py={1} width={1 / 3}>
+          <Label f={4}> 資訊來源: </Label>
+          <Text color="black" f="0.6rem">
+          地產代理
+          </Text>
+        </Cell>
+        <Cell px={2} py={1} width={1/ 3}>
+          <Label f={4}>聯絡人:</Label>
+          <Text color="black" f="0.6rem">
+          Gordon Wong
+          </Text>
+        </Cell>    
+        <Cell px={2} py={1} width={1 / 3}>
+        <Label f={4}>經驗評級 </Label>
+        <Flex>
+        <Star checked color="blue"/>
+        <Star checked color="blue"/>
+        <Star checked color="blue"/>
+        <Star half color="blue"/>
+        <Star color="blue"/>
+      </Flex> 
+    </Cell>  
+          <Box px={2} py={1} width={1} my={0}>
+            <ButtonOutline width={1} children="96181448" f={5}/>
+          </Box>
+          <Box align='center' px={4} py={1} width={1} my={0}>
+            <ButtonCircle width={1} children="Whatsapp"  f={5} bg="gray" />
+          </Box>
+          <Box px={2} py={1} width={1} my={0}>
+            <ButtonOutline width={1} children="Exit"  f={5}/>
+>>>>>>> 8106b096a873a2311186a65a6744493c27db0d68
           </Box>
         </Flex>
-      </Card>
+      </MrCard>
     );
   }
 }
