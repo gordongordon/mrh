@@ -3,7 +3,7 @@ import defaultTheme from '../theme';
 import PropTypes from 'prop-types';
 import Carousel from '../Carousel/index';
 
-export default class AgentLeaseProperty extends React.Component {
+export default class AgentRentProperty extends React.Component {
     constructor( props ) {
         super( props );
 
@@ -51,47 +51,25 @@ export default class AgentLeaseProperty extends React.Component {
         const isFirst = this.props.isFirst;
         const isLast = this.props.isLast;
         
-
-        // 出租樓盤: 名城, 大圍
-
-        // ————重點————
-        // 租金(元): $13,000
-        // 實用面積(呎): 344
-        // 單位間隔: 2房1廳
-        // ————特徵————
-        // 養寵物: ✔
-        // 傢俬: ✔
-        // 七日免租期：✔
-        // ———— 時間————
-        // 最快睇樓: 1月20日
-        // 入住日期：1月27日
-        // 更新時間: 5分鐘前
-        // ————聯絡方式————
-        // 代理人：Gordon 
-        // CALL 98765374
-        // Whatsapp 98765374
-        // Exit window
-        
         return (
              <Carousel.GenericContainer 
-               className="cmui-GenericContainer"
+              className="cmui-GenericContainer"
                opened="true"
                width="100%">
                 <Carousel.Title className="cmui-Title" isFirst={isFirst} isLast={isLast}>{p.addressLocationLabel}/{p.nameOfBuildingLabel}</Carousel.Title>
                 <Carousel.SubTitle className="cmui-SubTitle">{p.roleName} : {p.contactNameLabel}</Carousel.SubTitle>
                 <Carousel.Content>
-                <Carousel.LineText> Agent lease Property </Carousel.LineText>
-
-                <Carousel.ContentItem>: {p.leasePriceLabel}</Carousel.ContentItem>
-                <Carousel.ContentItem>: {p.partitionLabel}</Carousel.ContentItem>
-                <Carousel.ContentItem>: {p.leasingPeriodLabel}</Carousel.ContentItem>
-                <Carousel.ContentItem>: {p.isPetAllowedLabel}</Carousel.ContentItem>
-                <Carousel.ContentItem>: {p.howFresh}</Carousel.ContentItem>
-                <Carousel.ContentItem>: {p.dayListed}</Carousel.ContentItem>
-                <Carousel.ContentItem>: {p.hasHomeHardwareLabel}</Carousel.ContentItem>
-                <Carousel.ContentItem>: {p.earlyTimeToViewLabel}</Carousel.ContentItem>
-                <Carousel.ContentItem>: {p.isFreeForSevenDayLabel}</Carousel.ContentItem>
-                <Carousel.ContentItem>: {p.netSizeLabel}</Carousel.ContentItem>
+                <Carousel.LineText> Agent Rent Property </Carousel.LineText>
+                <Carousel.ContentItem>income: {p.incomeLabel}</Carousel.ContentItem>
+                <Carousel.ContentItem>rentBudgetMax: {p.rentBudgetMaxLabel}</Carousel.ContentItem>
+                <Carousel.ContentItem>numOfPeople: {p.numOfPeopleLivingLabel}</Carousel.ContentItem>
+                <Carousel.ContentItem>isPetAllowed: {p.isPetAllowedLabel}</Carousel.ContentItem>
+                <Carousel.ContentItem>level: {p.levelLabel}</Carousel.ContentItem>
+                <Carousel.ContentItem>isViewAble: {p.isViewAbeleLabel}</Carousel.ContentItem>
+                <Carousel.ContentItem>hasHomeHardware: {p.hasHomeHardwareLabel}</Carousel.ContentItem>
+                <Carousel.ContentItem>leasingPeriod: {p.leasingPeriodLabel}</Carousel.ContentItem>
+                <Carousel.ContentItem>jobNature: {p.jobNatureLabel}</Carousel.ContentItem>
+                <Carousel.ContentItem>dayListed: {p.dayListed}</Carousel.ContentItem>
                 <Carousel.ContentItem>f:{p.fbid}-r:{p.relatedFbid}</Carousel.ContentItem>
                 <Carousel.Toggle/>
                 </Carousel.Content>
@@ -124,7 +102,7 @@ export default class AgentLeaseProperty extends React.Component {
                 <Button className="cmui-Button" onClick={ () => onClick() } first> Call 96181448 </Button> */}
 
 
-AgentLeaseProperty.propTypes = {
+AgentRentProperty.propTypes = {
     steps: PropTypes.object,
     triggerNextStep: PropTypes.func,
     onWhatsapp : PropTypes.func,
@@ -136,7 +114,7 @@ AgentLeaseProperty.propTypes = {
     isLast  : PropTypes.bool,
   };
   
-AgentLeaseProperty.defaultProps = {
+AgentRentProperty.defaultProps = {
     steps: undefined,
     triggerNextStep: false,
     status  : undefined,

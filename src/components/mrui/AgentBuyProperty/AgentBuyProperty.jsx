@@ -2,7 +2,7 @@
 import React from "react";
 import defaultTheme from "../theme";
 import PropTypes from "prop-types";
-import Carousel from "../Carousel/index";
+//import Carousel from "../Carousel/index";
 import {
   Avatar,
   Star,

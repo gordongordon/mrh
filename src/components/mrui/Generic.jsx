@@ -1,18 +1,29 @@
-import React from 'react';
-import defaultTheme from '../theme';
 import PropTypes from 'prop-types';
-import Carousel from '../Carousel/index';
+import React from 'react';
 
-export default class AgentLeaseProperty extends React.Component {
+// import Title from './Title';
+// import SubTitle from './SubTitle';
+// import Footer from './Footer';
+// import Content from './Content';
+// import React from 'react';
+// import Button from './Button';
+// import ContentItem from './ContentItem';
+// import GenericContainer from './GenericContainer';
+// import LineText from './LineText';
+// import Toggle from './Toggle';
+
+import Carousel from './Carousel';
+
+export default class Generic extends React.Component {
     constructor( props ) {
         super( props );
 
         this.triggetNext = this.triggetNext.bind(this);
 
         // this.state = {
-        //   value: null,
-        //   trigger: false
-        // };
+        //     value: null,
+        //     trigger: false
+        //   };
         
     }
 
@@ -21,90 +32,68 @@ export default class AgentLeaseProperty extends React.Component {
         //const p = this.props;
         //    const t = moment().format('YYYY-MM-DD HH:mm:ss');
         //  this.props.property.realTime = moment( t );
-
-        // Will be active while production
-        //this.props.property.setTimeStamp();
+        this.props.property.setTimeStamp();
     
         //    console.log( 'realTime will mount', this.props.property.realTime)
       }    
 
     // // For Chatbot Custom Component Return 
     triggetNext() {
-        
         const label = 'gordon';
         console.log( 'triggetNext() ');
         this.setState({ trigger: true }, () => {
           this.props.triggerNextStep( { value: label, label : label });
-
         });
 
     }
 
     render() {
-        const onWhatsapp = this.props.onWhatsapp;
         const onCall = this.props.onCall;
         const onTriggetNext = this.props.onTriggetNext;
-        // const onSharePhone = this.props.onSharePhone;
+        const onSharePhone = this.props.onSharePhone;
         const status  = this.props.status;
         const fStatus = this.props.fStatus;
         const p = this.props.property;
         const isFirst = this.props.isFirst;
         const isLast = this.props.isLast;
         
-
-        // 出租樓盤: 名城, 大圍
-
-        // ————重點————
-        // 租金(元): $13,000
-        // 實用面積(呎): 344
-        // 單位間隔: 2房1廳
-        // ————特徵————
-        // 養寵物: ✔
-        // 傢俬: ✔
-        // 七日免租期：✔
-        // ———— 時間————
-        // 最快睇樓: 1月20日
-        // 入住日期：1月27日
-        // 更新時間: 5分鐘前
-        // ————聯絡方式————
-        // 代理人：Gordon 
-        // CALL 98765374
-        // Whatsapp 98765374
-        // Exit window
-        
         return (
-             <Carousel.GenericContainer 
+             <Carousel
                className="cmui-GenericContainer"
                opened="true"
-               width="100%">
+               width="100%"
+             >
+             <Carousel.GenericContainer>
                 <Carousel.Title className="cmui-Title" isFirst={isFirst} isLast={isLast}>{p.addressLocationLabel}/{p.nameOfBuildingLabel}</Carousel.Title>
                 <Carousel.SubTitle className="cmui-SubTitle">{p.roleName} : {p.contactNameLabel}</Carousel.SubTitle>
                 <Carousel.Content>
-                <Carousel.LineText> Agent lease Property </Carousel.LineText>
-
-                <Carousel.ContentItem>: {p.leasePriceLabel}</Carousel.ContentItem>
-                <Carousel.ContentItem>: {p.partitionLabel}</Carousel.ContentItem>
-                <Carousel.ContentItem>: {p.leasingPeriodLabel}</Carousel.ContentItem>
-                <Carousel.ContentItem>: {p.isPetAllowedLabel}</Carousel.ContentItem>
-                <Carousel.ContentItem>: {p.howFresh}</Carousel.ContentItem>
-                <Carousel.ContentItem>: {p.dayListed}</Carousel.ContentItem>
-                <Carousel.ContentItem>: {p.hasHomeHardwareLabel}</Carousel.ContentItem>
-                <Carousel.ContentItem>: {p.earlyTimeToViewLabel}</Carousel.ContentItem>
-                <Carousel.ContentItem>: {p.isFreeForSevenDayLabel}</Carousel.ContentItem>
-                <Carousel.ContentItem>: {p.netSizeLabel}</Carousel.ContentItem>
+                <Carousel.LineText> Main </Carousel.LineText>
+                <Carousel.ContentItem>Size: {p.netSizeLabel}</Carousel.ContentItem>
+                <Carousel.ContentItem>Price: {p.salePriceLabel} </Carousel.ContentItem>
+                <Carousel.ContentItem>Pet: {p.isPetAllowedLabel}</Carousel.ContentItem>
+                <Carousel.ContentItem>View: {p.isViewAbleLabel}:</Carousel.ContentItem
+                ><Carousel.ContentItem>Partition {p.partitionLabel}</Carousel.ContentItem>
+                <Carousel.ContentItem>Level:  {p.levelLabel}</Carousel.ContentItem>
+                <Carousel.ContentItem>With lease:  {p.isSaleWithLeaseLabel}</Carousel.ContentItem>
+                <Carousel.LineText> Time </Carousel.LineText>
+                <Carousel.ContentItem>Due Day: {p.dueDayLabel}</Carousel.ContentItem>
+                <Carousel.ContentItem>Time: {p.earlyTimeToViewLabel}</Carousel.ContentItem>
+                <Carousel.ContentItem>Day Listed:  {p.dayListed}</Carousel.ContentItem>
+                <Carousel.ContentItem>Status: {p.howFresh}</Carousel.ContentItem>
                 <Carousel.ContentItem>f:{p.fbid}-r:{p.relatedFbid}</Carousel.ContentItem>
                 <Carousel.Toggle/>
                 </Carousel.Content>
                 {
-                    onCall && <Carousel.Button className="cmui-Button" onClick={ () => onCall( p.contactPhone ) } first> { p.contactPhone} </Carousel.Button>
+                    onSharePhone()
                 }
-                            {
-                    onWhatsapp && <Carousel.Button className="cmui-Button" onClick={ () => onWhatsapp( p.contactPhone ) } first> Whatsapp { p.contactPhone} </Carousel.Button>
+                {
+                    onCall && <Carousel.Button className="cmui-Button" onClick={ () => onCall( status.contactPhone ) } first> { status.contactPhone} </Carousel.Button>
                 }
                 {
                     onTriggetNext && <Carousel.Button className="cmui-Button" onClick={ () => onTriggetNext() } first> triggetNext </Carousel.Button>
                 }
-            </Carousel.GenericContainer>
+                </Carousel.GenericContainer>
+            </Carousel>
         );
 
     }
@@ -124,10 +113,9 @@ export default class AgentLeaseProperty extends React.Component {
                 <Button className="cmui-Button" onClick={ () => onClick() } first> Call 96181448 </Button> */}
 
 
-AgentLeaseProperty.propTypes = {
+Generic.propTypes = {
     steps: PropTypes.object,
     triggerNextStep: PropTypes.func,
-    onWhatsapp : PropTypes.func,
     onClick : PropTypes.func,
     status  : PropTypes.object,
     fStatus : PropTypes.object,
@@ -136,7 +124,7 @@ AgentLeaseProperty.propTypes = {
     isLast  : PropTypes.bool,
   };
   
-AgentLeaseProperty.defaultProps = {
+Generic.defaultProps = {
     steps: undefined,
     triggerNextStep: false,
     status  : undefined,

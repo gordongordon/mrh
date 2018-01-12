@@ -458,13 +458,12 @@ class ChatAgentBuyRespond extends React.Component {
           hideSubmitButton="false"
           // hideBotAvatar="false"
           placeholder="請輸入這裏"
+          hideHeader={false}
           handleEnd={this.handleEnd}
           //cache="true"
           //cacheName="mrhouse"
           // floating="false"
 //          bubbleStyle={{ overflow: "visible", fontSize: "0.3rem" }}
-
-
 
           steps={[
             {

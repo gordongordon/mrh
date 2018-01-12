@@ -168,9 +168,7 @@ ReactDOM.render(
       <NavigationBar />
       <MobxRouter />
     </div>
-  </Provider>  	
-
-  ,
+  </Provider>,
   document.getElementById("root")
 );
 
