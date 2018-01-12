@@ -65,13 +65,13 @@ export default class AgentBuyProperty extends React.Component {
     return (
       <Card w={19 / 20}>
         <Flex wrap mx={-2} my={0}>
-          <Box px={1} py={1} width={1} my={0}>
-            <Text p={1} color="white" bg={["blue", "green"]}>
+          <Box px={4} py={1} width={1} my={0}>
+            <Text color="white" bg={["blue", "green"]}>
               心水樓盤：{p.addressLocationLabel}/{p.nameOfBuildingLabel}
             </Text>
           </Box>
           <Box px={2} py={1} width={1 / 3} my={0}>
-            <Text p={1} color="black">
+            <Text color="black">
               姓名:
             </Text>
           </Box>
@@ -121,7 +121,7 @@ export default class AgentBuyProperty extends React.Component {
             </Text>
           </Cell>
           <LineText> <Text f={3}>其他</Text> </LineText>          
-          <Cell px={2} py={1 / 5} width={1 / 3}>
+          <Cell px={4} py={1} width={1 / 3}>
             <Label f={4}>發布日期</Label>
             <Text color="black" f="1rem">
               {p.dayListed}
@@ -140,14 +140,14 @@ export default class AgentBuyProperty extends React.Component {
             </Text>
           </Cell>
           <LineText> <Text f={3}>你的决定</Text> </LineText>          
-          <Box px={5} py={5} width={1} my={0}>
-            <ButtonOutline width={1} children="96181448" f={5}/>
+          <Box px={3} py={1} width={1} my={0}>
+            <ButtonOutline width={4/5} children="96181448" f={5}/>
           </Box>
-          <Box px={10} py={10} width={1} my={0}>
-            <ButtonCircle width={1} children="Whatsapp"  f={5} bg="white" />
+          <Box px={3} py={1} width={1} my={0}>
+            <ButtonCircle width={4/5} children="Whatsapp"  f={5} bg="gray" />
           </Box>
-          <Box px={5} py={5} width={1} my={0}>
-            <ButtonOutline width={1} children="Exit"  f={5}/>
+          <Box px={3} py={1} width={1} my={0}>
+            <ButtonOutline width={4/5} children="Exit"  f={5}/>
           </Box>
         </Flex>
       </Card>
