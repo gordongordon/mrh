@@ -1,12 +1,12 @@
 import styled from 'styled-components';
 // import theme from './theme';
-import {Card} from 'rebass';
+import {Card as ext } from 'rebass';
 
-const MrCard = styled(Card)`
+const Card = styled(ext)`
     border-radius: 10px;
     background-color: white;   
     box-shadow: 2px;
     
 `
 
-export default MrCard;
+export default Card;

@@ -6,7 +6,8 @@ import {propertys} from 'userModelView';
 import {ListOfMatchOldSalePropertys} from '../listOfMatch/listOfMatchOldSalePropertys';
 import { SingleSaleUserMatchViewWrapper } from "../singlePropertyView/singleSaleUserMatchView";
 import {observer } from "mobx-react";
-import {AgentLeaseProperty as ItemView } from "react-simple-chatbot";
+import { AgentLeaseProperty as ItemView } from "../mrui/AgentLeaseProperty/AgentLeaseProperty";
+
 
 
 const prompt = Modal.prompt;

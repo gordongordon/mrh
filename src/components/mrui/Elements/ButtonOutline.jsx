@@ -1,10 +1,10 @@
 import styled from 'styled-components';
 // import theme from './theme';
-import {ButtonOutline} from 'rebass';
+import {ButtonOutline as ext} from 'rebass';
 
-const MrButtonOutline = styled(ButtonOutline)`
+const ButtonOutline = styled(ext)`
     border-radius: 30px;
     font-weight: bold;
 `
 
-export default MrButtonOutline;
+export default ButtonOutline;

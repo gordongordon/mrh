@@ -6,7 +6,6 @@ import PropTypes from "prop-types";
 import {
   Avatar,
   Star,
-  ButtonOutline,
   Row,
   Column,
   Small,
@@ -17,7 +16,6 @@ import {
   BackgroundImage,
   Border,
   Divider,
-  Card,
   Group,
   Heading,
   Flex,
@@ -25,17 +23,20 @@ import {
   Absolute,
   Relative,
   Text,
-  Tooltip,
-  Button,
-  ButtonCircle
+  Tooltip
 } from "rebass";
-import Cell from "./Cell";
-import LineText from "../Elements/LineText";
-import MrCard from "../Elements/MrCard";
-import TextHeader from "../Elements/TextHeader";
-import MrButtonOutline from "../Elements/MrButtonOutline";
+import { 
+  Cell,
+  LineText,
+  Card,
+  TextHeader,
+  ButtonOutline
+} from '../Elements';
 
-export default class AgentBuyProperty extends React.Component {
+export class AgentBuyProperty extends React.Component {
+
+  static displayName = 'AgentBuyProperty';
+
   constructor(props) {
     super(props);
 
@@ -90,10 +91,10 @@ export default class AgentBuyProperty extends React.Component {
     const isLast = this.props.isLast;
 
     return (
-      <MrCard w={19 / 20}>
+      <Card w={19 / 20}>
         <Heading>
           <TextHeader p={1} color="white" bg={["blue", "#F55869"]}>
-            出售樓盤: 龍苑, 九龍塘
+          心儀樓盤: 龍苑, 九龍塘
             <Relative>
               <Absolute bottom right>
                 <Pre>編號:MOS-0001</Pre>
@@ -235,20 +236,20 @@ export default class AgentBuyProperty extends React.Component {
             <Text f={3}>下一步行動</Text>
           </LineText>
           <Cell px={2} py={1} width={1} align="center">
-            <MrButtonOutline
+            <ButtonOutline
               width={7 / 22}
               children="96181448"
               f={5}
               color="#F55869"
             />
-            <MrButtonOutline
+            <ButtonOutline
               mx={1}
               width={7 / 22}
               children="Whatsapp"
               f={5}
               color="#F55869"
             />
-            <MrButtonOutline
+            <ButtonOutline
               width={7 / 22}
               children="Home"
               f={5}
@@ -256,10 +257,13 @@ export default class AgentBuyProperty extends React.Component {
             />
           </Cell>
         </Flex>
-      </MrCard>
+      </Card>
     );
   }
 }
+
+//export const AgentBuyProperty = AgentBuyProperty;
+//
 
 {
   /* <Box px={3} py={1} width={1} my={0}>

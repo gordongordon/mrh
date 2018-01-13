@@ -8,9 +8,10 @@ import { SingleSaleUserMatchViewWrapper } from "../singlePropertyView/singleSale
 import {observer } from "mobx-react";
 //import {AgentBuyProperty as ItemView } from "react-simple-chatbot";
 //import {AgentBuyProperty as ItemView } from "../mrui/AgentBuyProperty/AgentBuyProperty";
-import AgentBuyProperty from "../mrui/AgentBuyProperty/AgentBuyProperty";
+//import AgentBuyProperty from "../mrui/AgentBuyProperty/AgentBuyProperty";
 
-const ItemView = AgentBuyProperty;
+import { AgentBuyProperty as ItemView } from "../mrui/AgentBuyProperty/AgentBuyProperty";
+//const ItemView = AgentBuyProperty;
 const prompt = Modal.prompt;
 
 @observer
