@@ -170,9 +170,12 @@ const views = {
     // component: <ChatMatching />,
     onEnter: (route, params, store, queryParams) => {
       MobxStore.app.setTitle( '好 .. Matching');
+      console.log( 'parms', params);
+      console.log( 'queryParams', queryParams );
       // debugger
     },
     beforeExit: (route, params) => {
+      console.log( 'parms', params);
       console.log('exiting home /!');
       console.log('params changed to', params);
       MobxStore.app.previousView = route;

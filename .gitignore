@@ -14,4 +14,5 @@ singleBundo.js.html
 coverage
 npm-debug.log
 .DS_Store
+serviceAccountKey.json
 
