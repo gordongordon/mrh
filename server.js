@@ -34,7 +34,7 @@ function sendToken(email, token) {
     text: "and easy to do anywhere, even with Node.js",
     html: `<strong>
              Click the link below to login 
-             <a herf="${url}"> ${url} </a>
+             <a href="${url}"> ${url} </a>
            </strong>`
 
   };
