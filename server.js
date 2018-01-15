@@ -65,11 +65,12 @@ function sendToken(email, token, hostname , displayName, protocal) {
   const sgMail = require("@sendgrid/mail");
   sgMail.setApiKey(process.env.SENDGRID_API_KEY);
   const url = `${protocal}://${hostname}/list/${token}`;
+
   console.log( 'sendToken : url', url );
   const msg = {
     to: email,
     from: "webmaster@mr.house",
-    subject: "Mr.House - Passwordless login link",
+    subject: "Mr.House - Passwordless login Now!",
     text: `hi, ${displayName}
     Welcome to Mr.House!
     Click and confirm that you want to sign in to Mr.House. This link will expire in five minutes:
