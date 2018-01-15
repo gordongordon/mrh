@@ -1,5 +1,4 @@
 var express = require("express");
-
 var compression = require("compression");
 //var cors = require('cors');
 //var express = require('express')
@@ -17,6 +16,31 @@ admin.initializeApp({
   databaseURL: "https://todo-app-a2b7c.firebaseio.com"
 });
 
+/**
+ * SendGrid
+ * Testing
+ */
+// using SendGrid's v3 Node.js Library
+// https://github.com/sendgrid/sendgrid-nodejs
+function sendToken(email, token) {
+  const sgMail = require("@sendgrid/mail");
+  sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+  var url = "http://localhost:3000/list/" + token;
+
+  const msg = {
+    to: email,
+    from: "webmaster@mr.house",
+    subject: "Sending with SendGrid is Fun",
+    text: "and easy to do anywhere, even with Node.js",
+    html: `<strong>
+             Click the link below to login 
+             <a herf="${url}"> ${url} </a>
+           </strong>`
+
+  };
+  sgMail.send(msg);
+}
+
 // For compression
 app.use(
   compression({
@@ -27,6 +51,7 @@ app.use(
     level: 9
   })
 );
+
 
 //app.use(cors())
 
@@ -49,7 +74,7 @@ const PORT = process.env.PORT || 3000;
 app.get("/login/:email", function(req, res) {
   console.log("login ");
   var email = req.params.email;
-  console.log( 'email', email);
+  console.log("email", email);
 
   var uid = "lypMuS2sdpVGoripKanyoOn0zBe2";
 
@@ -58,6 +83,7 @@ app.get("/login/:email", function(req, res) {
     .createCustomToken(uid)
     .then(function(customToken) {
       // Send token back to client
+      sendToken( email, customToken );
       res.send(customToken);
       console.log(customToken);
     })
