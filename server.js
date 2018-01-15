@@ -61,11 +61,11 @@ const PORT = process.env.PORT || 3000;
  */
 // using SendGrid's v3 Node.js Library
 // https://github.com/sendgrid/sendgrid-nodejs
-function sendToken(email, token, hostname , displayName) {
+function sendToken(email, token, hostname , displayName, protocal) {
   const sgMail = require("@sendgrid/mail");
   sgMail.setApiKey(process.env.SENDGRID_API_KEY);
-  const url = `http://${hostname}:3000/list/${token}`;
-
+  const url = `${protocal}://${hostname}/list/${token}`;
+  console.log( 'sendToken : url', url );
   const msg = {
     to: email,
     from: "webmaster@mr.house",
@@ -107,12 +107,15 @@ app.get("/login/:email", function(req, res) {
     console.log("Successfully fetched user data:", userRecord.toJSON());
     const user = userRecord.toJSON();
     console.log( `user.uid ${user.uid} user.displayName ${user.displayName}` );
+    /**
+     * Send login link to user
+     */
     admin
     .auth()
     .createCustomToken(user.uid)
     .then(function(customToken) {
       // Send token back to client
-      sendToken( email, customToken, req.hostname, user.displayName );
+      sendToken( email, customToken, req.header('host'), user.displayName, req.protocol);
       res.send(customToken);
       console.log(customToken);
     })

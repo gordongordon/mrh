@@ -115,6 +115,7 @@ class AskChatbotSignIn extends React.Component {
 
   componentDidMount() {
     //this.handleEnd = this.handleEnd.bind(this);
+    console.log( "window.location.host ", window.location.host );
   }
 
   trythis = async ({ value, steps }) => {
@@ -221,7 +222,9 @@ class AskChatbotSignIn extends React.Component {
   handleLogin = ( email ) => {
     var xhttp;
     //const email = steps.getUserEmailInput.value;
-    const url = `http://localhost:3000/login/${email}`;
+    const url = `${window.location.protocol}//${window.location.host}/login/${email}`;
+    // const url = `${window.location.host}/login/${email}`;
+    console.log('url', url);
     xhttp = new XMLHttpRequest();
     xhttp.open("GET", url, true);
     xhttp.send();
@@ -301,9 +304,9 @@ class AskChatbotSignIn extends React.Component {
         message : ({ previousValue, steps }) => {
           const email = steps.getEmailUserInput.value;
           this.handleLogin( email );
-          return `Please Open 「${email} 」, then click a link  http://app.mr.house/list/xxx from mr.house to login without password!`;
+          return `Please Open 「${email} 」, then click a link  ${window.location.protocol}//${window.location.host}/list/xxx from mr.house to login without password!`;
         },
-        delay: 5000,
+        delay: 1000,
         trigger: "stop"
       }
     ];
@@ -316,6 +319,7 @@ class AskChatbotSignIn extends React.Component {
         // stop
         id: "stop",
         message: "stop",
+        delay: 600000,
         end: true
       }
     ];
