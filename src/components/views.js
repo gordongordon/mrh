@@ -1,12 +1,12 @@
 import React from 'react';
-import {Route} from 'mobx-router';
+import { Route } from 'mobx-router';
 //components
 //import {MatchPanelViewWrapper} from 'matchPanelView'
 //import {ListOfPropertysView} from 'listOfPropertysView'
 //import ListOfAgentPropertysView from 'listOfMatch/listOfAgentPropertysView'
 
 //import {FrontPapePanelViewSegment} from 'frontPagePanelViewSegment'
-import {FrontPageView} from 'frontPageView';
+import { FrontPageView } from 'frontPageView';
 import MobxStore from 'mobxStore';
 //import FrontPage from 'frontPage'
 //import {MobxRouter} from 'mobx-router';
@@ -29,7 +29,7 @@ import MobxStore from 'mobxStore';
 //import {MatchRentPanelViewWrapper} from 'matchPanel/matchRentPanelView';
 //import {MatchSalePanelViewWrapper} from 'matchPanel/matchSalePanelView';
 //import {MatchBuyPanelViewWrapper} from 'matchPanel/matchBuyPanelView';
-import {MatchAgentPanelViewWrapper} from 'matchPanel/matchAgentPanelView';
+import { MatchAgentPanelViewWrapper } from 'matchPanel/matchAgentPanelView';
 
 // import {AgentAppView} from 'agentAppView'
 
@@ -56,6 +56,7 @@ import AskChatbotSignUp from 'chatbot/AskChatbotSignUp';
 import AskChatbotSignIn from 'chatbot/AskChatbotSignIn';
 import AskChatbotBuyByUser from 'chatbot/AskChatbotBuyByUser';
 import AskChatbotProfile from 'chatbot/AskChatbotProfile';
+import firebase from "firebase";
 
 import Loadable from 'react-loadable';
 //import Loading from  'loading'
@@ -84,98 +85,98 @@ function MyLoadingComponent(props) {
 }
 
 const ListOfPropertysViewLoader = Loadable({
- loader: () => import('listOfPropertysView'),
- loading: MyLoadingComponent,
+  loader: () => import('listOfPropertysView'),
+  loading: MyLoadingComponent,
 });
 
 const ListOfAgentPropertysViewLoader = Loadable({
   loader: () => import('listOfMatch/listOfAgentPropertysView'),
   loading: MyLoadingComponent,
- });
+});
 
- const MatchBuyPanelViewLoader= Loadable({
+const MatchBuyPanelViewLoader = Loadable({
   loader: () => import('matchPanel/matchBuyPanelView'),
   loading: MyLoadingComponent,
- });
- 
- const MatchSalePanelViewLoader= Loadable({
+});
+
+const MatchSalePanelViewLoader = Loadable({
   loader: () => import('matchPanel/matchSalePanelView'),
   loading: MyLoadingComponent,
- });
+});
 
- const MatchLeasePanelViewLoader= Loadable({
+const MatchLeasePanelViewLoader = Loadable({
   loader: () => import('matchPanel/matchLeasePanelView'),
   loading: MyLoadingComponent,
- });
- 
- const MatchRentPanelViewLoader= Loadable({
+});
+
+const MatchRentPanelViewLoader = Loadable({
   loader: () => import('matchPanel/matchRentPanelView'),
   loading: MyLoadingComponent,
- });
+});
 
- const FormAgentFilterLoader = Loadable({
+const FormAgentFilterLoader = Loadable({
   loader: () => import('form/formAgentFilter'),
   loading: MyLoadingComponent,
- });
+});
 
- const FormSalePropertyAntMobileLoader = Loadable({
+const FormSalePropertyAntMobileLoader = Loadable({
   loader: () => import('form/formSalePropertyAntMobile'),
   loading: MyLoadingComponent,
- });
+});
 
- const FormBuyPropertyAntMobileLoader = Loadable({
+const FormBuyPropertyAntMobileLoader = Loadable({
   loader: () => import('form/formBuyPropertyAntMobile'),
   loading: MyLoadingComponent,
- });
+});
 
- const FormLeasePropertyAntMobileLoader = Loadable({
+const FormLeasePropertyAntMobileLoader = Loadable({
   loader: () => import('form/formLeasePropertyAntMobile'),
   loading: MyLoadingComponent,
- });
+});
 
- const FormRentPropertyAntMobileLoader = Loadable({
+const FormRentPropertyAntMobileLoader = Loadable({
   loader: () => import('form/formRentPropertyAntMobile'),
   loading: MyLoadingComponent,
- });
+});
 
 
- const FormBuyAgentPropertyAntMobileLoader = Loadable({
+const FormBuyAgentPropertyAntMobileLoader = Loadable({
   loader: () => import('form/formBuyAgentPropertyAntMobile'),
   loading: MyLoadingComponent,
- });
+});
 
- const FormSaleAgentPropertyAntMobileLoader = Loadable({
+const FormSaleAgentPropertyAntMobileLoader = Loadable({
   loader: () => import('form/formSaleAgentPropertyAntMobile'),
   loading: MyLoadingComponent,
- });
+});
 
- const FormLeaseAgentPropertyAntMobileLoader = Loadable({
+const FormLeaseAgentPropertyAntMobileLoader = Loadable({
   loader: () => import('form/formLeaseAgentPropertyAntMobile'),
   loading: MyLoadingComponent,
- });
+});
 
- const FormRentAgentPropertyAntMobileLoader = Loadable({
+const FormRentAgentPropertyAntMobileLoader = Loadable({
   loader: () => import('form/formRentAgentPropertyAntMobile'),
   loading: MyLoadingComponent,
- });
+});
 
 var save = false;
 
 const views = {
   home: new Route({
     path: '/',
-    component: <FrontPageView/>,
+    component: <FrontPageView />,
 
     //component: <MrHouse />,
     // component: <ChatMatching />,
     onEnter: (route, params, store, queryParams) => {
-      MobxStore.app.setTitle( '好 .. Matching');
-      console.log( 'parms', params);
-      console.log( 'queryParams', queryParams );
+      MobxStore.app.setTitle('好 .. Matching');
       // debugger
+      console.log('/params.uid', params.uid);
+      console.log('/queryParams', queryParams);
     },
     beforeExit: (route, params) => {
-      console.log( 'parms', params);
+      console.log('parms', params);
       console.log('exiting home /!');
       console.log('params changed to', params);
       MobxStore.app.previousView = route;
@@ -190,25 +191,27 @@ const views = {
       FormAgentFilterLoader.preload();
       ListOfPropertysViewLoader.preload();
       ListOfAgentPropertysViewLoader.preload();
-//      ListOfPropertysViewLoader.preload();
+      //      ListOfPropertysViewLoader.preload();
       MatchLeasePanelViewLoader.preload();
       FormBuyAgentPropertyAntMobileLoader.preload();
       FormSaleAgentPropertyAntMobileLoader.preload();
       FormLeaseAgentPropertyAntMobileLoader.preload();
       FormRentAgentPropertyAntMobileLoader.preload();
       //      debugger
-  }}),
-  filter : new Route({
+    }
+  }),
+  filter: new Route({
     path: '/filter',
-    component: <FrontPageFilter/>,
-    onEnter: ( route, params, store, queryParams ) => {
+    component: <FrontPageFilter />,
+    onEnter: (route, params, store, queryParams) => {
     },
     beforeEnter: (route, params, store) => {
     },
     beforeExit: (route, params) => {
     },
     onParamsChange: (route, params) => {
-    }}),
+    }
+  }),
 
 
 
@@ -227,26 +230,37 @@ const views = {
   list: new Route({
     path: '/list/:uid',
     component: <ListOfPropertysViewLoader />,
-    onEnter: ( route, params, store, queryParams ) => {
+    onEnter: (route, params, store, queryParams) => {
 
       console.log('entering ListOfPropertysView!');
       MobxStore.app.title = "你的儲存樓盤"
-      if ( save )
-      {
-      MobxStore.app.previousView = MobxStore.app.viewHistory.get( 'second')
+      if (save) {
+        MobxStore.app.previousView = MobxStore.app.viewHistory.get('second')
       }
-      if ( !save )
-      { MobxStore.app.viewHistory.set( 'list', MobxStore.app.previousView  )
+      if (!save) {
+        MobxStore.app.viewHistory.set('list', MobxStore.app.previousView)
         save = true
       }
-    },
-    beforeEnter: (route, params, store) => {
 
-      const userIsLoggedIn = MobxStore.app.user;
-      if (!userIsLoggedIn) {
-        alert('Only logged in users can enter this route!');
-        return false;
-      }
+      console.log('/list/:uid', params);
+      console.log('/list/:uid.params', params.uid);
+      console.log('/list/queryParams', queryParams);
+      firebase.auth().signInWithCustomToken(params.uid).catch(function (error) {
+        // Handle Errors here.
+        var errorCode = error.code;
+        var errorMessage = error.message;
+        // ...
+      });
+
+    },
+    beforeEnter: (route, params, store, queryParams) => {
+
+      // const userIsLoggedIn = MobxStore.app.user;
+      // if (!userIsLoggedIn) {
+      //   alert('Only logged in users can enter this route!');
+      //   return false;
+      // }
+
     },
     beforeExit: (route, params) => {
       console.log('exiting ListOfPRoperysView!');
@@ -256,115 +270,116 @@ const views = {
     },
     onParamsChange: (route, params) => {
       console.log('params changed to', params);
-    }}),
+    }
+  }),
   matchLease: new Route({
-      path: '/matchLease/:keyID',
-      // timeEnter for matching iktems only that time and after
-      component: <MatchLeasePanelViewLoader/>,
-      onEnter: (route, params, store, queryParams) => {
-      	console.log('third.current query params are -> ', queryParams);
-        console.log('third.current params are -> ', params);
-        MobxStore.app.setTitle( '最新鮮配對 房東');
-        console.log('route', route)
-        MobxStore.app.viewHistory.set( 'matchLease', MobxStore.app.previousView  )
-      },
-      beforeExit: (route, params) => {
-        console.log('exiting user profile!');
-        console.log('third. params', params);
-        //MobxStore.app.previousView = route;
-        MobxStore.app.params = params;
-      },
-      onParamsChange: (route, params) => {
-        console.log('params changed to', params);
-      }
+    path: '/matchLease/:keyID',
+    // timeEnter for matching iktems only that time and after
+    component: <MatchLeasePanelViewLoader />,
+    onEnter: (route, params, store, queryParams) => {
+      console.log('third.current query params are -> ', queryParams);
+      console.log('third.current params are -> ', params);
+      MobxStore.app.setTitle('最新鮮配對 房東');
+      console.log('route', route)
+      MobxStore.app.viewHistory.set('matchLease', MobxStore.app.previousView)
+    },
+    beforeExit: (route, params) => {
+      console.log('exiting user profile!');
+      console.log('third. params', params);
+      //MobxStore.app.previousView = route;
+      MobxStore.app.params = params;
+    },
+    onParamsChange: (route, params) => {
+      console.log('params changed to', params);
+    }
   }),
   matchRent: new Route({
-      path: '/matchRent/:keyID',
-      component: <MatchRentPanelViewLoader/>,
-      onEnter: (route, params, store, queryParams) => {
-      	console.log('third.current query params are -> ', queryParams);
-        console.log('third.current params are -> ', params);
-        MobxStore.app.setTitle( '最新鮮配對 租客');
-        console.log('route', route)
-        MobxStore.app.viewHistory.set( 'matchRent', MobxStore.app.previousView  )
-      },
-      beforeExit: (route, params) => {
-        console.log('exiting user profile!');
-        console.log('third. params', params);
-        //MobxStore.app.previousView = route;
-        MobxStore.app.params = params;
-      },
-      onParamsChange: (route, params) => {
-        console.log('params changed to', params);
-      }
+    path: '/matchRent/:keyID',
+    component: <MatchRentPanelViewLoader />,
+    onEnter: (route, params, store, queryParams) => {
+      console.log('third.current query params are -> ', queryParams);
+      console.log('third.current params are -> ', params);
+      MobxStore.app.setTitle('最新鮮配對 租客');
+      console.log('route', route)
+      MobxStore.app.viewHistory.set('matchRent', MobxStore.app.previousView)
+    },
+    beforeExit: (route, params) => {
+      console.log('exiting user profile!');
+      console.log('third. params', params);
+      //MobxStore.app.previousView = route;
+      MobxStore.app.params = params;
+    },
+    onParamsChange: (route, params) => {
+      console.log('params changed to', params);
+    }
   }),
   matchSale: new Route({
-      path: '/matchSale/:keyID',
-      component: <MatchSalePanelViewLoader/>,
-      onEnter: (route, params, store, queryParams) => {
-      	console.log('third.current query params are -> ', queryParams);
-        console.log('third.current params are -> ', params);
-        MobxStore.app.setTitle( '最新鮮配對 業主');
-        console.log('route', route)
-        MobxStore.app.viewHistory.set( 'matchSale', MobxStore.app.previousView  )
-      },
-      beforeExit: (route, params) => {
-        console.log('exiting user profile!');
-        console.log('third. params', params);
-        //MobxStore.app.previousView = route;
-        MobxStore.app.params = params;
-      },
-      onParamsChange: (route, params) => {
-        console.log('params changed to', params);
-      }
+    path: '/matchSale/:keyID',
+    component: <MatchSalePanelViewLoader />,
+    onEnter: (route, params, store, queryParams) => {
+      console.log('third.current query params are -> ', queryParams);
+      console.log('third.current params are -> ', params);
+      MobxStore.app.setTitle('最新鮮配對 業主');
+      console.log('route', route)
+      MobxStore.app.viewHistory.set('matchSale', MobxStore.app.previousView)
+    },
+    beforeExit: (route, params) => {
+      console.log('exiting user profile!');
+      console.log('third. params', params);
+      //MobxStore.app.previousView = route;
+      MobxStore.app.params = params;
+    },
+    onParamsChange: (route, params) => {
+      console.log('params changed to', params);
+    }
   }),
   matchBuy: new Route({
-      path: '/matchBuy/:keyID',
-      component: <MatchBuyPanelViewLoader />,
-      onEnter: (route, params, store, queryParams) => {
-      	console.log('third.current query params are -> ', queryParams);
-        console.log('third.current params are -> ', params);
-        MobxStore.app.setTitle( '最新鮮配對 買家');
-        console.log('route', route)
-        MobxStore.app.viewHistory.set( 'matchBuy', MobxStore.app.previousView  )
-        //console.log( 'timeEnter from view', moment().format('YYYY-MM-DD HH:mm:ss'))
-      },
-      beforeExit: (route, params) => {
-        console.log('exiting user profile!');
-        console.log('third. params', params);
-        //MobxStore.app.previousView = route;
-        MobxStore.app.params = params;
-      },
-      onParamsChange: (route, params) => {
-        console.log('params changed to', params);
-      }
+    path: '/matchBuy/:keyID',
+    component: <MatchBuyPanelViewLoader />,
+    onEnter: (route, params, store, queryParams) => {
+      console.log('third.current query params are -> ', queryParams);
+      console.log('third.current params are -> ', params);
+      MobxStore.app.setTitle('最新鮮配對 買家');
+      console.log('route', route)
+      MobxStore.app.viewHistory.set('matchBuy', MobxStore.app.previousView)
+      //console.log( 'timeEnter from view', moment().format('YYYY-MM-DD HH:mm:ss'))
+    },
+    beforeExit: (route, params) => {
+      console.log('exiting user profile!');
+      console.log('third. params', params);
+      //MobxStore.app.previousView = route;
+      MobxStore.app.params = params;
+    },
+    onParamsChange: (route, params) => {
+      console.log('params changed to', params);
+    }
   }),
   matchAgent: new Route({
-      path: '/matchAgent/:selectedSegmentIndex/:keyID/:typeTo',
-      component: <MatchAgentPanelViewWrapper />,
-      onEnter: (route, params, store, queryParams) => {
-      	console.log('third.current query params are -> ', queryParams);
-        console.log('third.current params are -> ', params);
-        MobxStore.app.setTitle( 'Agent');
-        console.log('route', route)
-        MobxStore.app.viewHistory.set( 'matchBuy', MobxStore.app.previousView  )
+    path: '/matchAgent/:selectedSegmentIndex/:keyID/:typeTo',
+    component: <MatchAgentPanelViewWrapper />,
+    onEnter: (route, params, store, queryParams) => {
+      console.log('third.current query params are -> ', queryParams);
+      console.log('third.current params are -> ', params);
+      MobxStore.app.setTitle('Agent');
+      console.log('route', route)
+      MobxStore.app.viewHistory.set('matchBuy', MobxStore.app.previousView)
 
-      },
-      beforeExit: (route, params) => {
-        console.log('exiting user profile!');
-        console.log('third. params', params);
-        //MobxStore.app.previousView = route;
-        MobxStore.app.params = params;
-      },
-      onParamsChange: (route, params) => {
-        console.log('params changed to', params);
-      }
+    },
+    beforeExit: (route, params) => {
+      console.log('exiting user profile!');
+      console.log('third. params', params);
+      //MobxStore.app.previousView = route;
+      MobxStore.app.params = params;
+    },
+    onParamsChange: (route, params) => {
+      console.log('params changed to', params);
+    }
   }),
-  lease : new Route({
+  lease: new Route({
     path: '/lease',
     component: <FormLeasePropertyAntMobileLoader />,
     onEnter: (route, params, store, queryParams) => {
-      MobxStore.app.setTitle( '房東');
+      MobxStore.app.setTitle('房東');
 
     },
     beforeExit: (route, params) => {
@@ -373,11 +388,11 @@ const views = {
       MobxStore.app.previousView = route;
     }
   }),
-  rent : new Route({
+  rent: new Route({
     path: '/rent',
     component: <FormRentPropertyAntMobileLoader />,
     onEnter: (route, params, store, queryParams) => {
-      MobxStore.app.setTitle( '租客');
+      MobxStore.app.setTitle('租客');
 
     },
     beforeExit: (route, params) => {
@@ -386,11 +401,11 @@ const views = {
       MobxStore.app.previousView = route;
     }
   }),
-  buy : new Route({
+  buy: new Route({
     path: '/buy',
-    component: <FormBuyPropertyAntMobileLoader/>,
+    component: <FormBuyPropertyAntMobileLoader />,
     onEnter: (route, params, store, queryParams) => {
-      MobxStore.app.setTitle( '買家');
+      MobxStore.app.setTitle('買家');
     },
     beforeExit: (route, params) => {
       console.log('exiting buy!');
@@ -398,11 +413,11 @@ const views = {
       MobxStore.app.previousView = route;
     }
   }),
-  sale : new Route({
+  sale: new Route({
     path: '/sale',
     component: <FormSalePropertyAntMobileLoader />,
     onEnter: (route, params, store, queryParams) => {
-      MobxStore.app.setTitle( '業主');
+      MobxStore.app.setTitle('業主');
 
     },
     beforeExit: (route, params) => {
@@ -411,11 +426,11 @@ const views = {
       MobxStore.app.previousView = route;
     }
   }),
-  createAgentFilter : new Route({
+  createAgentFilter: new Route({
     path: '/createAgentFilter',
     component: <FormAgentFilterLoader />,
     onEnter: (route, params, store, queryParams) => {
-      MobxStore.app.setTitle( 'Filter');
+      MobxStore.app.setTitle('Filter');
 
     },
     beforeExit: (route, params) => {
@@ -427,16 +442,15 @@ const views = {
   listAgent: new Route({
     path: '/listAgent',
     component: <ListOfAgentPropertysViewLoader />,
-    onEnter: ( route, params, store, queryParams ) => {
+    onEnter: (route, params, store, queryParams) => {
 
       console.log('entering ListOfAgentPropertysView!');
       MobxStore.app.title = "你的地產代理儲存樓盤"
-      if ( save )
-      {
-      MobxStore.app.previousView = MobxStore.app.viewHistory.get( 'second')
+      if (save) {
+        MobxStore.app.previousView = MobxStore.app.viewHistory.get('second')
       }
-      if ( !save )
-      { MobxStore.app.viewHistory.set( 'list', MobxStore.app.previousView  )
+      if (!save) {
+        MobxStore.app.viewHistory.set('list', MobxStore.app.previousView)
         save = true
       }
     },
@@ -457,65 +471,66 @@ const views = {
     },
     onParamsChange: (route, params) => {
       console.log('params changed to', params);
-    }}),
-buyAgentForm : new Route({
-  path: '/BuyAgentForm/keyID/:keyID/:typeTo/filterID/:filterID',
-  component: <FormBuyAgentPropertyAntMobileLoader />,
-  onEnter: (route, params, store, queryParams) => {
-    MobxStore.app.setTitle( '地產代理回復 業主');
+    }
+  }),
+  buyAgentForm: new Route({
+    path: '/BuyAgentForm/keyID/:keyID/:typeTo/filterID/:filterID',
+    component: <FormBuyAgentPropertyAntMobileLoader />,
+    onEnter: (route, params, store, queryParams) => {
+      MobxStore.app.setTitle('地產代理回復 業主');
 
-  },
-  beforeExit: (route, params) => {
-    console.log('exiting buyAgentForm!');
-    console.log('params changed to', params);
-    MobxStore.app.previousView = route;
-  }
-}),
-saleAgentForm : new Route({
-  path: '/SaleAgentForm/keyID/:keyID/:typeTo/filterID/:filterID',
-  component: <FormSaleAgentPropertyAntMobileLoader />,
-  onEnter: (route, params, store, queryParams) => {
-    MobxStore.app.setTitle( '地產代理回復 買家');
+    },
+    beforeExit: (route, params) => {
+      console.log('exiting buyAgentForm!');
+      console.log('params changed to', params);
+      MobxStore.app.previousView = route;
+    }
+  }),
+  saleAgentForm: new Route({
+    path: '/SaleAgentForm/keyID/:keyID/:typeTo/filterID/:filterID',
+    component: <FormSaleAgentPropertyAntMobileLoader />,
+    onEnter: (route, params, store, queryParams) => {
+      MobxStore.app.setTitle('地產代理回復 買家');
 
-  },
-  beforeExit: (route, params) => {
-    console.log('exiting saleAgentForm!');
-    console.log('params changed to', params);
-    MobxStore.app.previousView = route;
-  }
-}),
-rentAgentForm : new Route({
-  path: '/RentAgentForm/keyID/:keyID/:typeTo/filterID/:filterID',
-  component: <FormRentAgentPropertyAntMobileLoader />,
-  onEnter: (route, params, store, queryParams) => {
-    MobxStore.app.setTitle( '地產代理回復 租客');
+    },
+    beforeExit: (route, params) => {
+      console.log('exiting saleAgentForm!');
+      console.log('params changed to', params);
+      MobxStore.app.previousView = route;
+    }
+  }),
+  rentAgentForm: new Route({
+    path: '/RentAgentForm/keyID/:keyID/:typeTo/filterID/:filterID',
+    component: <FormRentAgentPropertyAntMobileLoader />,
+    onEnter: (route, params, store, queryParams) => {
+      MobxStore.app.setTitle('地產代理回復 租客');
 
-  },
-  beforeExit: (route, params) => {
-    console.log('exiting rentAgentForm!');
-    console.log('params changed to', params);
-    MobxStore.app.previousView = route;
-  }
-}),
-leaseAgentForm : new Route({
-  path: '/LeaseAgentForm/keyID/:keyID/:typeTo/filterID/:filterID',
-  component: <FormLeaseAgentPropertyAntMobileLoader />,
-  onEnter: (route, params, store, queryParams) => {
-    MobxStore.app.setTitle( '地產代理回復 房東');
+    },
+    beforeExit: (route, params) => {
+      console.log('exiting rentAgentForm!');
+      console.log('params changed to', params);
+      MobxStore.app.previousView = route;
+    }
+  }),
+  leaseAgentForm: new Route({
+    path: '/LeaseAgentForm/keyID/:keyID/:typeTo/filterID/:filterID',
+    component: <FormLeaseAgentPropertyAntMobileLoader />,
+    onEnter: (route, params, store, queryParams) => {
+      MobxStore.app.setTitle('地產代理回復 房東');
 
-  },
-  beforeExit: (route, params) => {
-    console.log('exiting leaseAgentForm!');
-    console.log('params changed to', params);
-    MobxStore.app.previousView = route;
-  }
-}),
+    },
+    beforeExit: (route, params) => {
+      console.log('exiting leaseAgentForm!');
+      console.log('params changed to', params);
+      MobxStore.app.previousView = route;
+    }
+  }),
   // For Chat bot example
-  mrHouse : new Route({
+  mrHouse: new Route({
     path: '/MrHouse',
     component: <MrHouse />,
     onEnter: (route, params, store, queryParams) => {
-      MobxStore.app.setTitle( 'Chat Bot 賣 樓');
+      MobxStore.app.setTitle('Chat Bot 賣 樓');
     },
     beforeExit: (route, params) => {
       console.log('exiting mrHouse!');
@@ -524,193 +539,193 @@ leaseAgentForm : new Route({
     }
   }),
   // For Chat bot example
-  chatMatching : new Route({
-      path: '/chatMatching',
-      component: <ChatMatching />,
-      onEnter: (route, params, store, queryParams) => {
-        MobxStore.app.setTitle( 'CBUY_Matching');
-      },
-      beforeExit: (route, params) => {
-        console.log('exiting chatMatching!');
-        console.log('params changed to', params);
-        MobxStore.app.previousView = route;
-      }
+  chatMatching: new Route({
+    path: '/chatMatching',
+    component: <ChatMatching />,
+    onEnter: (route, params, store, queryParams) => {
+      MobxStore.app.setTitle('CBUY_Matching');
+    },
+    beforeExit: (route, params) => {
+      console.log('exiting chatMatching!');
+      console.log('params changed to', params);
+      MobxStore.app.previousView = route;
+    }
   }),
   // For Chat bot example
-  chatAgentBuyRespond : new Route({
+  chatAgentBuyRespond: new Route({
     path: '/chatAgentBuyRespond/:keyID',
     component: <ChatAgentBuyRespond />,
     onEnter: (route, params, store, queryParams) => {
-      MobxStore.app.setTitle( 'CBUY_Matching');
+      MobxStore.app.setTitle('CBUY_Matching');
     },
     beforeExit: (route, params) => {
       console.log('exiting chatAgentBuyRespond!');
       console.log('params changed to', params);
       MobxStore.app.previousView = route;
     }
-}),
+  }),
   // For Chat bot example
-chatAgentSaleRespond : new Route({
+  chatAgentSaleRespond: new Route({
     path: '/chatAgentSaleRespond/:keyID',
     component: <ChatAgentSaleRespond />,
     onEnter: (route, params, store, queryParams) => {
-      MobxStore.app.setTitle( 'CSALE_Matching');
+      MobxStore.app.setTitle('CSALE_Matching');
     },
     beforeExit: (route, params) => {
       console.log('exiting chatAgentSaleRespond!');
       console.log('params changed to', params);
       MobxStore.app.previousView = route;
     }
-}),
+  }),
   // For Chat bot example
-  chatAgentRentRespond : new Route({
+  chatAgentRentRespond: new Route({
     path: '/chatAgentRentRespond/:keyID',
     component: <ChatAgentRentRespond />,
     onEnter: (route, params, store, queryParams) => {
-      MobxStore.app.setTitle( 'CSALE_Matching');
+      MobxStore.app.setTitle('CSALE_Matching');
     },
     beforeExit: (route, params) => {
       console.log('exiting chatAgentRentRespond!');
       console.log('params changed to', params);
       MobxStore.app.previousView = route;
     }
-}),
+  }),
   // For Chat bot example
-  chatAgentLeaseRespond : new Route({
+  chatAgentLeaseRespond: new Route({
     path: '/chatAgentLeaseRespond/:keyID',
     component: <ChatAgentLeaseRespond />,
     onEnter: (route, params, store, queryParams) => {
-      MobxStore.app.setTitle( 'CSALE_Matching');
+      MobxStore.app.setTitle('CSALE_Matching');
     },
     beforeExit: (route, params) => {
       console.log('exiting chatAgentLeaseRespond!');
       console.log('params changed to', params);
       MobxStore.app.previousView = route;
     }
-}),
+  }),
 
-// Buy, Sale, Rent, Lease Chatbot
+  // Buy, Sale, Rent, Lease Chatbot
   // For Chat bot example
-askChatbotBuy : new Route({
+  askChatbotBuy: new Route({
     path: '/askChatbotBuy',
     component: <AskChatbotBuy />,
     onEnter: (route, params, store, queryParams) => {
-      MobxStore.app.setTitle( 'CSALE_Matching');
+      MobxStore.app.setTitle('CSALE_Matching');
     },
     beforeExit: (route, params) => {
       console.log('exiting askChatbotBuy!');
       console.log('params changed to', params);
       MobxStore.app.previousView = route;
     }
-}),
-askChatbotSale : new Route({
-  path: '/askChatbotSale',
-  component: <AskChatbotSale />,
-  onEnter: (route, params, store, queryParams) => {
-    MobxStore.app.setTitle( 'CSALE_Matching');
-  },
-  beforeExit: (route, params) => {
-    console.log('exiting askChatbotSale!');
-    console.log('params changed to', params);
-    MobxStore.app.previousView = route;
-  }
-}),
-askChatbotRent : new Route({
-  path: '/askChatbotRent',
-  component: <AskChatbotRent />,
-  onEnter: (route, params, store, queryParams) => {
-    MobxStore.app.setTitle( 'CSALE_Matching');
-  },
-  beforeExit: (route, params) => {
-    console.log('exiting askChatbotRent!');
-    console.log('params changed to', params);
-    MobxStore.app.previousView = route;
-  }
-}),
-askChatbotLease : new Route({
-  path: '/askChatbotLease', 
-  component: <AskChatbotLease />,
-  onEnter: (route, params, store, queryParams) => {
-    MobxStore.app.setTitle( 'CSALE_Matching');
-  },
-  beforeExit: (route, params) => {
-    console.log('exiting askChatbotLease!');
-    console.log('params changed to', params);
-    MobxStore.app.previousView = route;
-  }
-}),
-askChatbotSignUp : new Route({
-  path: '/askChatbotSignUp', 
-  component: <AskChatbotSignUp />,
-  onEnter: (route, params, store, queryParams) => {
-    MobxStore.app.setTitle( 'CSALE_Matching');
-  },
-  beforeExit: (route, params) => {
-    console.log('exiting askChatbotSignUp!');
-    console.log('params changed to', params);
-    MobxStore.app.previousView = route;
-  }
-}),
-askChatbotSignIn : new Route({
-  path: '/askChatbotSignIn', 
-  component: <AskChatbotSignIn />,
-  onEnter: (route, params, store, queryParams) => {
-    MobxStore.app.setTitle( 'CSALE_Matching');
-  },
-  beforeExit: (route, params) => {
-    console.log('exiting askChatbotSignIn!');
-    console.log('params changed to', params);
-    MobxStore.app.previousView = route;
-  }
-}),
-askChatbotBuyByUser : new Route({
-  path: '/askChatbotBuyByUser/:uid', 
-  component: <AskChatbotBuyByUser />,
-  onEnter: (route, params, store, queryParams) => {
-    MobxStore.app.setTitle( 'CSALE_Matching');
-  },
-  beforeEnter: (route, params, store) => {
-    const userIsLoggedIn = MobxStore.app.user;
-    if (!userIsLoggedIn) {
-      alert('Only logged in users can enter this route!');
-      return false;
+  }),
+  askChatbotSale: new Route({
+    path: '/askChatbotSale',
+    component: <AskChatbotSale />,
+    onEnter: (route, params, store, queryParams) => {
+      MobxStore.app.setTitle('CSALE_Matching');
+    },
+    beforeExit: (route, params) => {
+      console.log('exiting askChatbotSale!');
+      console.log('params changed to', params);
+      MobxStore.app.previousView = route;
     }
-  },
-  beforeExit: (route, params) => {
-    console.log('exiting askChatbotBuyByUser!');
-    console.log('params changed to', params);
-    MobxStore.app.previousView = route;
-  }
-}),
-askChatbotProfile : new Route({
-  path: '/askChatbotProfile/:uid', 
-  component: <AskChatbotProfile />,
-  onEnter: (route, params, store, queryParams) => {
-    MobxStore.app.setTitle( 'CSALE_Matching');
-  },
-  beforeExit: (route, params) => {
-    console.log('exiting askChatbotProfile!');
-    console.log('params changed to', params);
-    MobxStore.app.previousView = route;
-  }
-}),
+  }),
+  askChatbotRent: new Route({
+    path: '/askChatbotRent',
+    component: <AskChatbotRent />,
+    onEnter: (route, params, store, queryParams) => {
+      MobxStore.app.setTitle('CSALE_Matching');
+    },
+    beforeExit: (route, params) => {
+      console.log('exiting askChatbotRent!');
+      console.log('params changed to', params);
+      MobxStore.app.previousView = route;
+    }
+  }),
+  askChatbotLease: new Route({
+    path: '/askChatbotLease',
+    component: <AskChatbotLease />,
+    onEnter: (route, params, store, queryParams) => {
+      MobxStore.app.setTitle('CSALE_Matching');
+    },
+    beforeExit: (route, params) => {
+      console.log('exiting askChatbotLease!');
+      console.log('params changed to', params);
+      MobxStore.app.previousView = route;
+    }
+  }),
+  askChatbotSignUp: new Route({
+    path: '/askChatbotSignUp',
+    component: <AskChatbotSignUp />,
+    onEnter: (route, params, store, queryParams) => {
+      MobxStore.app.setTitle('CSALE_Matching');
+    },
+    beforeExit: (route, params) => {
+      console.log('exiting askChatbotSignUp!');
+      console.log('params changed to', params);
+      MobxStore.app.previousView = route;
+    }
+  }),
+  askChatbotSignIn: new Route({
+    path: '/askChatbotSignIn',
+    component: <AskChatbotSignIn />,
+    onEnter: (route, params, store, queryParams) => {
+      MobxStore.app.setTitle('CSALE_Matching');
+    },
+    beforeExit: (route, params) => {
+      console.log('exiting askChatbotSignIn!');
+      console.log('params changed to', params);
+      MobxStore.app.previousView = route;
+    }
+  }),
+  askChatbotBuyByUser: new Route({
+    path: '/askChatbotBuyByUser/:uid',
+    component: <AskChatbotBuyByUser />,
+    onEnter: (route, params, store, queryParams) => {
+      MobxStore.app.setTitle('CSALE_Matching');
+    },
+    beforeEnter: (route, params, store) => {
+      const userIsLoggedIn = MobxStore.app.user;
+      if (!userIsLoggedIn) {
+        alert('Only logged in users can enter this route!');
+        return false;
+      }
+    },
+    beforeExit: (route, params) => {
+      console.log('exiting askChatbotBuyByUser!');
+      console.log('params changed to', params);
+      MobxStore.app.previousView = route;
+    }
+  }),
+  askChatbotProfile: new Route({
+    path: '/askChatbotProfile/:uid',
+    component: <AskChatbotProfile />,
+    onEnter: (route, params, store, queryParams) => {
+      MobxStore.app.setTitle('CSALE_Matching');
+    },
+    beforeExit: (route, params) => {
+      console.log('exiting askChatbotProfile!');
+      console.log('params changed to', params);
+      MobxStore.app.previousView = route;
+    }
+  }),
 
-actionSheetExample : new Route({
+  actionSheetExample: new Route({
     path: '/ActionSheetExample',
     component: <ActionSheetExample />,
     onEnter: (route, params, store, queryParams) => {
     },
     beforeExit: (route, params) => {
     }
-  }),  
+  }),
 
-  
-  bmi : new Route({
+
+  bmi: new Route({
     path: '/bmi',
     component: <BMIChatbot />,
     onEnter: (route, params, store, queryParams) => {
-      MobxStore.app.setTitle( 'Chat Bot 賣 樓');
-  
+      MobxStore.app.setTitle('Chat Bot 賣 樓');
+
     },
     beforeExit: (route, params) => {
       console.log('exiting ListOfPRoperysView!');
