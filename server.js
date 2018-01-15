@@ -61,7 +61,7 @@ const PORT = process.env.PORT || 3000;
  */
 // using SendGrid's v3 Node.js Library
 // https://github.com/sendgrid/sendgrid-nodejs
-function sendToken(email, token, hostname ) {
+function sendToken(email, token, hostname , displayName) {
   const sgMail = require("@sendgrid/mail");
   sgMail.setApiKey(process.env.SENDGRID_API_KEY);
   const url = `http://${hostname}:3000/list/${token}`;
@@ -70,14 +70,17 @@ function sendToken(email, token, hostname ) {
     to: email,
     from: "webmaster@mr.house",
     subject: "Mr.House - Passwordless login link",
-    text: `Welcome to Mr.House!
+    text: `hi, ${displayName}
+    Welcome to Mr.House!
     Click and confirm that you want to sign in to Mr.House. This link will expire in five minutes:
     ${url}
     If you are having any issues with your account, please don't hesitate to contact us by replying to this mail.
     
     Thanks!
     Mr.House`,
-    html: `Welcome to Mr.House!
+    html: `hi, ${displayName} 
+    <br />
+    Welcome to Mr.House!
     <br />
     <p>
     <strong>
@@ -96,20 +99,32 @@ app.get("/login/:email", function(req, res) {
   const email = req.params.email;
   console.log( `email ${email} hostname ${req.hostname}` );
 
-  const uid = "lypMuS2sdpVGoripKanyoOn0zBe2";
+  // const uid = "lypMuS2sdpVGoripKanyoOn0zBe2";
 
-  admin
+  admin.auth().getUserByEmail(email)
+  .then(function(userRecord) {
+    // See the UserRecord reference doc for the contents of userRecord.
+    console.log("Successfully fetched user data:", userRecord.toJSON());
+    const user = userRecord.toJSON();
+    console.log( `user.uid ${user.uid} user.displayName ${user.displayName}` );
+    admin
     .auth()
-    .createCustomToken(uid)
+    .createCustomToken(user.uid)
     .then(function(customToken) {
       // Send token back to client
-      sendToken( email, customToken, req.hostname );
+      sendToken( email, customToken, req.hostname, user.displayName );
       res.send(customToken);
       console.log(customToken);
     })
     .catch(function(error) {
       console.log("Error creating custom token:", error);
     });
+  })
+  .catch(function(error) {
+    console.log("Error fetching user data:", error);
+  });
+
+
 });
 
 

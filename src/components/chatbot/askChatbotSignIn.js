@@ -109,95 +109,39 @@ class AskChatbotSignIn extends React.Component {
     this.toggleSignIn = this.toggleSignIn.bind(this);
     this.handleEnd = this.handleEnd.bind(this);
     this.trythis = this.trythis.bind(this);
+    this.handleLogin = this.handleLogin.bind(this);
   }
 
-  showActionSheet = () => {
-    const BUTTONS = ["操作一", "操作二", "操作三", "删除", "取消"];
-    ActionSheet.showActionSheetWithOptions(
-      {
-        options: BUTTONS,
-        cancelButtonIndex: BUTTONS.length - 1,
-        destructiveButtonIndex: BUTTONS.length - 2,
-        // title: '标题',
-        message: "我是描述我是描述",
-        maskClosable: true,
-        "data-seed": "logId",
-        wrapProps
-      },
-      buttonIndex => {
-        this.setState({ clicked: BUTTONS[buttonIndex] });
-      }
-    );
-  };
-  showShareActionSheet = () => {
-    const icons = [...iconList];
-    icons.length = 4;
-    ActionSheet.showShareActionSheetWithOptions(
-      {
-        options: icons,
-        // title: '标题',
-        message: "我是描述我是描述",
-        className: "my-action-sheet"
-      },
-      buttonIndex => {
-        this.setState({
-          clicked1: buttonIndex > -1 ? icons[buttonIndex].title : "cancel"
-        });
-        // also support Promise
-        return new Promise(resolve => {
-          Toast.info("1000ms 后关闭");
-          setTimeout(resolve, 1000);
-        });
-      }
-    );
-  };
-  showShareActionSheetMulpitleLine = () => {
-    const icons = [[...iconList], [iconList[5], iconList[6], iconList[7]]];
-    ActionSheet.showShareActionSheetWithOptions(
-      {
-        options: icons,
-        // title: '标题',
-        message: "我是描述我是描述",
-        className: "my-action-sheet"
-      },
-      (buttonIndex, rowIndex) => {
-        this.setState({
-          clicked2:
-            buttonIndex > -1 ? icons[rowIndex][buttonIndex].title : "cancel"
-        });
-      }
-    );
-  };
 
   componentDidMount() {
     //this.handleEnd = this.handleEnd.bind(this);
   }
 
-  trythis = async ( {value, steps} ) => {
-         return await firebase
-          .auth()
-          //steps.getUserIdInput.value, steps.getUserPasswordInput.value 
-          .signInWithEmailAndPassword(steps.getUserIdInput.value, steps.getUserPasswordInput.value )
-          .catch( error => {
-            return "getUserSignIn";
-          })
-//          console.log( "finish await", post ); 
-        }
+  trythis = async ({ value, steps }) => {
+    return await firebase
+      .auth()
+      //steps.getUserIdInput.value, steps.getUserPasswordInput.value 
+      .signInWithEmailAndPassword(steps.getUserIdInput.value, steps.getUserPasswordInput.value)
+      .catch(error => {
+        return "getUserSignIn";
+      })
+    //          console.log( "finish await", post ); 
+  }
 
-  toggleSignIn = ( {value, steps} ) => {
-//  toggleSignIn = (email, password) => {
+  toggleSignIn = ({ value, steps }) => {
+    //  toggleSignIn = (email, password) => {
     //console.log(`email ${email}, password ${password}`);
     // Sign in with email and pass.
     // [START authwithemail]
-     return firebase
+    return firebase
       .auth()
       //steps.getUserIdInput.value, steps.getUserPasswordInput.value 
-      .signInWithEmailAndPassword(steps.getUserIdInput.value, steps.getUserPasswordInput.value )
-//      .signInWithEmailAndPassword(email, password)
-      .then( function( result ) {
+      .signInWithEmailAndPassword(steps.getUserIdInput.value, steps.getUserPasswordInput.value)
+      //      .signInWithEmailAndPassword(email, password)
+      .then(function (result) {
         return "signUp";
       })
-      .catch(function(error) {
+      .catch(function (error) {
         // Handle Errors here.
         var errorCode = error.code;
         var errorMessage = error.message;
@@ -260,36 +204,52 @@ class AskChatbotSignIn extends React.Component {
   // to be program
   resetPassword = (email) => {
     const auth = firebase.auth();
-     
+
     const emailAddress = email;
 
     auth
       .sendPasswordResetEmail(emailAddress)
-      .then(function() {
-        console.log( "email sent", email)
+      .then(function () {
+        console.log("email sent", email)
         // Email sent.
       })
-      .catch(function(error) {
+      .catch(function (error) {
         // An error happened.
       });
   };
 
+  handleLogin = ( email ) => {
+    var xhttp;
+    //const email = steps.getUserEmailInput.value;
+    const url = `http://localhost:3000/login/${email}`;
+    xhttp = new XMLHttpRequest();
+    xhttp.open("GET", url, true);
+    xhttp.send();
+  }
+
   handleEnd = ({ steps, values }) => {
-    var user = firebase.auth().currentUser;
+    // var user = firebase.auth().currentUser;
 
-    if (user != null) {
-      user.providerData.forEach(function(profile) {
-        console.log("Sign-in provider: " + profile.providerId);
-        console.log("  Provider-specific UID: " + profile.uid);
-        console.log("  Name: " + profile.displayName);
-        console.log("  Email: " + profile.email);
-        console.log("  Photo URL: " + profile.photoURL);
-      });
-    } else {
-      console.log("user === null");
-    }
+    // if (user != null) {
+    //   user.providerData.forEach(function(profile) {
+    //     console.log("Sign-in provider: " + profile.providerId);
+    //     console.log("  Provider-specific UID: " + profile.uid);
+    //     console.log("  Name: " + profile.displayName);
+    //     console.log("  Email: " + profile.email);
+    //     console.log("  Photo URL: " + profile.photoURL);
+    //   });
+    // } else {
+    //   console.log("user === null");
+    // }
+    // var xhttp;
+    // const email = steps.getUserEmailInput.value;
+    // const url = `http://localhost:3000/login/${email}`;
+    // xhttp = new XMLHttpRequest();
+    // xhttp.open("GET", url, true);
+    // xhttp.send();
 
-    MobxStore.router.goTo(views.list, { uid : user.uid });
+    //    MobxStore.router.goTo(views.list, { uid : user.uid });
+    MobxStore.router.goTo(views.home);
   };
 
   render() {
@@ -297,137 +257,57 @@ class AskChatbotSignIn extends React.Component {
       {
         // welcome
         id: "getUserSignIn",
-        message: "please choice the following actionrs?",
-        trigger: "getUserSignInOptions"
+        message: "Welcome to Passwordless login!",
+        trigger: "getEmail"
       },
       {
-        id: "getUserSignInOptions",
-        options : [
-          { value: "signIn", label: "sign in", trigger: "getUserId" },
-          { value: "resetPassword", label: "reset password", trigger: "getUserEmail" }
+        id: "getEmail",
+        message: "please input your email!",
+        trigger: "getEmailUserInput"
+      },
+      {
+        // on.FILLED
+        id: "getEmailUserInput",
+        user: true,
+        inputType: "email",
+        trigger: "validaEmailUserInput"
+      },
+      {
+        //
+        id: "validaEmailUserInput",
+        message: ({ previousValue, steps }) => {
+          return `你選擇左 (Email) 「${previousValue} 」!`;
+        },
+        trigger: "validaEmailBoolean"
+      },
+      {
+        id: "validaEmailBoolean",
+        options: [
+          { value: "true", label: "👍🏻係", trigger: "followUp" },
+          {
+            value: "false",
+            label: "👎🏻唔係",
+            trigger: "update-getEmailUserInput"
+          }
         ]
       },
       {
-        id: "getUserEmail",
-        message: "Please give us your email in order to recover your password?",
-        trigger: "getUserEmailInput"
+        id: "update-getEmailUserInput",
+        update: "getEmailUserInput",
+        trigger: "validaEmailUserInput"
       },
       {
-        id: "getUserEmailInput",
-        user : true,
-        inputType: "email",
-        trigger: ({ value, steps }) => {
-          this.resetPassword(
-            value
-          );
-          return "resetPasswordMessage";
-        }        
-      },
-      {
-        id: "resetPasswordMessage",
-        message: "please check your email address! and come back https://mr.house",
-        trigger: "getUserSignIn"
-      },
-      { 
-        id: "getUserId",
-        message: "Please enter email!",
-        trigger : "getUserIdInput"
-      },
-      {
-        // on.FILLED
-        id: "getUserIdInput",
-        user: true,
-        inputType: "text",
-        trigger: "getUserPassword"
-      },
-      {
-        id: "getUserPassword",
-        message: "please input your password!",
-        trigger: "getUserPasswordInput"
-      },
-      {
-        // on.FILLED
-        id: "getUserPasswordInput",
-        user: true,
-        inputType: "password",
-        trigger: ( {value, steps}) => this.trythis( {value, steps}).then( result => { return "getUserId"} )
-//        trigger: "signUp"
-  //       trigger : async ( {value, steps} ) => {
-  // //  toggleSignIn = (email, password) => {
-  //     //console.log(`email ${email}, password ${password}`);
-  //     // Sign in with email and pass.
-  //     // [START authwithemail]
-  //      const post = await firebase
-  //       .auth()
-  //       //steps.getUserIdInput.value, steps.getUserPasswordInput.value 
-  //       .signInWithEmailAndPassword(steps.getUserIdInput.value, steps.getUserPasswordInput.value );
-  // //      .signInWithEmailAndPassword(email, password)
-  //     //   .then( function( result ) {
-  //     //     return "signUp";
-  //     //   })
-  //     //   .catch(function(error) {
-  //     //     // Handle Errors here.
-  //     //     var errorCode = error.code;
-  //     //     var errorMessage = error.message;
-  //     //     // [START_EXCLUDE]
-  //     //     if (errorCode === "auth/wrong-password") {
-  //     // //      alert("Wrong password.");
-  //     //       //isSign = false;
-  //     //     } else {
-  //     //       //alert(errorMessage);
-  //     //       //isSign = false;
-  //     //     }
-  //     //     console.log(error);
-  //     //     console.log(error);
-  //     //     // [END_EXCLUDE]
-  //     //     return "signUp";
-  //     //   })
-  //       console.log( "finish await", post ); 
-  //       return "getUserSignIn";
-  //     }
-  
-        //trigger: this.toggleSignIn( {value, steps })
-        // trigger: ({value, steps}) => {
-        //   return this.toggleSignIn( steps.getUserIdInput.value, steps.getUserPasswordInput.value );
-        //   }
-          // .then( function( result) {
-          //       return "signUp";
-          //    }).catch( function(error) {
-          //       return "getUserPasswordInput";
-          //    })
-          //   }
-      },
-      {
-        id: "signUp",
-        message: ({ previousValue, steps }) => {
-          if (
-            this.toggleSignIn(
-              steps.getUserIdInput.value,
-              steps.getUserPasswordInput.value
-            )
-          ) {
-            // return "Successful signup";
-
-            var user = firebase.auth().currentUser;
-            var message = "empty";
-            if (user != null) {
-              user.providerData.forEach(function(profile) {
-                message += "Sign-in provider: " + profile.providerId;
-                message += "  Provider-specific UID: " + profile.uid;
-                message += "  Name: " + profile.displayName;
-                message += "  Email: " + profile.email;
-                message += "  Photo URL: " + profile.photoURL;
-                return message;
-              });
-            }
-            return "Successful signup";
-          } else {
-            return "invalid user id or password, please try again";
-          }
+        id: "followUp",
+        message : ({ previousValue, steps }) => {
+          const email = steps.getEmailUserInput.value;
+          this.handleLogin( email );
+          return `Please Open 「${email} 」, then click a link  http://app.mr.house/list/xxx from mr.house to login without password!`;
         },
+        delay: 5000,
         trigger: "stop"
       }
     ];
+    
 
     const AboutMrHouse = [];
 

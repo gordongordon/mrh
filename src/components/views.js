@@ -172,8 +172,8 @@ const views = {
     onEnter: (route, params, store, queryParams) => {
       MobxStore.app.setTitle('好 .. Matching');
       // debugger
-      console.log('/params.uid', params.uid);
-      console.log('/queryParams', queryParams);
+       console.log('/params', params);
+       console.log('/queryParams', queryParams);
     },
     beforeExit: (route, params) => {
       console.log('parms', params);
@@ -233,7 +233,7 @@ const views = {
     onEnter: (route, params, store, queryParams) => {
 
       console.log('entering ListOfPropertysView!');
-      MobxStore.app.title = "你的儲存樓盤"
+      MobxStore.app.title = `你的儲存樓盤`;
       if (save) {
         MobxStore.app.previousView = MobxStore.app.viewHistory.get('second')
       }

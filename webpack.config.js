@@ -49,6 +49,11 @@ module.exports = {
     host: "0.0.0.0",
     compress: true,
     port: 9090,
+    before(app){
+      app.get('/test', function(req, res) {
+        res.status(200).send(" devServer ok");
+      });
+    }
   },
 //   output: {
 //     // path: path.join(__dirname, 'public'),
