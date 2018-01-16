@@ -95,6 +95,7 @@
     "mobx-react-devtools": "^4.2.15",
     "mobx-router": "0.0.7",
     "moment": "^2.18.1",
+    "nodemailer": "^4.4.1",
     "path": "^0.12.7",
     "path-to-regexp": "^1.7.0",
     "pure-react-carousel": "^1.9.9",

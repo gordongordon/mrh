@@ -5,24 +5,79 @@ const path = require('path');
 //var express = require('express')
 //var app = express()
 
+/**
+ * NodeMailer Setting
+ */
+var nodemailer = require('nodemailer');
+var transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: 'gtmail801@gmail.com',
+    pass: 'email1020'
+  }
+});
+
+/**
+ * Send Token 
+ */
+function nodeSendMail(email, token, hostname, displayName, protocal) {
+
+  const url = `${protocal}://${hostname}/list/${token}`;
+  /**
+   * Message Editing
+   */
+  const mailOptions = {
+    from: 'gtmail801@gmail.com', // sender address
+    to: '3225297@gmail.com', // list of receivers
+    subject: 'Testing NodeMailer', // Subject line
+    html: `hi, ${displayName} 
+  <br />
+  Welcome to Mr.House!
+  <br />
+  <p>
+  <strong>
+  Click and confirm that you want to sign in to Mr.House This link will expire in five minutes: <br>
+  <a href="${url}"> ${url} </a>
+  </strong>
+  </p>
+  <br />
+  <Small>You’re receiving this email because you have an account in mrhouse. If you are not sure why you’re receiving this, please contact us. </Small>`
+  };
+
+  /**
+   * Send Email
+   */
+  transporter.sendMail(mailOptions, function (err, info) {
+    if (err)
+      console.log(err)
+    else
+      console.log(info);
+  });
+
+}
+
+
 // Create our app
 var app = express();
 
+/**
+ * Firebase Admin SDK 
+ * initialize
+ */
 var admin = require("firebase-admin");
-
 var serviceAccount = require("./serviceAccountKey.json");
-
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
   databaseURL: "https://todo-app-a2b7c.firebaseio.com"
 });
 
-
-// For compression
+/**
+ * Compression all messages
+ */
 app.use(
   compression({
     threshold: 10240,
-    filter: function() {
+    filter: function () {
       return true;
     },
     level: 9
@@ -45,6 +100,11 @@ app.use(
 //  }
 //app.use(express.static(__dirname + "/public"));
 //app.use(express.static(__dirname));
+
+
+/**
+ * Stand setting expressjs
+ */
 app.use(express.static(path.join(__dirname, '/public')));
 const PORT = process.env.PORT || 3000;
 
@@ -61,12 +121,12 @@ const PORT = process.env.PORT || 3000;
  */
 // using SendGrid's v3 Node.js Library
 // https://github.com/sendgrid/sendgrid-nodejs
-function sendToken(email, token, hostname , displayName, protocal) {
+function sendToken(email, token, hostname, displayName, protocal) {
   const sgMail = require("@sendgrid/mail");
   sgMail.setApiKey(process.env.SENDGRID_API_KEY);
   const url = `${protocal}://${hostname}/list/${token}`;
 
-  console.log( 'sendToken : url', url );
+  console.log('sendToken : url', url);
   const msg = {
     to: email,
     from: "webmaster@mr.house",
@@ -95,38 +155,39 @@ function sendToken(email, token, hostname , displayName, protocal) {
   sgMail.send(msg);
 }
 
-app.get("/login/:email", function(req, res) {
+app.get("/login/:email", function (req, res) {
   console.log("login ");
   const email = req.params.email;
-  console.log( `email ${email} hostname ${req.hostname}` );
+  console.log(`email ${email} hostname ${req.hostname}`);
 
   // const uid = "lypMuS2sdpVGoripKanyoOn0zBe2";
 
   admin.auth().getUserByEmail(email)
-  .then(function(userRecord) {
-    // See the UserRecord reference doc for the contents of userRecord.
-    console.log("Successfully fetched user data:", userRecord.toJSON());
-    const user = userRecord.toJSON();
-    console.log( `user.uid ${user.uid} user.displayName ${user.displayName}` );
-    /**
-     * Send login link to user
-     */
-    admin
-    .auth()
-    .createCustomToken(user.uid)
-    .then(function(customToken) {
-      // Send token back to client
-      sendToken( email, customToken, req.header('host'), user.displayName, req.protocol);
-      res.send(customToken);
-      console.log(customToken);
+    .then(function (userRecord) {
+      // See the UserRecord reference doc for the contents of userRecord.
+      console.log("Successfully fetched user data:", userRecord.toJSON());
+      const user = userRecord.toJSON();
+      console.log(`user.uid ${user.uid} user.displayName ${user.displayName}`);
+      /**
+       * Send login link to user
+       */
+      admin
+        .auth()
+        .createCustomToken(user.uid)
+        .then(function (customToken) {
+          // Send token back to client
+//          sendToken(email, customToken, req.header('host'), user.displayName, req.protocol);
+          nodeSendMail(email, customToken, req.header('host'), user.displayName, req.protocol);
+          res.send(customToken);
+          console.log(customToken);
+        })
+        .catch(function (error) {
+          console.log("Error creating custom token:", error);
+        });
     })
-    .catch(function(error) {
-      console.log("Error creating custom token:", error);
+    .catch(function (error) {
+      console.log("Error fetching user data:", error);
     });
-  })
-  .catch(function(error) {
-    console.log("Error fetching user data:", error);
-  });
 
 
 });
@@ -144,14 +205,14 @@ app.get("/login/:email", function(req, res) {
 //   }
 // });
 
-app.get('/*', function(req, res) {
+app.get('/*', function (req, res) {
   res.sendFile(path.join(__dirname, '/public', 'index.html'));
 });
 
 
 //app.use(express.static('public'));
 
-app.listen(PORT, function() {
+app.listen(PORT, function () {
   console.log("Express server is up on port " + PORT);
 });
 
