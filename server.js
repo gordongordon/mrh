@@ -9,13 +9,40 @@ const path = require('path');
  * NodeMailer Setting
  */
 var nodemailer = require('nodemailer');
-var transporter = nodemailer.createTransport({
-  service: 'gmail',
+
+// let smtpConfig = {
+//   host: 's2-hongkong.accountservergroup.com',
+//   port: 465,
+//   secure: false, // upgrade later with STARTTLS
+//   auth: {
+//       user: 'webmaster@mr.house',
+//       pass: 'mr.house.96181448'
+//   }
+// };
+
+const poolConfig = {
+  pool: true,
+  host: 's2-hongkong.accountservergroup.com',
+  port: 465,
+  secure: true, // upgrade later with STARTTLS
   auth: {
-    user: 'gtmail801@gmail.com',
-    pass: 'email1020'
+      user: 'webmaster@mr.house',
+      pass: 'mr.house.96181448'
   }
-});
+};
+
+let transporter = nodemailer.createTransport(poolConfig)
+
+
+// let smtpConfig = {
+//   host: 's2-hongkong.accountservergroup.com',
+//   port: 465,
+//   secure: false, // upgrade later with STARTTLS
+//   auth: {
+//       user: 'webmaster@mr.house',
+//       pass: 'mr.house.96181448'
+//   }
+// };
 
 /**
  * Send Token 
@@ -27,9 +54,17 @@ function nodeSendMail(email, token, hostname, displayName, protocal) {
    * Message Editing
    */
   const mailOptions = {
-    from: 'gtmail801@gmail.com', // sender address
-    to: '3225297@gmail.com', // list of receivers
+    from: 'webmaster@mr.house', // sender address
+    to: email, // list of receivers
     subject: 'Mr.House Passwordless Login', // Subject line
+    text: `hi, ${displayName}
+    Welcome to Mr.House!
+    Click and confirm that you want to sign in to Mr.House. This link will expire in five minutes:
+    ${url}
+    If you are having any issues with your account, please don't hesitate to contact us by replying to this mail.
+    
+    Thanks!
+    Mr.House`,
     html: `hi, ${displayName} 
     <br />
     Welcome to Mr.House!
