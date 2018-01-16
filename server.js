@@ -51,15 +51,6 @@ transporter.verify(function(error, success) {
   }
 });
 
-// let smtpConfig = {
-//   host: 's2-hongkong.accountservergroup.com',
-//   port: 465,
-//   secure: false, // upgrade later with STARTTLS
-//   auth: {
-//       user: 'webmaster@mr.house',
-//       pass: 'mr.house.96181448'
-//   }
-// };
 
 /**
  * Send Token 
