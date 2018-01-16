@@ -109,6 +109,7 @@
     "react-simple-chatbot": "^0.2.7",
     "react-touch-screen-keyboard": "^0.2.3",
     "rebass": "^1.0.4",
+    "sib-api-v3-sdk": "^3.1.5",
     "styled-components": "^2.4.0",
     "uuid": "^3.1.0",
     "validatorjs": "^3.13.3",

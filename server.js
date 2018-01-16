@@ -20,6 +20,9 @@ var nodemailer = require('nodemailer');
 //   }
 // };
 
+/**
+ * 
+ */
 const poolConfig = {
   pool: true,
   host: 's2-hongkong.accountservergroup.com',
@@ -28,11 +31,25 @@ const poolConfig = {
   auth: {
       user: 'webmaster@mr.house',
       pass: 'mr.house.96181448'
-  }
+  },
+  dsn: {
+    id: 'Passwordless Login attemp',
+    return: 'headers',
+    notify: 'success',
+    recipient: 'info@mr.house'
+}  
 };
 
 let transporter = nodemailer.createTransport(poolConfig)
 
+// verify connection configuration
+transporter.verify(function(error, success) {
+  if (error) {
+       console.log(error);
+  } else {
+       console.log('Server is ready to take our messages');
+  }
+});
 
 // let smtpConfig = {
 //   host: 's2-hongkong.accountservergroup.com',
@@ -90,6 +107,44 @@ function nodeSendMail(email, token, hostname, displayName, protocal) {
   });
 
 }
+
+/**
+ * 
+ */
+
+//# Include the SendinBlue library\
+// var SibApiV3Sdk = require('sib-api-v3-sdk');
+// var defaultClient = SibApiV3Sdk.ApiClient.instance;
+
+// //# Instantiate the client\
+// var apiKey = defaultClient.authentications['api-key'];
+// apiKey.apiKey = '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';
+
+// var apiInstance = new SibApiV3Sdk.EmailCampaignsApi();
+// var emailCampaigns = new SibApiV3Sdk.CreateEmailCampaign();
+
+// //# Define the campaign settings\
+// emailCampaigns = {
+//     name: 'Campaign sent via the API',
+//     subject: 'Mr.House Passwordless Testing',
+//     sender: {name: 'Gordon Wong', email: 'webmaster@mr.house'},
+//     type: 'classic',
+
+//     //# Content that will be sent\
+//     htmlContent: 'Congratulations! You successfully sent this example campaign via the SendinBlue API.',
+
+//     //# Select the recipients\
+//     recipients: {listIds: [2, 7]},
+
+//   //  # Schedule the sending in one hour\
+//     scheduledAt: '2018-01-01 00:00:01'
+// }
+// //# Make the call to the client\
+// apiInstance.createEmailCampaign(emailCampaigns).then(function(data) {
+//   console.log('API called successfully. Returned data: ' + data);
+// }, function(error) {
+//   console.error(error);
+// });
 
 
 // Create our app
