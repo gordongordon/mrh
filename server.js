@@ -29,19 +29,19 @@ function nodeSendMail(email, token, hostname, displayName, protocal) {
   const mailOptions = {
     from: 'gtmail801@gmail.com', // sender address
     to: '3225297@gmail.com', // list of receivers
-    subject: 'Testing NodeMailer', // Subject line
+    subject: 'Mr.House Passwordless Login', // Subject line
     html: `hi, ${displayName} 
-  <br />
-  Welcome to Mr.House!
-  <br />
-  <p>
-  <strong>
-  Click and confirm that you want to sign in to Mr.House This link will expire in five minutes: <br>
-  <a href="${url}"> ${url} </a>
-  </strong>
-  </p>
-  <br />
-  <Small>You’re receiving this email because you have an account in mrhouse. If you are not sure why you’re receiving this, please contact us. </Small>`
+    <br />
+    Welcome to Mr.House!
+    <br />
+    <p>
+    <strong>
+    Click and confirm that you want to sign in to Mr.House This link will expire in five minutes: <br>
+    <a href="${url}"> ${url} </a>
+    </strong>
+    </p>
+    <br />
+    <Small>You’re receiving this email because you have an account in mrhouse. If you are not sure why you’re receiving this, please contact us. </Small>`
   };
 
   /**
