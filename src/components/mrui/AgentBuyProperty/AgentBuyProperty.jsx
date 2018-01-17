@@ -2,6 +2,8 @@
 import React from "react";
 import defaultTheme from "../theme";
 import PropTypes from "prop-types";
+import moment from "moment";
+
 //import Carousel from "../Carousel/index";
 import {
   Avatar,
@@ -26,14 +28,29 @@ import {
   Tooltip
 } from "rebass";
 
-import { 
+import {
   Cell,
   LineText,
   Card,
   TextHeader,
   ButtonOutline,
-  ViewSalePrice
+  ViewLevel,
+  ViewIsPetAllowed,
+  ViewIsSaleWithLease,
+  ViewNetSquarePrice,
+  ViewContactName,
+  ViewAgentID,
+  ViewAvatar,
+  ViewPartition,
+  ViewSchool,
+  ViewIsViewAble,
+  ViewAgentStar,
+  ViewMonthlyPayment,
+  ViewDayListed,
+  ViewBuyBudgetMax,
+  ViewNetSizeMin 
 } from '../Elements';
+
 
 export class AgentBuyProperty extends React.Component {
 
@@ -52,12 +69,12 @@ export class AgentBuyProperty extends React.Component {
 
   // update property's timestamp in order to display howFresh..
   componentWillMount() {
-    //const p = this.props;
-    //    const t = moment().format('YYYY-MM-DD HH:mm:ss');
-    //  this.props.property.realTime = moment( t );
+    const p = this.props;
+       const t = moment().format('YYYY-MM-DD HH:mm:ss');
+     this.props.property.realTime = moment( t );
     // Will be active while production
-    //this.props.property.setTimeStamp();
-    //    console.log( 'realTime will mount', this.props.property.realTime)
+    // this.props.property.setTimeStamp();
+       console.log( 'realTime will mount', this.props.property.realTime)
   }
 
   // // For Chatbot Custom Component Return
@@ -96,149 +113,62 @@ export class AgentBuyProperty extends React.Component {
       <Card w={19 / 20}>
         <Heading>
           <TextHeader p={1} color="white" bg={["blue", "#F55869"]}>
-          心儀樓盤: 龍苑, 九龍塘
+            心儀樓盤: {p.addressLocationLabel}, {p.nameOfBuildingLabel}
             <Relative>
               <Absolute bottom right>
-                <Pre>編號:MOS-0001</Pre>
+                <Pre>編號:MOS-001</Pre>
               </Absolute>
             </Relative>
           </TextHeader>
         </Heading>
         {BackgroundImage && <BackgroundImage ratio={2 / 5} src="http://www.kowsinn.com/dc02.jpg" />}
+        {p.uid}
         <Flex wrap mx={1} my={1}>
           <LineText>
-            <Text f={3}>重點</Text>
+            <Text f={3}>重點 </Text>
           </LineText>
 
+          <ViewBuyBudgetMax value={p.buyBudgetMax} />
+          <ViewNetSizeMin value={p.netSizeMin} />
+          <ViewNetSquarePrice value={p.buyerNetSquarePrice} />
+          <ViewPartition room={p.numOfRoom} livingRoom={p.numOfLivingroom} bathRoom={p.numOfBathroom} />
 
-          <Cell px={2} py={1} width={1 / 4}>
-            <Label f={4} bold>
-              實用面積:
-            </Label>
-            <Text fontSize="0.9rem" color="black">
-              344呎
-            </Text>
-          </Cell>
-          <Cell px={2} py={1} width={1 / 4}>
-            <Label f={4}>實用呎價:</Label>
-            <Text fontSize="0.9rem" color="black">
-              $13k
-            </Text>
-          </Cell>
-          <Cell px={2} py={1} width={1 / 4}>
-            <Label f={4}>單位間隔: </Label>
-            <Text fontSize="0.9rem" color="black">
-              2房1廳
-            </Text>
-          </Cell>
 
-          <LineText>
-            <Text f={3}>特徵</Text>
-          </LineText>
-
-          <Cell px={2} py={1} width={1 / 4}>
-            <Label f={4}> 樓層: </Label>
-            <Text color="black" f="0.9rem">
-              中層
-            </Text>
-          </Cell>
-
-          <Cell px={2} py={1} width={1 / 4}>
-            <Label f={4}> 養寵物: </Label>
-            <Text color="black" fontSize="0.9rem">
-              ✔
-            </Text>
-          </Cell>
-
-          <Cell px={2} py={1} width={1 / 4}>
-            <Label f={4}>睇樓:</Label>
-            <Text color="black" fontSize="0.9rem">
-              ✔
-            </Text>
-          </Cell>
-          <Cell px={2} py={1} width={1 / 4}>
-            <Tooltip text="買賣連租賃- 樓盤已經簽咗一份租約俾人">
-              <Label f={4}>出售形式:</Label>
-              <Text color="black" fontSize="0.9rem">
-                連租約
-              </Text>
-            </Tooltip>
-          </Cell>
+          <LineText>  <Text f={3}>特徵</Text> </LineText>
+          <ViewLevel value={p.levelLabel} />
+          <ViewIsPetAllowed value={p.isPetAllowed} />
+          <ViewIsViewAble value={p.isViewAble} />
+          <ViewIsSaleWithLease value={p.isSaleWithLease} />
 
           <LineText>
             <Text f={3}>其他</Text>
           </LineText>
-          <Cell px={2} py={1} width={1 / 4}>
-            <Label f={4}>學校網: </Label>
-            <Text color="black" f="0.5rem">
-            小學:95
-            </Text>
-            <Text color="black" f="0.5rem" p={0}>
-            中學馬鞍山區
-            </Text>
-          </Cell>
+          <ViewSchool pramary={95} secondary="馬鞍山區" />
           <Cell px={2} py={1} width={1 / 4}>
             <Label f={4}> 睇樓日期： </Label>
             <Text color="black" f="0.8rem">
               1月20日
             </Text>
           </Cell>
-          <Cell px={2} py={1} width={1 / 4}>
-            <Label f={4}>上載時間:</Label>
-            <Text color="black" f="0.8rem">
-              2分鐘前
-            </Text>
-          </Cell>
-          <Cell px={2} py={1} width={1 / 4}>
-            <Tooltip text="@$19,389">
-              <Label f={4}> 每月供款: </Label>
-              <Text color="black" f="0.8rem">
-                $19K
-              </Text>
-            </Tooltip>
-          </Cell>
+          <ViewDayListed value={p.dayListed} />
+
+                    
+          <ViewMonthlyPayment value={19000} />
           <LineText>
-            {" "}
-            <Text f={3}>聯絡方式</Text>{" "}
+            <Text f={3}>聯絡方式</Text>
           </LineText>
-          <Cell px={2} py={1} width={1 / 4}>
-            <Label f={4}> 資訊來源: </Label>
-            <Text color="black" f="0.6rem">
-              地產代理
-            </Text>
-            <Text color="black" f="0.5rem" p={0}>
-              (E-3348778)
-            </Text>
-          </Cell>
-          <Cell px={2} py={1} width={1 / 4}>
-            <Avatar
-              size="2rem"
-              src="http://www.kowsinn.com/dc03.jpeg"
-            />
-          </Cell>
-          <Cell px={2} py={1} width={1 / 4}>
-            <Label f={4}>聯絡人:</Label>
-            <Text color="black" f="0.6rem">
-              Gordon Wong
-            </Text>
-          </Cell>
-          <Cell px={2} py={1} width={1 / 4}>
-            <Label f={4}>經驗評級 </Label>
-            <Flex>
-              <Star checked bg="blue" />
-              <Star checked bg="blue" />
-              <Star checked bg="blue" />
-              <Star bg="blue" half />
-              <Star color="blue" />
-            </Flex>
-          </Cell>
+          <ViewAgentID value="E-3348778" />
+          <ViewAvatar value="http://www.kowsinn.com/dc03.jpeg" />
+          <ViewContactName value={p.contactName} />
+
+          <ViewAgentStar value={2} />
           <LineText>
             <Text f={3}>下一步行動</Text>
           </LineText>
           <Cell px={2} py={1} width={1} align="center">
             <ButtonOutline
               width={7 / 22}
-              children="96181448"
+              children={p.contactPhone}
               f={5}
               color="#F55869"
             />

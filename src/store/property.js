@@ -504,6 +504,17 @@ export class Property {
     return name;
   }
 
+  @computed
+  get buyerNetSquarePrice() {
+    //debugger
+     if ( (this.buyBudgetMax <= 0 ) || ( this.netSizeMin <= 0) )  {
+       return 0;
+     }
+
+     const squarePrice = this.buyBudgetMax / this.netSizeMin;
+     return squarePrice.toFixed(0);
+  }
+
   @computed 
   get levelLabel() {
 

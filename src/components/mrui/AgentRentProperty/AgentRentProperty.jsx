@@ -111,7 +111,7 @@ export class AgentRentProperty extends React.Component {
           心儀地方：名城, 大圍
             <Relative>
               <Absolute bottom right>
-                <Pre>編號:MOS-0001</Pre>
+                <Pre>編號:{p.uid}</Pre>
               </Absolute>
             </Relative>
           </TextHeader>

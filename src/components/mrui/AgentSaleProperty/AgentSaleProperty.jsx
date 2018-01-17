@@ -25,12 +25,14 @@ import {
     Text,
     Tooltip
   } from "rebass";
+
   import { 
     Cell,
     LineText,
     Card,
     TextHeader,
-    ButtonOutline
+    ButtonOutline,
+    ViewIsPetAllowed
   } from '../Elements';
 
 
@@ -190,7 +192,6 @@ export class AgentSaleProperty extends React.Component {
             </Tooltip>
           </Cell>
           <LineText>
-            {" "}
             <Text f={3}>聯絡方式</Text>{" "}
           </LineText>
           <Cell px={2} py={1} width={1 / 4}>

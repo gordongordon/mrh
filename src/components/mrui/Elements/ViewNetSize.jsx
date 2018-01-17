@@ -3,21 +3,21 @@ import PropTypes from 'prop-types';
 import Cell from './Cell';  
 import { Label, Text } from 'rebass';
 
-const ViewSalePrice = ({ value }) => (
+const ViewNetSize = ({ value }) => (
   <Cell px={2} py={1} width={1 / 4}>
-    <Label f={4}>出售價(萬元):</Label>
+    <Label f={4}>實用面積:</Label>
     <Text fontSize="0.9rem" color="black">
-      ${value}
+      {value}呎
     </Text>
   </Cell>
 );
 
-ViewSalePrice.defaultProps = {
-  value : 0
+ViewNetSize.defaultProps = {
+  value: -1
 };
 
-ViewSalePrice.propTypes = {
+ViewNetSize.propTypes = {
   value: PropTypes.number.isRequired
 };
 
-export default ViewSalePrice;
+export default ViewNetSize;
