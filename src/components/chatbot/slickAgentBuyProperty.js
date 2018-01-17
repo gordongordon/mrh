@@ -43,7 +43,7 @@ export default class SlickAgentBuyProperty extends React.Component {
 
   triggetNext() {
     this.setState({ trigger: true }, () => {
-      this.props.triggerNextStep( { value: 'building', label : 'matching' });
+      this.props.triggerNextStep( { value: 'stop', label : 'stop' });
     });
   }
 

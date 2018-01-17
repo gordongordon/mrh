@@ -507,7 +507,7 @@ class ChatAgentBuyRespond extends React.Component {
                 // component: <Generic className="cumi Generic"/>,
   
                 waitAction: true,
-                trigger: "getPhone"
+                trigger: "redirectMessage"
             },
 
 

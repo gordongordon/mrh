@@ -113,7 +113,7 @@ export class AgentBuyProperty extends React.Component {
       <Card w={19 / 20}>
         <Heading>
           <TextHeader p={1} color="white" bg={["blue", "#F55869"]}>
-            心儀樓盤: {p.addressLocationLabel}, {p.nameOfBuildingLabel}
+          有客約睇樓: {p.addressLocationLabel}, {p.nameOfBuildingLabel}
             <Relative>
               <Absolute bottom right>
                 <Pre>編號:MOS-001</Pre>
@@ -166,25 +166,34 @@ export class AgentBuyProperty extends React.Component {
             <Text f={3}>下一步行動</Text>
           </LineText>
           <Cell px={2} py={1} width={1} align="center">
-            <ButtonOutline
+            { onCall && 
+              <ButtonOutline
+              onClick={ () => onCall(p.contactPhone)}
               width={7 / 22}
               children={p.contactPhone}
               f={5}
               color="#F55869"
             />
+            }
+            { onWhatsapp &&
             <ButtonOutline
+              
+              onClick={ () => onWhatsapp(p.contactPhone)}
               mx={1}
               width={7 / 22}
               children="Whatsapp"
               f={5}
               color="#F55869"
             />
-            <ButtonOutline
+            }
+            {  onTriggetNext && <ButtonOutline
+              onClick={ () => onTriggetNext() }
               width={7 / 22}
               children="Home"
               f={5}
               color="#F55869"
             />
+            }
           </Cell>
         </Flex>
       </Card>
