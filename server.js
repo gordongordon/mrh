@@ -62,11 +62,13 @@ const PORT = process.env.PORT || 3000;
 // using SendGrid's v3 Node.js Library
 // https://github.com/sendgrid/sendgrid-nodejs
 function sendToken(email, token, hostname , displayName, protocal) {
-  const sgMail = require("@sendgrid/mail");
-  sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+  // const sgMail = require("@sendgrid/mail");
+  // sgMail.setApiKey(process.env.SENDGRID_API_KEY);
   const url = `${protocal}://${hostname}/list/${token}`;
 
   console.log( 'sendToken : url', url );
+  console.log( '\n');
+  
   const msg = {
     to: email,
     from: "webmaster@mr.house",
@@ -92,7 +94,9 @@ function sendToken(email, token, hostname , displayName, protocal) {
     <br />
     <Small>You’re receiving this email because you have an account in mrhouse. If you are not sure why you’re receiving this, please contact us. </Small>`
   };
-  sgMail.send(msg);
+
+  console.log( msg );
+  // sgMail.send(msg);
 }
 
 app.get("/login/:email", function(req, res) {
