@@ -219,12 +219,20 @@ class AskChatbotSignIn extends React.Component {
       });
   };
 
+  /**
+   * Handling xhttp
+   * Ask node.js for a token, which send it back to user's email 
+   * 
+   * @argument email login email
+   * @description todo. update to post
+   * 
+   */
   handleLogin = ( email ) => {
     var xhttp;
     //const email = steps.getUserEmailInput.value;
     const url = `${window.location.protocol}//${window.location.host}/login/${email}`;
     // const url = `${window.location.host}/login/${email}`;
-    console.log('url', url);
+    console.log('askChatbot xhttp url', url);
     xhttp = new XMLHttpRequest();
     xhttp.open("GET", url, true);
     xhttp.send();

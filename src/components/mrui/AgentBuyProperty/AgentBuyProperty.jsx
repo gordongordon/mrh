@@ -25,12 +25,14 @@ import {
   Text,
   Tooltip
 } from "rebass";
+
 import { 
   Cell,
   LineText,
   Card,
   TextHeader,
-  ButtonOutline
+  ButtonOutline,
+  ViewSalePrice
 } from '../Elements';
 
 export class AgentBuyProperty extends React.Component {
@@ -107,10 +109,8 @@ export class AgentBuyProperty extends React.Component {
           <LineText>
             <Text f={3}>重點</Text>
           </LineText>
-          <Cell px={2} py={1} width={1 / 4}>
-            <Label f={4}>出售價(萬元):</Label>
-            <Text fontSize="0.9rem" color="black" children="$588" />
-          </Cell>
+
+
           <Cell px={2} py={1} width={1 / 4}>
             <Label f={4} bold>
               實用面積:

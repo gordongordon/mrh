@@ -1,3 +1,7 @@
+/**
+ * Need to handle new user 
+ */
+
 var express = require("express");
 var compression = require("compression");
 const path = require('path');
@@ -202,7 +206,6 @@ const PORT = process.env.PORT || 3000;
  */
 // using SendGrid's v3 Node.js Library
 // https://github.com/sendgrid/sendgrid-nodejs
-<<<<<<< HEAD
 function sendToken(email, token, hostname , displayName, protocal) {
   // const sgMail = require("@sendgrid/mail");
   // sgMail.setApiKey(process.env.SENDGRID_API_KEY);
@@ -211,14 +214,6 @@ function sendToken(email, token, hostname , displayName, protocal) {
   console.log( 'sendToken : url', url );
   console.log( '\n');
   
-=======
-function sendToken(email, token, hostname, displayName, protocal) {
-  const sgMail = require("@sendgrid/mail");
-  sgMail.setApiKey(process.env.SENDGRID_API_KEY);
-  const url = `${protocal}://${hostname}/list/${token}`;
-
-  console.log('sendToken : url', url);
->>>>>>> 36f7f588046ee7ccd1d7579be2f0f94503ef81ed
   const msg = {
     to: email,
     from: "webmaster@mr.house",
@@ -249,10 +244,14 @@ function sendToken(email, token, hostname, displayName, protocal) {
   // sgMail.send(msg);
 }
 
+/**
+ * Generate firebase token, base on email
+ * Need to handle new user which doesn't have uid 
+ */
 app.get("/login/:email", function (req, res) {
   console.log("login ");
   const email = req.params.email;
-  console.log(`email ${email} hostname ${req.hostname}`);
+  console.log(`email ${email} ,hostname ${req.hostname}`);
 
   // const uid = "lypMuS2sdpVGoripKanyoOn0zBe2";
 
