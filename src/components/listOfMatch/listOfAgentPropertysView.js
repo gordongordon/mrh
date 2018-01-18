@@ -16,6 +16,10 @@ const Brief = Item.Brief;
 @observer
 export default class ListOfAgentPropertysView extends React.Component {
 
+  constructor(props) {
+    super(props);
+    this.handleOnClick = this.handleOnClick.bind( this );
+  }
   onClick = (key) => {
     console.log(key)
   }
@@ -24,11 +28,21 @@ export default class ListOfAgentPropertysView extends React.Component {
     this.props.history.push("/front?", keyID);
   }
 
-  loadingToast = () => {
-    Toast.loading('Loading...', 1, () => {
-      console.log('Load complete !!!');
-    });
-  }
+  /**
+   * direct user to next page
+   */
+  handleOnClick = (keyID, typeTo, typeBy) => {
+      Toast.loading('Loading...', 1, () => {
+       MobxStore.router.goTo(views.matchAgent, { 
+         keyID,
+         typeTo,
+         // Routing either Open or engage
+         selectedSegmentIndex: typeBy === "open" ? 0 : 1
+      })
+                console.log('Load complete !!!');
+       });                         
+      }
+
 
 
   successToast = () => {
@@ -44,10 +58,10 @@ export default class ListOfAgentPropertysView extends React.Component {
 
     const list = propertys;
 
-    const isListEmpty = list => list.size === 0 ? true : null ; 
+    const isListEmpty = list => list.size === 0 ? true : null;
 
     // Catched empty list, don't do anything!
-    if ( isListEmpty( list ) ) {
+    if (isListEmpty(list)) {
       return null;
     }
 
@@ -74,8 +88,8 @@ export default class ListOfAgentPropertysView extends React.Component {
       // }
 
       //}
-  
-     if (property.typeTo === 'buy') {
+
+      if (property.typeTo === 'buy') {
         element.push(
           <div key={keyID}>
             <SwipeAction
@@ -108,16 +122,11 @@ export default class ListOfAgentPropertysView extends React.Component {
               onOpen={() => console.log('global open')}
               onClose={() => console.log('global close')}
             >
-              <Item 
-              extra={<Badge size="large" text={ property.typeByLabel + property.sizeLabel} 
-              overflowCount={99} />} 
-                arrow="horizontal" 
-                onClick={() => MobxStore.router.goTo(views.matchAgent, { keyID, 
-                  typeTo : property.typeTo,
-                  // Routing either Open or engage
-                  selectedSegmentIndex : property.typeBy === "open"? 0 : 1
-                  
-                })} 
+              <Item
+                extra={<Badge size="large" text={property.typeByLabel + property.sizeLabel}
+                  overflowCount={99} />}
+                arrow="horizontal"
+                onClick={() => this.handleOnClick(keyID, property.typeTo, property.typeBy) }
                 thumb="http://hair.losstreatment.com/icons/building-up.svg"
                 wrap="true"
                 multipleLine >
@@ -125,8 +134,8 @@ export default class ListOfAgentPropertysView extends React.Component {
                 </Brief>
               </Item>
             </SwipeAction>
-            
-            </div>
+
+          </div>
         )
       }  // end of buy
 
@@ -163,25 +172,23 @@ export default class ListOfAgentPropertysView extends React.Component {
               onOpen={() => console.log('global open')}
               onClose={() => console.log('global close')}
             >
-              <Item extra={<Badge size="large" text={property.typeByLabel + property.sizeLabel} overflowCount={99} />} 
-              thumb="http://hair.losstreatment.com/icons/rent.svg"
-              arrow="horizontal" 
-              onClick={() => MobxStore.router.goTo(views.matchAgent, { keyID, typeTo : property.typeTo,
-                selectedSegmentIndex : property.typeBy === "open"? 0 : 1
+              <Item extra={<Badge size="large" text={property.typeByLabel + property.sizeLabel} overflowCount={99} />}
+                thumb="http://hair.losstreatment.com/icons/rent.svg"
+                arrow="horizontal"
+                onClick={() => this.handleOnClick(keyID, property.typeTo, property.typeBy) }
                 
-              })} 
-              multipleLine >
-              {property.typeToLabel}:{property.addressLocationLabel}/{property.nameOfBuildingLabel}<Brief>
-              </Brief>
-           
+                multipleLine >
+                {property.typeToLabel}:{property.addressLocationLabel}/{property.nameOfBuildingLabel}<Brief>
+                </Brief>
+
               </Item>
             </SwipeAction>
-            
-            </div>
+
+          </div>
         )
       }  // end of sale
 
-      
+
 
       if (property.typeTo === 'rent') {
         element.push(
@@ -216,21 +223,17 @@ export default class ListOfAgentPropertysView extends React.Component {
               onOpen={() => console.log('global open')}
               onClose={() => console.log('global close')}
             >
-              <Item extra={<Badge size="lg" text={property.typeByLabel + property.sizeLabel} overflowCount={99} />} 
-              arrow="horizontal" 
-              onClick={() => MobxStore.router.goTo(views.matchAgent, { keyID, 
-                typeTo : property.typeTo,
-                selectedSegmentIndex : property.typeBy === "open"? 0 : 1
-                
-              })} 
-            thumb="http://hair.losstreatment.com/icons/building-down.svg"
-              multipleLine
+              <Item extra={<Badge size="lg" text={property.typeByLabel + property.sizeLabel} overflowCount={99} />}
+                arrow="horizontal"
+                onClick={() => this.handleOnClick(keyID, property.typeTo, property.typeBy) }
+                thumb="http://hair.losstreatment.com/icons/building-down.svg"
+                multipleLine
               >
-              {property.typeToLabel}:{property.addressLocationLabel}/{property.nameOfBuildingLabel}<Brief>
-              </Brief>
-            </Item>
+                {property.typeToLabel}:{property.addressLocationLabel}/{property.nameOfBuildingLabel}<Brief>
+                </Brief>
+              </Item>
             </SwipeAction>
-            </div>
+          </div>
         )
       }  // end of rent
 
@@ -267,19 +270,16 @@ export default class ListOfAgentPropertysView extends React.Component {
               onOpen={() => console.log('global open')}
               onClose={() => console.log('global close')}
             >
-              <Item 
-                 extra={<Badge size="large" text={property.typeByLabel + property.sizeLabel} overflowCount={99} />} 
-                 arrow="horizontal" 
-                 onClick={() => MobxStore.router.goTo(views.matchAgent, { keyID , 
-                  typeTo : property.typeTo,
-                  selectedSegmentIndex : property.typeBy === "open"? 0 : 1
-                })} 
-                 thumb="http://hair.losstreatment.com/icons/rent-up.svg"
-                
-                 multipleLine >
-                 {property.typeToLabel}:{property.addressLocationLabel}/{property.nameOfBuildingLabel}<Brief>
-                 </Brief>
-               </Item>
+              <Item
+                extra={<Badge size="large" text={property.typeByLabel + property.sizeLabel} overflowCount={99} />}
+                arrow="horizontal"
+                onClick={() => this.handleOnClick(keyID, property.typeTo, property.typeBy) }
+                thumb="http://hair.losstreatment.com/icons/rent-up.svg"
+
+                multipleLine >
+                {property.typeToLabel}:{property.addressLocationLabel}/{property.nameOfBuildingLabel}<Brief>
+                </Brief>
+              </Item>
             </SwipeAction>
           </div>
         )
@@ -314,6 +314,6 @@ export default class ListOfAgentPropertysView extends React.Component {
 }
 
 ListOfAgentPropertysView.propTypes = {
-  handleNextProperty : Proptypes.object.isRequired,
-  store : Proptypes.object
+  handleNextProperty: Proptypes.object.isRequired,
+  store: Proptypes.object
 };

@@ -37,6 +37,13 @@ import { DISTRICK } from "DISTRICK";
 import { Fb } from "firebase-store";
 import views from "views";
 
+/**
+ * Handling Carousel 
+ */
+import SlickBuyProperty from "../chatbot/slickBuyProperty";
+
+
+
 // import Loadable from 'react-loadable';
 
 // function MyLoadingComponent() {
@@ -176,7 +183,8 @@ class MatchAgentPanelView extends React.Component {
     // Fb.app.agentsFilterRef.child(this.state.id).update({ typeFor: typeForString[index] });
     if (this.state.selectedSegmentIndex === 0 ) {
     switch ( selectedTab ) {
-      case 'buy' : return <ListOfMatchAgentBuyPropertys segment="filter" filter={filter} propertys={filter.buyRequest} filterID={MobxStore.router.params.keyID}/>;
+      //case 'buy' : return <ListOfMatchAgentBuyPropertys segment="filter" filter={filter} propertys={filter.buyRequest} filterID={MobxStore.router.params.keyID}/>;
+      case 'buy' : return <SlickBuyProperty keyID={MobxStore.router.params.keyID} propertys={filter.buyRequest}/>
       break;
       case 'sale': return <ListOfMatchAgentSalePropertys  segment="filter" filter={filter} propertys={filter.saleRequest} filterID={MobxStore.router.params.keyID}/>;
       break;
@@ -237,14 +245,6 @@ class MatchAgentPanelView extends React.Component {
           selectedIndex={this.state.selectedSegmentIndex}
           onChange={this.onChange}
         />
-        <WhiteSpace size="sm" />
-        
-        <NoticeBar
-          mode="closable"
-          icon={<Icon type="check-circle-o" size="xxs" />}
-        >
-          以下是 HoMatching ... 超新鮮回覆請等待嘅客!
-        </NoticeBar>
         <WhiteSpace size="sm" />
 
         <TabBar
@@ -379,3 +379,11 @@ class MatchAgentPanelView extends React.Component {
 // <ListOfMatchPropertys propertys={property.matchedPropertys} />
 export const MatchAgentPanelViewWrapper = createForm()(MatchAgentPanelView);
 // <ListOfMatchSalePropertys propertys={property.matchedPropertys} />
+        {/* <WhiteSpace size="sm" />
+        
+        <NoticeBar
+          mode="closable"
+          icon={<Icon type="check-circle-o" size="xxs" />}
+        >
+          以下是 HoMatching ... 超新鮮回覆請等待嘅客!
+        </NoticeBar> */}

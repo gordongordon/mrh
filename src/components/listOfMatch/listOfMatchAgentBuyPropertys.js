@@ -14,7 +14,6 @@ import { observer } from "mobx-react";
 import { Accordion, List } from "antd-mobile";
 import PropTypes from 'prop-types';
 
-
 //const Item = List.Item;
 //const Brief = Item.Brief;
 
@@ -85,6 +84,7 @@ class ListOfMatchAgentBuyPropertys
       const element = array.map(getSingleBuyAgentRespondViewWrapper);
       return <div>{element.reverse()}</div>;
     }
+
     const getSingleBuyUserMatchViewWrapper = p => (
       <SingleBuyUserMatchViewWrapper
         filter={filter}

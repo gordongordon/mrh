@@ -60,8 +60,14 @@ export default class ListOfPropertysView extends React.Component {
   };
 
 
+  componentDidMount() {
+    //    this.loadingToast();
+  }
 
-  
+  componentWillMount() {
+    // this.loadingToast();
+
+  }
   /**
    * model is userModelView, use to handle all functions , e.g. del
    * propertys is list of propertys for this user
@@ -85,14 +91,15 @@ export default class ListOfPropertysView extends React.Component {
 
     console.log("list size ", list.size);
     var element = [];
+
     list.forEach((property, keyID) => {
       const size = property.responsedPropertys.size;
       var color = "#ff5b05";
-      if ( size > 0) {
-         color = "green";
+      if (size > 0) {
+        color = "green";
       }
-      
-        if (property.typeTo === "lease") {
+
+      if (property.typeTo === "lease") {
         element.push(
           <div key={keyID}>
             <SwipeAction
@@ -134,7 +141,7 @@ export default class ListOfPropertysView extends React.Component {
                 onClick={() =>
                   MobxStore.router.goTo(views.chatAgentRentRespond, { keyID })}
                 multipleLine
-                extra={ <Badge text={"回覆" + size}  style={ { backgroundColor: color } } /> }
+                extra={<Badge text={"回覆" + size} style={{ backgroundColor: color }} />}
               >
                 {property.typeToLabel}:{property.addressLocationLabel}/{property.nameOfBuildingLabel}
                 <Brief>
@@ -191,7 +198,7 @@ export default class ListOfPropertysView extends React.Component {
                   MobxStore.router.goTo(views.chatAgentLeaseRespond, { keyID })}
 
                 multipleLine
-                extra={ <Badge text={"回覆" + size}  style={ { backgroundColor: color } } /> }
+                extra={<Badge text={"回覆" + size} style={{ backgroundColor: color }} />}
               >
                 {property.typeToLabel}:{property.addressLocationLabel}/{property.nameOfBuildingLabel}
                 <Brief>
@@ -203,7 +210,7 @@ export default class ListOfPropertysView extends React.Component {
           </div>
         );
       } // end of rent //                   MobxStore.router.goTo(views.matchRent, { keyID })}
-      
+
       if (property.typeTo === "buy") {
         element.push(
           <div key={keyID}>
@@ -245,7 +252,7 @@ export default class ListOfPropertysView extends React.Component {
                 arrow="horizontal"
                 onClick={() => MobxStore.router.goTo(views.chatAgentSaleRespond, { keyID })}
                 multipleLine
-                extra={ <Badge text={"回覆" + size}  style={ { backgroundColor: color } } /> }
+                extra={<Badge text={"回覆" + size} style={{ backgroundColor: color }} />}
               >
                 {property.typeToLabel}:{property.addressLocationLabel}/{property.nameOfBuildingLabel}
                 <Brief>
@@ -300,7 +307,7 @@ export default class ListOfPropertysView extends React.Component {
                 onClick={() =>
                   MobxStore.router.goTo(views.chatAgentBuyRespond, { keyID })}
                 multipleLine
-                extra={ <Badge text={"回覆" + size}  style={ { backgroundColor: color } } /> }
+                extra={<Badge text={"回覆" + size} style={{ backgroundColor: color }} />}
               >
                 {property.typeToLabel}:{property.addressLocationLabel}/{property.nameOfBuildingLabel}
                 <Brief>
@@ -312,8 +319,12 @@ export default class ListOfPropertysView extends React.Component {
           </div>
         );
       } // end of sale //                   MobxStore.router.goTo(views.matchSale, { keyID })}
-      
-    });
+
+
+
+    } // List
+    );
+
     return <div>{element.reverse()}</div>;
   };
 
@@ -334,12 +345,19 @@ export default class ListOfPropertysView extends React.Component {
         >
           以下是你的過往配對!
         </NoticeBar>
+
+
         <List renderHeader={() => "你搜尋嘅樓盤"} className="my-list">
-          {that.renderPropertys(
-            propertys,
-            propertys.propertys,
-            handleNextProperty
-          )}
+
+
+
+          {
+            that.renderPropertys(
+              propertys,
+              propertys.propertys,
+              handleNextProperty
+            )
+          }
         </List>
       </div>
     );

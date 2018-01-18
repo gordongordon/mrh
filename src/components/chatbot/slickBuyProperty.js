@@ -38,15 +38,9 @@ export default class SlickBuyProperty extends React.Component {
   }
 
 
-  display( propertys, filter, inDirectCall ) {
+  display( propertys ) {
     const list = propertys;
     
-//    const p = this.props.property;
-//    const f = this.props.filter;
-    //const status = p.getStatus(f.fbid).get();
-
-    // const status = property.getStatus(filter.fbid).get();
-    // const fStatus = filter.getStatus(property.fbid).get();
 
     // Catched empty list, don't do anything!
     if (list.size === 0) {
@@ -56,25 +50,18 @@ export default class SlickBuyProperty extends React.Component {
     //const timeEnter = this.props.timeEnter;
     // Try to show most uptoday item only
     var element = [];
-    //           <SingleSalePropertyForMatchView property={property} key={keyID} timeEnter={timeEnter}/>
-    //           <SingleSaleAgentPropertyForRespondView property={property} key={keyID} timeEnter={timeEnter}/>
 
     var count = 0;
     list.forEach((property, keyID) => {
-      //let status = inDirectCall.get( keyID);
-//      let status = property.getStatus(filter.fbid).get();      
-      const fStatus = filter.getStatus(property.fbid).get();
-      const status = property.getStatus(filter.fbid).get();
 
       if ( count == 0 ) {
       element.push(
         <ItemView key={keyID}
-          status={status}
-          filter={filter}
           property={property}
-          fStatus={fStatus}
           isFirst={true}
           isLast={false}
+          index={count}
+          isBackgroundImage={false}
         />
       );      
     } else 
@@ -82,12 +69,11 @@ export default class SlickBuyProperty extends React.Component {
   
       element.push(
         <ItemView key={keyID}
-          status={status}
-          filter={filter}
           property={property}
-          fStatus={fStatus}
           isFirst={false}
           isLast={false}
+          index={count}
+          isBackgroundImage={false}
           
         />
       );      
@@ -100,40 +86,25 @@ export default class SlickBuyProperty extends React.Component {
   };
 
   render() {
-    const hProp = this.state.initialHeight ? { height: this.state.initialHeight } : {};
     const keyID = this.props.keyID;  
-
-    //filter={property} inDirectCall={property.inDirectCall} propertys={property.matchedPropertys}
-
-    // Buy Property ID
-    const property = propertys.propertys.get( keyID );
-//    const property = propertys.propertys.get( '-Ktw-IOu3RDyKZybeB-A' );
 
     /**
      * make sure either matchProperty or responsedPropertys
      * in this case, we are matching agents reponsed property. 
      */
-    const localpropertys = property.responsedPropertys;
-    const filter = property;
-    const inDirectCall = property.inDirectCall;    
+    const localpropertys = this.props.propertys;
     
-    // Sell Property ID
-    //const property = propertys.propertys.get( '-Kte6f8sOgZ0gsVWwv2k' );
-    // return (
-    //     <ListOfMatchOldSalePropertys filter={property} inDirectCall={property.inDirectCall} propertys={property.matchedPropertys}/>
-    // )
-
     return (
         <Carousel
           className="my-carousel"
-          autoplay={false}
-          dots={true}
+          autoplay={true}
+          dots={false}
           selectedIndex={0}
           swipeSpeed={3}
           beforeChange={(from, to) => console.log(`slide from ${from} to ${to}`)}
           afterChange={index => console.log('slide to', index)}
         >
-        {this.display(localpropertys, filter, inDirectCall)}
+        {this.display(localpropertys)}
       </Carousel>
 
      );

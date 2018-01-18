@@ -69,12 +69,12 @@ export class AgentBuyProperty extends React.Component {
 
   // update property's timestamp in order to display howFresh..
   componentWillMount() {
-    const p = this.props;
-       const t = moment().format('YYYY-MM-DD HH:mm:ss');
-     this.props.property.realTime = moment( t );
+    //const p = this.props;
+    //const t = moment().format('YYYY-MM-DD HH:mm:ss');
+    //this.props.property.realTime = moment( t );
     // Will be active while production
-    // this.props.property.setTimeStamp();
-       console.log( 'realTime will mount', this.props.property.realTime)
+    this.props.property.setTimeStamp();
+    // console.log( 'realTime will mount', this.props.property.realTime)
   }
 
   // // For Chatbot Custom Component Return
@@ -102,9 +102,11 @@ export class AgentBuyProperty extends React.Component {
     const onCall = this.props.onCall;
     const onWhatsapp = this.props.onWhatsapp;
     const onTriggetNext = this.props.onTriggetNext;
+    const index = this.props.index;
+    const isBackgroundImage = this.props.isBackgroundImage;
     // const onSharePhone = this.props.onSharePhone;
-    const status = this.props.status;
-    const fStatus = this.props.fStatus;
+    //const status = this.props.status;
+    //const fStatus = this.props.fStatus;
     const p = this.props.property;
     const isFirst = this.props.isFirst;
     const isLast = this.props.isLast;
@@ -116,12 +118,12 @@ export class AgentBuyProperty extends React.Component {
           有客約睇樓: {p.addressLocationLabel}, {p.nameOfBuildingLabel}
             <Relative>
               <Absolute bottom right>
-                <Pre>編號:MOS-001</Pre>
+                <Pre>編號:MOS-{index}</Pre>
               </Absolute>
             </Relative>
           </TextHeader>
         </Heading>
-        {BackgroundImage && <BackgroundImage ratio={2 / 5} src="http://www.kowsinn.com/dc02.jpg" />}
+        {isBackgroundImage && BackgroundImage && <BackgroundImage ratio={2 / 5} src="http://www.kowsinn.com/dc02.jpg" />}
         {p.uid}
         <Flex wrap mx={1} my={1}>
           <LineText>
@@ -273,7 +275,8 @@ AgentBuyProperty.propTypes = {
   fStatus: PropTypes.object,
   property: PropTypes.object,
   isFirst: PropTypes.bool,
-  isLast: PropTypes.bool
+  isLast: PropTypes.bool,
+  isBackgroundImage: PropTypes.bool
 };
 
 AgentBuyProperty.defaultProps = {
@@ -283,7 +286,8 @@ AgentBuyProperty.defaultProps = {
   fStatus: undefined,
   property: undefined,
   isFirst: false,
-  isLast: false
+  isLast: false,
+  isBackgroundImage: true
 };
 
 {
