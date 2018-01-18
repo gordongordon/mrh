@@ -6,13 +6,16 @@ import {propertys} from 'userModelView';
 import {ListOfMatchOldSalePropertys} from '../listOfMatch/listOfMatchOldSalePropertys';
 import { SingleSaleUserMatchViewWrapper } from "../singlePropertyView/singleSaleUserMatchView";
 import {observer } from "mobx-react";
-import { AgentRentProperty as ItemView } from "../mrui/AgentRentProperty/AgentRentProperty";
+//import {AgentBuyProperty as ItemView } from "react-simple-chatbot";
+//import {AgentBuyProperty as ItemView } from "../mrui/AgentBuyProperty/AgentBuyProperty";
+//import AgentBuyProperty from "../mrui/AgentBuyProperty/AgentBuyProperty";
 
-
+import { AgentBuyProperty as ItemView } from "../mrui/AgentBuyProperty/AgentBuyProperty";
+//const ItemView = AgentBuyProperty;
 const prompt = Modal.prompt;
 
 @observer
-export default class SlickAgentRentProperty extends React.Component {
+export default class SlickBuyProperty extends React.Component {
   constructor( props ) {
     super( props )
     this.state = {
@@ -21,10 +24,6 @@ export default class SlickAgentRentProperty extends React.Component {
         value: null,
       trigger: false
     };
-    this.triggetNext = this.triggetNext.bind(this);
-    this.onSharePhone = this.onSharePhone.bind(this);
-    this.onWhatsapp = this.onWhatsapp.bind(this);
-    this.onCall = this.onCall.bind(this);
     this.display = this.display.bind(this);
   }
 
@@ -38,42 +37,6 @@ export default class SlickAgentRentProperty extends React.Component {
     }, 100);
   }
 
-  triggetNext() {
-    this.setState({ trigger: true }, () => {
-      this.props.triggerNextStep( { value: 'stop', label : 'stop' });
-    });
-  }
-
-  onSharePhone() {
-    return <Button onClick={() => prompt('請輸入您的電話號碼', '這個號碼只會顯示給這個用戶',
-    [
-      { text: '取消' },
-      {
-        text: '提交',
-        onPress: value => new Promise((resolve) => {
-          Toast.info('onPress promise', 1);
-          setTimeout(() => {
-            resolve();
-            console.log(`value:${value}`);
-          }, 1000);
-        }),
-      },
-    ], 'default', null, ['96181448'])}
-  >留電話給對方</Button>
-  }
-
-  onWhatsapp(phone) {
-    window.location.href = "https://api.whatsapp.com/send?phone=852"+phone+"&text=迎海 Double Cove 566呎 2房 1廳 6000元/月 Double cove https://mr.house (分享自Mr.House iPhone版)";
-    console.log( `onWhatsapp(${phone});`);
-  }
-
-  onCall(phone) {
-////
-      //window.location.href = "tel://" + status.contactPhone;
-      window.location.href = "tel://" + phone;
-      console.log( `onCall(${phone});`);
-   // }
-  }
 
   display( propertys, filter, inDirectCall ) {
     const list = propertys;
@@ -102,26 +65,6 @@ export default class SlickAgentRentProperty extends React.Component {
 //      let status = property.getStatus(filter.fbid).get();      
       const fStatus = filter.getStatus(property.fbid).get();
       const status = property.getStatus(filter.fbid).get();
-      // let status = this.props.inDirectCall.get(keyID);
-      // console.log( 'this.props.store.router.params.keyID',this.props.store.router.params.keyID )
-      // let showPhone = false;
-      // if (status) {
-      //   console.log("call ", status.isShowPhone);
-      //   showPhone = status.isShowPhone;
-      // }
-      // if ( status === undefined ) {
-      //    status = new Status( this., 0, false)
-      // }
-
-      // debugger
-      // element.push(
-      //   <SingleSaleUserMatchViewWrapper
-      //     filter={filter}
-      //     status={status}
-      //     property={property}
-      //     key={keyID}
-      //   />
-      // );
 
       if ( count == 0 ) {
       element.push(
@@ -130,10 +73,6 @@ export default class SlickAgentRentProperty extends React.Component {
           filter={filter}
           property={property}
           fStatus={fStatus}
-          onWhatsapp={this.onWhatsapp}
-          onCall={this.onCall}
-          onTriggetNext={this.triggetNext}
-          onSharePhone={this.onSharePhone}
           isFirst={true}
           isLast={false}
         />
@@ -147,10 +86,6 @@ export default class SlickAgentRentProperty extends React.Component {
           filter={filter}
           property={property}
           fStatus={fStatus}
-          onWhatsapp={this.onWhatsapp}
-          onCall={this.onCall}
-          onTriggetNext={this.triggetNext}
-          onSharePhone={this.onSharePhone}
           isFirst={false}
           isLast={false}
           
@@ -205,12 +140,12 @@ export default class SlickAgentRentProperty extends React.Component {
   }
 }
 
-SlickAgentRentProperty.propTypes = {
-  steps: PropTypes.object,
-  triggerNextStep: PropTypes.func,
+SlickBuyProperty.propTypes = {
+  //steps: PropTypes.object,
+  //triggerNextStep: PropTypes.func,
 };
 
-SlickAgentRentProperty.defaultProps = {
-  steps: undefined,
-  triggerNextStep: undefined,
+SlickBuyProperty.defaultProps = {
+  //steps: undefined,
+  //triggerNextStep: undefined,
 };

@@ -24,6 +24,7 @@ export default class SlickAgentSaleProperty extends React.Component {
     this.triggetNext = this.triggetNext.bind(this);
     this.onSharePhone = this.onSharePhone.bind(this);
     this.onCall = this.onCall.bind(this);
+    this.onWhatsapp = this.onWhatsapp.bind(this);
     this.display = this.display.bind(this);
   }
 
@@ -68,6 +69,12 @@ export default class SlickAgentSaleProperty extends React.Component {
       console.log( `onCall(${phone});`);
    // }
   }
+
+  onWhatsapp(phone) {
+    window.location.href = "https://api.whatsapp.com/send?phone=852"+phone+"&text=迎海 Double Cove 566呎 2房 1廳 6000元/月 Double cove https://mr.house (分享自Mr.House iPhone版)";
+    console.log( `onWhatsapp(${phone});`);
+  }
+  
 
   display( propertys, filter, inDirectCall ) {
     const list = propertys;

@@ -823,6 +823,9 @@ export class Propertyhk extends Property {
     //    Fb.root.ref('inDirectCall/rent/').update({ [relatedFbid + '_call_'+fbid]: { subjectID : relatedFbid, objectID : fbid, inDirectCall : true } });
     Fb.root.ref("inDirectCall/rent/" + fbid).update({ [relatedFbid]: status });
 
+    /**
+     * May use for dugger inDirectCall
+     */
     console.log(`inDirectCall setSaleInDirecTCall this.fbid ${this.fbid}`);
     // if (showPhone) {
     //   let status = this.inDirectCall.get(fbid);
@@ -1004,10 +1007,13 @@ export class Propertyhk extends Property {
     //   var username = (snapshot.val() && snapshot.val().username) || 'Anonymous';
     //   // ...
     // });
-    console.log(
-      `inDirectCall typeFor ${that.typeTo}, that.fbid ${that.fbid}, inDirectCall.size ${that
-        .inDirectCall.size}`
-    );
+    /**
+     * inDirectCall dugger
+     */
+    // console.log(
+    //   `inDirectCall typeFor ${that.typeTo}, that.fbid ${that.fbid}, inDirectCall.size ${that
+    //     .inDirectCall.size}`
+    // );
 
     Fb.root
       .ref("inDirectCall/" + this.typeTo + "/" + this.fbid)
