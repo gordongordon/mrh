@@ -66,7 +66,7 @@ export default class SlickAgentBuyProperty extends React.Component {
   }
 
   onWhatsapp(phone) {
-    window.location.href = "https://api.whatsapp.com/send?phone=?phone=" + phone + "&text=迎海 Double Cove 566呎 2房 1廳 6000元/月 Double cove https://rent.591.com.hk/rent-detail-662082.html?z=3_47_1_2&aid=196 (分享自Mr.House iPhone版)";
+    window.location.href = "https://api.whatsapp.com/send?phone=" + phone + "&text=迎海 Double Cove 566呎 2房 1廳 6000元/月 Double cove https://rent.591.com.hk/rent-detail-662082.html?z=3_47_1_2&aid=196 (分享自Mr.House iPhone版)";
     console.log( `onWhatsapp(${phone});`);
   }
 
