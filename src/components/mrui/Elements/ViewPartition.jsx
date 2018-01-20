@@ -5,7 +5,7 @@ import { Label, Text } from 'rebass';
 
 const ViewPartition = ({ room, livingRoom, bathRoom }) => (
     <Cell px={2} py={1} width={1 / 4}>
-        <Label f={4}>單位間隔:</Label>
+        <Label f={4}>間隔要求:</Label>
         <Text fontSize="0.7rem" color="black">
             {room}房{livingRoom}廳{bathRoom}廁
   </Text>

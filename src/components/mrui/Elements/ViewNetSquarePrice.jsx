@@ -7,7 +7,7 @@ const ViewNetSquarePrice = ({ value }) => (
     <Cell px={2} py={1} width={1 / 4}>
         <Label f={4}>實用呎價:</Label>
         <Text fontSize="0.9rem" color="black">
-            ${value}k
+            ${value}
     </Text>
     </Cell>
 );

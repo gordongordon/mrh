@@ -25,12 +25,29 @@ import {
     Text,
     Tooltip
   } from "rebass";
-  import { 
-    Cell,
-    LineText,
-    Card,
-    TextHeader,
-    ButtonOutline
+  import { Card, Cell, TextHeader, LineText, ButtonOutline, ViewSalePrice, ViewNetSize, ViewLevel, 
+    ViewIsPetAllowed,
+    ViewIsSaleWithLease,
+    ViewNetSquarePrice,
+    ViewContactName,
+    ViewAgentID,
+    ViewAvatar,
+    ViewPartition,
+    ViewSchool,
+    ViewIsViewAble,
+    ViewAgentStar,
+    ViewMonthlyPayment,
+    ViewDayListed,
+    ViewBuyBudgetMax,
+    ViewNetSizeMin,
+    ViewJobNature,
+    ViewIsFreeForSevenDay,
+    ViewHasHomeHardware,
+    ViewIncome,
+    ViewLeasingPeriod,
+    ViewDueDay,
+    ViewEarlyTimeToView,
+    ViewUserRentHeading
   } from '../Elements';
 
 export class AgentRentProperty extends React.Component {
@@ -106,16 +123,8 @@ export class AgentRentProperty extends React.Component {
 
         return (
       <Card w={19 / 20}>
-        <Heading>
-          <TextHeader p={1} color="white" bg={["blue", "#F55869"]}>
-          心儀地方：名城, 大圍
-            <Relative>
-              <Absolute bottom right>
-                <Pre>編號:{p.uid}</Pre>
-              </Absolute>
-            </Relative>
-          </TextHeader>
-        </Heading>
+      <ViewUserRentHeading location={p.addressLocationLabel} building={p.nameOfBuildingLabel} recordNumber={1} />
+
         {BackgroundImage && <BackgroundImage ratio={2 / 5} src="http://www.kowsinn.com/dc02.jpg" />}
         <Flex wrap mx={1} my={1}>
           <LineText>
@@ -308,7 +317,7 @@ AgentRentProperty.propTypes = {
   
 AgentRentProperty.defaultProps = {
     steps: undefined,
-    triggerNextStep: false,
+    triggerNextStep: undefined,
     status  : undefined,
     fStatus : undefined,
     property: undefined,

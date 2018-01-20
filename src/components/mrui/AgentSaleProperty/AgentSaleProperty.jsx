@@ -26,14 +26,30 @@ import {
     Tooltip
   } from "rebass";
 
-  import { 
-    Cell,
-    LineText,
-    Card,
-    TextHeader,
-    ButtonOutline,
-    ViewIsPetAllowed
-  } from '../Elements';
+  import { Card, Cell, TextHeader, LineText, ButtonOutline, ViewSalePrice, ViewNetSize, ViewLevel, 
+    ViewIsPetAllowed,
+    ViewIsSaleWithLease,
+    ViewNetSquarePrice,
+    ViewContactName,
+    ViewAgentID,
+    ViewAvatar,
+    ViewPartition,
+    ViewSchool,
+    ViewIsViewAble,
+    ViewAgentStar,
+    ViewMonthlyPayment,
+    ViewDayListed,
+    ViewBuyBudgetMax,
+    ViewNetSizeMin,
+    ViewJobNature,
+    ViewIsFreeForSevenDay,
+    ViewHasHomeHardware,
+    ViewIncome,
+    ViewLeasingPeriod,
+    ViewDueDay,
+    ViewEarlyTimeToView,
+    ViewUserSaleHeading
+  }  from '../Elements';
 
 
 export class AgentSaleProperty extends React.Component {
@@ -78,153 +94,72 @@ export class AgentSaleProperty extends React.Component {
         const onCall = this.props.onCall;
         const onTriggetNext = this.props.onTriggetNext;
         // const onSharePhone = this.props.onSharePhone;
-        const status  = this.props.status;
-        const fStatus = this.props.fStatus;
+        //const status  = this.props.status;
+        //const fStatus = this.props.fStatus;
         const p = this.props.property;
         const isFirst = this.props.isFirst;
         const isLast = this.props.isLast;
         
+        // 出售樓盤: 黃埔花園, 紅磡
+        // ————重點————
+        // 出售價(萬元): $588
+        // 實用面積(呎): 344
+        // 單位間隔: 2房1廳1廁
+        // 實用呎價: $13,000
+        // ————特徵————
+        // 樓層: 中
+        // 養寵物: ✔
+        // 睇樓: ✔
+        // 每月供款: $18,000
+        // ————其他————
+        // 出售形式: 連租約
+        // 睇樓日期：1月20日
+        // 更新時間: 2分鐘前
+        // 學校網 : 95小學/中學西貢區
+        // ————聯絡方式————
+        // 資料來源: 地產代理
+        // Avator
+        // 聯絡人: Gordon Wong
+        // 經驗評級: */平均回复時間: 1分鐘
+        // CALL 98765374
+        // Whatsapp 98765374
+        // Exit window
+
+
         return (
  <Card w={19 / 20}>
-        <Heading>
-          <TextHeader p={1} color="white" bg={["blue", "#F55869"]}>
-            出售樓盤: 龍苑, 九龍塘
-            <Relative>
-              <Absolute bottom right>
-                <Pre>編號:MOS-0001</Pre>
-              </Absolute>
-            </Relative>
-          </TextHeader>
-        </Heading>
+ <ViewUserSaleHeading location={p.addressLocationLabel} building={p.nameOfBuildingLabel} recordNumber={1} />
+
         {BackgroundImage && <BackgroundImage ratio={2 / 5} src="http://www.kowsinn.com/dc02.jpg" />}
         <Flex wrap mx={1} my={1}>
           <LineText>
             <Text f={3}>重點</Text>
           </LineText>
-          <Cell px={2} py={1} width={1 / 4}>
-            <Label f={4}>出售價(萬元):</Label>
-            <Text fontSize="0.9rem" color="black" children="$588" />
-          </Cell>
-          <Cell px={2} py={1} width={1 / 4}>
-            <Label f={4} bold>
-              實用面積:
-            </Label>
-            <Text fontSize="0.9rem" color="black">
-              344呎
-            </Text>
-          </Cell>
-          <Cell px={2} py={1} width={1 / 4}>
-            <Label f={4}>實用呎價:</Label>
-            <Text fontSize="0.9rem" color="black">
-              $13k
-            </Text>
-          </Cell>
-          <Cell px={2} py={1} width={1 / 4}>
-            <Label f={4}>單位間隔: </Label>
-            <Text fontSize="0.9rem" color="black">
-              2房1廳
-            </Text>
-          </Cell>
-
+          <ViewSalePrice value={p.salePrice} />
+          <ViewNetSize value={p.netSize} />
+          <ViewNetSquarePrice value={13000} />
+          <ViewPartition room={1} bathRoom={1} livingRoom={1} />
           <LineText>
             <Text f={3}>特徵</Text>
           </LineText>
-
-          <Cell px={2} py={1} width={1 / 4}>
-            <Label f={4}> 樓層: </Label>
-            <Text color="black" f="0.9rem">
-              中層
-            </Text>
-          </Cell>
-
-          <Cell px={2} py={1} width={1 / 4}>
-            <Label f={4}> 養寵物: </Label>
-            <Text color="black" fontSize="0.9rem">
-              ✔
-            </Text>
-          </Cell>
-
-          <Cell px={2} py={1} width={1 / 4}>
-            <Label f={4}>睇樓:</Label>
-            <Text color="black" fontSize="0.9rem">
-              ✔
-            </Text>
-          </Cell>
-          <Cell px={2} py={1} width={1 / 4}>
-            <Tooltip text="買賣連租賃- 樓盤已經簽咗一份租約俾人">
-              <Label f={4}>出售形式:</Label>
-              <Text color="black" fontSize="0.9rem">
-                連租約
-              </Text>
-            </Tooltip>
-          </Cell>
-
+          <ViewLevel value={p.levelLabel} />
+          <ViewIsPetAllowed value={p.isPetAllowed} />
+          <ViewIsViewAble value={p.isViewAble} />
+          <ViewIsSaleWithLease value={p.isSaleWithLease} />
           <LineText>
             <Text f={3}>其他</Text>
           </LineText>
-          <Cell px={2} py={1} width={1 / 4}>
-            <Label f={4}>學校網: </Label>
-            <Text color="black" f="0.5rem">
-            小學:95
-            </Text>
-            <Text color="black" f="0.5rem" p={0}>
-            中學馬鞍山區
-            </Text>
-          </Cell>
-          <Cell px={2} py={1} width={1 / 4}>
-            <Label f={4}> 睇樓日期： </Label>
-            <Text color="black" f="0.8rem">
-              1月20日
-            </Text>
-          </Cell>
-          <Cell px={2} py={1} width={1 / 4}>
-            <Label f={4}>上載時間:</Label>
-            <Text color="black" f="0.8rem">
-              2分鐘前
-            </Text>
-          </Cell>
-          <Cell px={2} py={1} width={1 / 4}>
-            <Tooltip text="@$19,389">
-              <Label f={4}> 每月供款: </Label>
-              <Text color="black" f="0.8rem">
-                $19K
-              </Text>
-            </Tooltip>
-          </Cell>
+          <ViewSchool  primary={95} secondary="馬鞍山區"/>
+          <ViewEarlyTimeToView value={p.earlyTimeToView} />
+          <ViewDayListed value={p.dayListed} />
+          <ViewMonthlyPayment value={19389} />
           <LineText>
-            <Text f={3}>聯絡方式</Text>{" "}
+            <Text f={3}>聯絡方式</Text>
           </LineText>
-          <Cell px={2} py={1} width={1 / 4}>
-            <Label f={4}> 資訊來源: </Label>
-            <Text color="black" f="0.6rem">
-              地產代理
-            </Text>
-            <Text color="black" f="0.5rem" p={0}>
-              (E-3348778)
-            </Text>
-          </Cell>
-          <Cell px={2} py={1} width={1 / 4}>
-            <Avatar
-              size="2rem"
-              src="http://www.kowsinn.com/dc03.jpeg"
-            />
-          </Cell>
-          <Cell px={2} py={1} width={1 / 4}>
-            <Label f={4}>聯絡人:</Label>
-            <Text color="black" f="0.6rem">
-              Gordon Wong
-            </Text>
-          </Cell>
-          <Cell px={2} py={1} width={1 / 4}>
-            <Label f={4}>經驗評級 </Label>
-            <Flex>
-              <Star checked bg="blue" />
-              <Star checked bg="blue" />
-              <Star checked bg="blue" />
-              <Star bg="blue" half />
-              <Star color="blue" />
-            </Flex>
-          </Cell>
+          <ViewAgentID value="E-3348778" />
+          <ViewAvatar value="http://www.kowsinn.com/dc03.jpeg" />
+          <ViewContactName value={p.contactName} />
+          <ViewAgentStar value={2} />
           <LineText>
             <Text f={3}>下一步行動</Text>
           </LineText>
@@ -287,7 +222,7 @@ AgentSaleProperty.propTypes = {
   
 AgentSaleProperty.defaultProps = {
     steps: undefined,
-    triggerNextStep: false,
+    triggerNextStep: undefined,
     status  : undefined,
     fStatus : undefined,
     property: undefined,

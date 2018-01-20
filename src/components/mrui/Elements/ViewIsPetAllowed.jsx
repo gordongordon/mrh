@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+import PropTypes from 'prop-types';
 import Cell from './Cell';  
 import { Label, Text } from 'rebass';
 
@@ -11,4 +11,13 @@ const ViewIsPetAllowed = ({ value }) => (
     </Text>
   </Cell>
 );
+
+ViewIsPetAllowed.defaultProps = {
+  value: false
+};
+
+ViewIsPetAllowed.propTypes = {
+  value: PropTypes.bool.isRequired
+};
+
 export default ViewIsPetAllowed;

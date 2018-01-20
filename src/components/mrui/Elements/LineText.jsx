@@ -8,7 +8,7 @@ const LineText = styled.span`
   flex-basis: 100%;
   align-items: center;
   color: #F55869;
-  margin: 8px 0px;
+  margin: 6px 0px;
 
  &:before,
  &:after {

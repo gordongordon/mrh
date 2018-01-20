@@ -20,6 +20,17 @@ import ViewMonthlyPayment from './ViewMonthlyPayment';
 import ViewDayListed from './ViewDayListed';
 import ViewBuyBudgetMax from './ViewBuyBudgetMax';
 import ViewNetSizeMin from './ViewNetSizeMin';
+import ViewJobNature from './ViewJobNature';
+import ViewIsFreeForSevenDay from './ViewIsFreeForSevenDay';
+import ViewHasHomeHardware from './ViewHasHomeHardware';
+import ViewIncome from './ViewIncome';
+import ViewLeasingPeriod from './ViewLeasingPeriod';
+import ViewDueDay from './ViewDueDay';
+import ViewEarlyTimeToView from './ViewEarlyTimeToView';
+import ViewUserSaleHeading from './ViewUserSaleHeading';
+import ViewUserBuyHeading from './ViewUserBuyHeading';
+import ViewUserLeaseHeading from './ViewUserLeaseHeading';
+import ViewUserRentHeading from './ViewUserRentHeading';
 
 export { Card, Cell, TextHeader, LineText, ButtonOutline, ViewSalePrice, ViewNetSize, ViewLevel, 
          ViewIsPetAllowed,
@@ -35,5 +46,17 @@ export { Card, Cell, TextHeader, LineText, ButtonOutline, ViewSalePrice, ViewNet
          ViewMonthlyPayment,
          ViewDayListed,
          ViewBuyBudgetMax,
-         ViewNetSizeMin 
-       };
+         ViewNetSizeMin,
+         ViewJobNature,
+         ViewIsFreeForSevenDay,
+         ViewHasHomeHardware,
+         ViewIncome,
+         ViewLeasingPeriod,
+         ViewDueDay,
+         ViewEarlyTimeToView,
+         ViewUserBuyHeading,
+         ViewUserSaleHeading,
+         ViewUserLeaseHeading,
+         ViewUserRentHeading
+    };
+

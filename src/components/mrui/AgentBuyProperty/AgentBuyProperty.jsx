@@ -28,13 +28,7 @@ import {
   Tooltip
 } from "rebass";
 
-import {
-  Cell,
-  LineText,
-  Card,
-  TextHeader,
-  ButtonOutline,
-  ViewLevel,
+import { Card, Cell, TextHeader, LineText, ButtonOutline, ViewSalePrice, ViewNetSize, ViewLevel, 
   ViewIsPetAllowed,
   ViewIsSaleWithLease,
   ViewNetSquarePrice,
@@ -48,7 +42,15 @@ import {
   ViewMonthlyPayment,
   ViewDayListed,
   ViewBuyBudgetMax,
-  ViewNetSizeMin 
+  ViewNetSizeMin,
+  ViewJobNature,
+  ViewIsFreeForSevenDay,
+  ViewHasHomeHardware,
+  ViewIncome,
+  ViewLeasingPeriod,
+  ViewDueDay,
+  ViewEarlyTimeToView,
+  ViewUserBuyHeading
 } from '../Elements';
 
 
@@ -113,17 +115,8 @@ export class AgentBuyProperty extends React.Component {
 
     return (
       <Card w={19 / 20}>
-        <Heading>
-          <TextHeader p={1} color="white" bg={["blue", "#F55869"]}>
-          有客約睇樓: {p.addressLocationLabel}, {p.nameOfBuildingLabel}
-            <Relative>
-              <Absolute bottom right>
-                <Pre>編號:MOS-{index}</Pre>
-              </Absolute>
-            </Relative>
-          </TextHeader>
-        </Heading>
-        {isBackgroundImage && BackgroundImage && <BackgroundImage ratio={2 / 5} src="http://www.kowsinn.com/dc02.jpg" />}
+      <ViewUserBuyHeading location={p.addressLocationLabel} building={p.nameOfBuildingLabel} recordNumber={1} />
+      {isBackgroundImage && BackgroundImage && <BackgroundImage ratio={2 / 5} src="http://www.kowsinn.com/dc02.jpg" />}
         {p.uid}
         <Flex wrap mx={1} my={1}>
           <LineText>
@@ -146,12 +139,7 @@ export class AgentBuyProperty extends React.Component {
             <Text f={3}>其他</Text>
           </LineText>
           <ViewSchool pramary={95} secondary="馬鞍山區" />
-          <Cell px={2} py={1} width={1 / 4}>
-            <Label f={4}> 睇樓日期： </Label>
-            <Text color="black" f="0.8rem">
-              1月20日
-            </Text>
-          </Cell>
+          <ViewEarlyTimeToView value="1月20日"/>
           <ViewDayListed value={p.dayListed} />
 
                     
@@ -162,7 +150,6 @@ export class AgentBuyProperty extends React.Component {
           <ViewAgentID value="E-3348778" />
           <ViewAvatar value="http://www.kowsinn.com/dc03.jpeg" />
           <ViewContactName value={p.contactName} />
-
           <ViewAgentStar value={2} />
           <LineText>
             <Text f={3}>下一步行動</Text>
@@ -281,7 +268,7 @@ AgentBuyProperty.propTypes = {
 
 AgentBuyProperty.defaultProps = {
   steps: undefined,
-  triggerNextStep: false,
+  triggerNextStep: undefined,
   status: undefined,
   fStatus: undefined,
   property: undefined,

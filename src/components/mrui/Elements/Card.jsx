@@ -3,9 +3,9 @@ import styled from 'styled-components';
 import {Card as ext } from 'rebass';
 
 const Card = styled(ext)`
-    border-radius: 10px;
+    border-radius: 15px;
     background-color: white;   
-    box-shadow: 2px;
+    box-shadow: 4px;
     
 `
 

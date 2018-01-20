@@ -1,23 +1,23 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Cell from './Cell';
+import Cell from './Cell';  
 import { Label, Text } from 'rebass';
 
-const ViewLevel = ({ value }) => (
+const ViewJobNature = ({ value }) => (
   <Cell px={2} py={1} width={1 / 4}>
-    <Label f={4}> 樓層: </Label>
+    <Label f={4}>職業:</Label>
     <Text fontSize="0.9rem" color="black">
       {value}
     </Text>
   </Cell>
 );
 
-ViewLevel.defaultProps = {
-  value: "none"
+ViewJobNature.defaultProps = {
+  value: "null"
 };
 
-ViewLevel.propTypes = {
+ViewJobNature.propTypes = {
   value: PropTypes.string.isRequired
 };
 
-export default ViewLevel;
+export default ViewJobNature;
