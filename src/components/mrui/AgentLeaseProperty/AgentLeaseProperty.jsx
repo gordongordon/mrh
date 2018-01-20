@@ -48,7 +48,7 @@ import {
     ViewLeasingPeriod,
     ViewDueDay,
     ViewEarlyTimeToView,
-    ViewUserSaleHeading
+    ViewUserLeaseHeading
   }  from '../Elements';  
 
 export class AgentLeaseProperty extends React.Component {

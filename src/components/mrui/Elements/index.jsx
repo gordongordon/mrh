@@ -31,6 +31,10 @@ import ViewUserSaleHeading from './ViewUserSaleHeading';
 import ViewUserBuyHeading from './ViewUserBuyHeading';
 import ViewUserLeaseHeading from './ViewUserLeaseHeading';
 import ViewUserRentHeading from './ViewUserRentHeading';
+import ViewAgentSaleHeading from './ViewAgentSaleHeading';
+import ViewAgentBuyHeading from './ViewAgentBuyHeading';
+import ViewAgentLeaseHeading from './ViewAgentLeaseHeading';
+import ViewAgentRentHeading from './ViewAgentRentHeading';
 
 export { Card, Cell, TextHeader, LineText, ButtonOutline, ViewSalePrice, ViewNetSize, ViewLevel, 
          ViewIsPetAllowed,
@@ -57,6 +61,10 @@ export { Card, Cell, TextHeader, LineText, ButtonOutline, ViewSalePrice, ViewNet
          ViewUserBuyHeading,
          ViewUserSaleHeading,
          ViewUserLeaseHeading,
-         ViewUserRentHeading
+         ViewUserRentHeading,
+         ViewAgentSaleHeading,
+         ViewAgentBuyHeading,
+         ViewAgentLeaseHeading,
+         ViewAgentRentHeading
     };
 
