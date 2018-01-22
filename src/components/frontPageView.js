@@ -11,8 +11,6 @@ import views from 'views';
 import {inject, observer} from 'mobx-react';
 // import MrHouse from 'chatbot/mrHouse';
 
-//import Generic from 'chatbot/chatbot-message-ui';
-
 
 @inject("store") @observer
 export class FrontPageView extends React.Component {

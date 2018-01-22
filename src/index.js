@@ -165,7 +165,11 @@ firebase.auth().onAuthStateChanged(user => {
 
     console.log("displayName", user.displayName);
 
-    // Think over before remove this like, may cause matchedPropertys = null
+    /**
+     * Think over before remove this like, may cause matchedPropertys = null
+     * Update firebase reference
+     * init userModel Propertys & agentModel Propertys
+     */
     Fb.app.updateUid();
 
     // Once, user login redirect to "List" or "Home"

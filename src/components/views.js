@@ -35,7 +35,7 @@ import { MatchAgentPanelViewWrapper } from 'matchPanel/matchAgentPanelView';
 
 // From chatbot
 //import FormSaleChatbot from 'chatbot/formSaleChatbot';
-import BMIChatbot from 'chatbot/bmiChatbot';
+//import BMIChatbot from 'chatbot/bmiChatbot';
 import ActionSheetExample from 'chatbot/actionSheetExample';
 
 // testing
@@ -720,19 +720,19 @@ const views = {
   }),
 
 
-  bmi: new Route({
-    path: '/bmi',
-    component: <BMIChatbot />,
-    onEnter: (route, params, store, queryParams) => {
-      MobxStore.app.setTitle('Chat Bot 賣 樓');
+  // bmi: new Route({
+  //   path: '/bmi',
+  //   component: <BMIChatbot />,
+  //   onEnter: (route, params, store, queryParams) => {
+  //     MobxStore.app.setTitle('Chat Bot 賣 樓');
 
-    },
-    beforeExit: (route, params) => {
-      console.log('exiting ListOfPRoperysView!');
-      console.log('params changed to', params);
-      MobxStore.app.previousView = route;
-    }
-  })
+  //   },
+  //   beforeExit: (route, params) => {
+  //     console.log('exiting ListOfPRoperysView!');
+  //     console.log('params changed to', params);
+  //     MobxStore.app.previousView = route;
+  //   }
+  // })
 
 
 };

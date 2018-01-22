@@ -345,12 +345,7 @@ export default class ListOfPropertysView extends React.Component {
         >
           以下是你的過往配對!
         </NoticeBar>
-
-
         <List renderHeader={() => "你搜尋嘅樓盤"} className="my-list">
-
-
-
           {
             that.renderPropertys(
               propertys,
