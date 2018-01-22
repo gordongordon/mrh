@@ -163,6 +163,7 @@ export class Property {
   //    return this.netSize;
   //  }
 
+
   // computed values are values derived and automatically updated when the observed
   // observable values changes. For example we use it to determine whenever the todo is valid
   @computed

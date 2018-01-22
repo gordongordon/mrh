@@ -1,6 +1,5 @@
 import Card from './Card';
 import Cell from './Cell';
-import TextHeader from './TextHeader';
 import LineText from './LineText';
 import ButtonOutline from './ButtonOutline';
 import ViewSalePrice from './ViewSalePrice';
@@ -35,8 +34,11 @@ import ViewAgentSaleHeading from './ViewAgentSaleHeading';
 import ViewAgentBuyHeading from './ViewAgentBuyHeading';
 import ViewAgentLeaseHeading from './ViewAgentLeaseHeading';
 import ViewAgentRentHeading from './ViewAgentRentHeading';
+import ViewLeaseDeposit from './ViewLeaseDeposit';
+import ViewLeasePrice from './ViewLeasePrice';
+import ViewNetSquareLeasePrice from './ViewNetSquareLeasePrice';
 
-export { Card, Cell, TextHeader, LineText, ButtonOutline, ViewSalePrice, ViewNetSize, ViewLevel, 
+export { Card, Cell, LineText, ButtonOutline, ViewSalePrice, ViewNetSize, ViewLevel, 
          ViewIsPetAllowed,
          ViewIsSaleWithLease,
          ViewNetSquarePrice,
@@ -65,6 +67,9 @@ export { Card, Cell, TextHeader, LineText, ButtonOutline, ViewSalePrice, ViewNet
          ViewAgentSaleHeading,
          ViewAgentBuyHeading,
          ViewAgentLeaseHeading,
-         ViewAgentRentHeading
+         ViewAgentRentHeading,
+         ViewLeaseDeposit,
+         ViewLeasePrice,
+         ViewNetSquareLeasePrice
     };
 

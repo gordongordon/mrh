@@ -50,11 +50,13 @@ import {
     ViewUserRentHeading
   } from '../Elements';
 
+  import MrCard from '../MrCard';
+
 export class AgentRentProperty extends React.Component {
     constructor( props ) {
         super( props );
 
-        this.triggetNext = this.triggetNext.bind(this);
+        // this.triggetNext = this.triggetNext.bind(this);
 
         // this.state = {
         //   value: null,
