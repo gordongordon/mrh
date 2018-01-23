@@ -37,6 +37,7 @@ import ViewAgentRentHeading from './ViewAgentRentHeading';
 import ViewLeaseDeposit from './ViewLeaseDeposit';
 import ViewLeasePrice from './ViewLeasePrice';
 import ViewNetSquareLeasePrice from './ViewNetSquareLeasePrice';
+import ViewNumOfPeopleLiving  from './ViewNumOfPeopleLiving';
 
 export { Card, Cell, LineText, ButtonOutline, ViewSalePrice, ViewNetSize, ViewLevel, 
          ViewIsPetAllowed,
@@ -70,6 +71,7 @@ export { Card, Cell, LineText, ButtonOutline, ViewSalePrice, ViewNetSize, ViewLe
          ViewAgentRentHeading,
          ViewLeaseDeposit,
          ViewLeasePrice,
-         ViewNetSquareLeasePrice
+         ViewNetSquareLeasePrice,
+         ViewNumOfPeopleLiving
     };
 

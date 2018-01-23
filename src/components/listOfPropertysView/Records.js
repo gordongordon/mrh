@@ -16,65 +16,40 @@ import {
   Button,
   SegmentedControl
 } from "antd-mobile";
-import { createForm } from "rc-form";
-import moment from "moment";
-import "moment/locale/zh-cn";
-import { propertys } from "userModelView";
-import { observer } from "mobx-react";
-import MobxStore from "mobxStore";
-import views from "views";
 
-const Item = List.Item;
-const Brief = Item.Brief;
-
-// const BUILDING_NAME
-//    'MOSDBC' : '迎海',
-//    'MOSDBC' : '迎海',
-//    'MOSCTO' : '第一城',
-//    'MOSSSC' : '新港城'
-// }
-// const NameOfBuilding = [
-//   { value: 'MOSDBC', label: '迎海' },
-//   { value: 'MOSCTO', label: '第一城' },
-//   { value: 'MOSSSC', label: '新港城' },
-// ];
-
-@observer
-export default class ListOfPropertysView extends React.Component {
-  onClick = key => {
-    console.log(key);
-  };
-
-  hhc = keyID => {
-    this.props.history.push("/front?", keyID);
-  };
-
-  loadingToast = () => {
-    Toast.loading("Loading...", 1, () => {
-      console.log("Load complete !!!");
-    });
-  };
-
-  successToast = () => {
-    Toast.success("成功刪除!!!", 1);
-  };
-
-
-  componentDidMount() {
-    //    this.loadingToast();
-  }
-
-  componentWillMount() {
-    // this.loadingToast();
-
-  }
-  /**
+/**
    * model is userModelView, use to handle all functions , e.g. del
    * propertys is list of propertys for this user
    * h is a callback to handle next route wiht keyID
    */
-  renderPropertys = (model, propertys, h) => {
-    const list = propertys;
+export default class Records extends React.Component {
+ 
+    constructor( props ) {
+      super( props );
+      this.buildRecords = this.buildRecords.bind( this );
+      this.onClick = this.onClick.bind( this );
+      this.loadingToast = this.loadingToast.bind( this );
+      this.successToast = this.successToast.bind( this );
+    }
+
+    onClick = key => {
+      console.log(key);
+    };
+  
+
+    loadingToast = () => {
+      Toast.loading("Loading...", 1, () => {
+        console.log("Load complete !!!");
+      });
+    };
+  
+    successToast = () => {
+      Toast.success("成功刪除!!!", 1);
+    };
+
+
+    buildRecords( model  ) {
+    const list = model;
 
     // Function to test is list empty
     const isListEmpty = list =>
@@ -329,32 +304,13 @@ export default class ListOfPropertysView extends React.Component {
   };
 
   render() {
-    //console.log( "title", this.props.title)
-    const { store } = this.props;
-
-    //    console.log( 'list of properys view .store', store)
-
-    const that = this;
-    var { handleNextProperty } = this.props;
+       const model = this.props.src;
 
     return (
       <div>
-        <NoticeBar
-          mode="closable"
-          icon={<Icon type="check-circle-o" size="xxs" />}
-        >
-          以下是你的過往配對!
-        </NoticeBar>
-        <List renderHeader={() => "你搜尋嘅樓盤"} className="my-list">
-          {
-            that.renderPropertys(
-              propertys,
-              propertys.propertys,
-              handleNextProperty
-            )
-          }
-        </List>
-      </div>
-    );
+       { this.buildRecords( model ) }
+       </div>
+    )
   }
+
 }

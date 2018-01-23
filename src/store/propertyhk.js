@@ -100,7 +100,7 @@ export class Propertyhk extends Property {
 
     //debugger
     // Handle match propertys
-    fb
+    const addPromise = fb
       .orderByChild(orderByChild)
       .equalTo(equalTo)
       .on("child_added", function(snap) {
@@ -110,7 +110,7 @@ export class Propertyhk extends Property {
         //console.log("propertyhk.child_added - request.size", request.size);
       });
 
-    fb
+    const changePromise = fb
       .orderByChild(orderByChild)
       .equalTo(equalTo)
       .on("child_changed", snapshot => {
@@ -130,13 +130,20 @@ export class Propertyhk extends Property {
         //console.log("propertyhk.child_changed - request.size", request.size);
       });
 
-    fb
+    const removePromise = fb
       .orderByChild(orderByChild)
       .equalTo(equalTo)
       .on("child_removed", function(snap) {
         request.delete(snap.key);
         console.log("child_removed - request.size", request.size);
       });
+
+      Promise.all([addPromise, changePromise, removePromise]).then(function(results) {
+        console.log( 'propertyhk init successful');
+        return request;
+      }).catch( error => {
+        console.log( 'propertyhk can\'t be inited' );
+      })
 
     return request;
   };

@@ -27,4 +27,5 @@ const Spinner = styled.div`
 const Loading = () => (
   <Spinner>Loading</Spinner>
 );
+
 export default Loading;

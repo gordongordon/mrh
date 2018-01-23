@@ -40,7 +40,8 @@ import {
     ViewAgentRentHeading,
     ViewNetSquareLeasePrice,
     ViewLeasePrice,
-    ViewLeaseDeposit
+    ViewLeaseDeposit,
+    ViewNumOfPeopleLiving
 }
     from '../Elements';
 
@@ -90,6 +91,7 @@ MrCard.AgentRentHeading = ViewAgentRentHeading;
 MrCard.LeasePrice = ViewLeasePrice;
 MrCard.LeaseDeposit = ViewLeaseDeposit;
 MrCard.NetSquareLeasePrice = ViewNetSquareLeasePrice;
+MrCard.NumOfPeopleLiving = ViewNumOfPeopleLiving;
 
 MrCard.defaultProps = {
     theme: defaultTheme,

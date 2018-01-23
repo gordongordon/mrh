@@ -28,10 +28,6 @@ class AgentModelViewModel {
   //@observable propertys = map({});
   //@observable propertys = new Map();
 
-  constructor() {
-    //    var that = this;
-  }
-
   @computed
   get json() {
     console.log("json", this.propertys);
@@ -48,7 +44,7 @@ class AgentModelViewModel {
   init = () => {
     const that = this;
 
-    Fb.app.agentsFilterRef.on("child_added", snapshot => {
+    const addPromise = Fb.app.agentsFilterRef.on("child_added", snapshot => {
       //console.log( "fire", snapshot.val() )
       //var p = new Propertyhk();
       var p = Propertyhk.deserialize(snapshot.val());
@@ -69,7 +65,7 @@ class AgentModelViewModel {
     });
 
     // Handle update
-    Fb.app.agentsFilterRef.on("child_changed", snapshot => {
+   const changePromise =  Fb.app.agentsFilterRef.on("child_changed", snapshot => {
       console.log("agentModelView.child_changed");
 
 //      var p = that.filters.get(snapshot.key);
@@ -95,10 +91,17 @@ class AgentModelViewModel {
     });
 
     // Handle child_removed
-    Fb.app.agentsFilterRef.on("child_removed", snapshot => {
+   const removePromise =  Fb.app.agentsFilterRef.on("child_removed", snapshot => {
       that.filters.delete(snapshot.key);
       // console.log('that.propertys.size', that.propertys.size)
     });
+
+    Promise.all([addPromise, changePromise, removePromise]).then(function(results) {
+      console.log( 'AgentModelView init successful');
+      return propertys;
+    }).catch( error => {
+      console.log( 'AgentModelView can\'t be inited' );
+    })
 
     // /**
     //  * Handle User update propertys
@@ -201,7 +204,7 @@ class AgentModelViewModel {
     //this.writeNewPost( 1233, 'gordon', 'picture', 'title', 'body')
 
     // Handle match propertys
-    Fb.app.agentsRef
+    const addPromise = Fb.app.agentsRef
       .orderByChild(compareTo)
       .equalTo(valueTo)
       .on("child_added", function(snap) {
@@ -211,21 +214,29 @@ class AgentModelViewModel {
         console.log("matchProperty.size", that.matchedPropertys.size);
       });
 
-    Fb.app.agentsRef
+    const removePromise = Fb.app.agentsRef
       .orderByChild(compareTo)
       .equalTo(valueTo)
       .on("child_removed", function(snap) {
         that.matchedPropertys.delete(snap.key);
         console.log("matchProperty.size", that.matchedPropertys.size);
       });
+
+      Promise.all([addPromise, removePromise]).then(function(results) {
+        console.log( 'agentModelView getMatchProperty successful');
+        return request;
+      }, function( error ) { console.log( 'may be network problem') }).catch( error => {
+        console.log( 'agentModelView getMatchProperty error', error );
+      })
+
   };
 
   update = (id, name) => {
-    Fb.app.agentsRef.update({ [id]: { name } });
+    Fb.app.agentsRef.update({ [id]: { name } }).catch( error => console.log( error ));
   };
 
   del = id => {
-    Fb.app.agentsRef.child(id).remove();
+    Fb.app.agentsRef.child(id).remove().catch( error => console.log( error ));
     // Fb.propertys.child(id).remove();
     //this.propertys.delete( id );
   };

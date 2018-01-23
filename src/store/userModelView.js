@@ -35,7 +35,6 @@ class UserModelView {
     return toJS(this.propertys);
   }
 
-
   // init userModelView, for mobx,
   // can't be used inside constructor, otherwise error
   // when app start will call an empty constructor
@@ -44,7 +43,7 @@ class UserModelView {
     const that = this;
     // Handle Child_added
     //if ( Fb.app.propertysRef !== undefined ) {
-    Fb.app.usersRef.on('child_added', (snapshot) => {
+    const addPromise = Fb.app.usersRef.on('child_added', (snapshot) => {
 
             //console.log( "fire", snapshot.val() )
             // var p = new Propertyhk();
@@ -70,7 +69,7 @@ class UserModelView {
             that.propertys.set( snapshot.key, p );
     });
 
-    Fb.app.usersRef.on('child_changed', (snapshot) => {
+    const changePromise = Fb.app.usersRef.on('child_changed', (snapshot) => {
 
                  // Get an element with all functions, propertys
                  // Recreate a new properts { ... }
@@ -88,10 +87,17 @@ class UserModelView {
     });
 
    // Handle child_removed
-   Fb.app.usersRef.on('child_removed', (snapshot) => {
+   const removePromise = Fb.app.usersRef.on('child_removed', (snapshot) => {
                 that.propertys.delete( snapshot.key );
                 // console.log('that.propertys.size', that.propertys.size)
    });
+
+   Promise.all([addPromise, changePromise, removePromise]).then(function(results) {
+     console.log( 'UserModelView init successful');
+     return propertys;
+   }).catch( error => {
+     console.log( 'UserModelView can\'t be inited' );
+   })
 
    /**
     * allocate agent's property public for display
