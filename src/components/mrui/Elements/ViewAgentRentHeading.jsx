@@ -4,7 +4,7 @@ import { Heading, Absolute, Pre, Relative } from 'rebass';
 
 const ViewAgentRentHeading = ({ location, building, recordNumber }) => (
     <Heading p={1} f='1rem' color="white" bg={["blue", "#F55869"]}>
-    出租樓盤: {location} , {building}
+    有客約睇租盤: {location} , {building}
             <Relative>
                 <Absolute bottom right>
                     <Pre>編號:MOS-{recordNumber} </Pre>

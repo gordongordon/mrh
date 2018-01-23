@@ -371,38 +371,6 @@ class FormSaleAgentPropertyAntMobile extends React.Component {
         </List.Item>          
 
 
-          <InputItem
-            {...getFieldProps("contactName", {
-              initialValue: property.contactName
-            })}
-            type="text"
-            placeholder="請輸入姓名"
-            clear
-          >
-            姓名
-          </InputItem>
-
-          <InputItem
-            clear
-            {...getFieldProps("contactPhone", {
-              initialValue: property.contactPhone
-            })}
-            type="phone"
-            placeholder="請輸入電話"
-          >
-            聯絡手機
-          </InputItem>
-
-          <InputItem
-            {...getFieldProps("contactEmail", {
-              initialValue: property.contactEmail
-            })}
-            clear
-            placeholder="請輸入電郵地址"
-          >
-            聯絡電郵
-          </InputItem>
-
           <List.Item
             extra={
               <Button type="ghost" size="large" inline onClick={this.submit}>

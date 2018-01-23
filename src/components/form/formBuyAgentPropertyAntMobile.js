@@ -338,14 +338,6 @@ class FormBuyAgentPropertyAntMobile extends React.Component {
                   placeholder="請輸入電話"
                 >聯絡手機</InputItem>
 
-                <InputItem
-                  {...getFieldProps('contactEmail', {
-                    initialValue : property.contactEmail,
-                  })}
-                  clear
-                  placeholder="請輸入電郵地址"
-                  type="email"
-                >聯絡電郵</InputItem>
 
 
 
