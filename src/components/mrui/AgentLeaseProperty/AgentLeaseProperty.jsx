@@ -4,12 +4,10 @@ import PropTypes from 'prop-types';
 //import Carousel from '../Carousel/index';
 
 import {
-    Label,
-    Pre,
-    BackgroundImage,
-    Flex,
-    Text
-  } from "rebass";
+  BackgroundImage,
+  Flex,
+  Text
+} from "rebass";
 
   import MrCard from '../MrCard';
 
@@ -105,15 +103,14 @@ export class AgentLeaseProperty extends React.Component {
 
           <MrCard.HasHomeHardware value={p.hasHomeHardware} />
           <MrCard.IsPetAllowed value={p.isPetAllowed} />
-          <MrCard.IsFreeForSevenDay value={p.isFreeForSevenDay} />
           <MrCard.LeaseDeposit value={p.leaseDepositPerMonth} />
-
+          <MrCard.LeaseTaxInclusive value={true} />
           <MrCard.LineText>
             <Text f={3}>其他</Text>
           </MrCard.LineText>
           <MrCard.LeasingPeriod value={p.leasingPeriod} />
-          <MrCard.DueDay value={p.dueDay} />
-          <MrCard.EarlyTimeToView value={p.earlyTimeToView}  />
+          <MrCard.DueDay value={p.dueDayLabel} />
+          <MrCard.EarlyTimeToView value={p.earlyTimeToViewLabel}  />
           <MrCard.DayListed value={p.dayListed} />
 
           

@@ -38,6 +38,8 @@ import ViewLeaseDeposit from './ViewLeaseDeposit';
 import ViewLeasePrice from './ViewLeasePrice';
 import ViewNetSquareLeasePrice from './ViewNetSquareLeasePrice';
 import ViewNumOfPeopleLiving  from './ViewNumOfPeopleLiving';
+import ViewAverageResponseTime  from './ViewAverageResponseTime';
+import ViewLeaseTaxInclusive from './ViewLeaseTaxInclusive';
 
 export { Card, Cell, LineText, ButtonOutline, ViewSalePrice, ViewNetSize, ViewLevel, 
          ViewIsPetAllowed,
@@ -72,6 +74,8 @@ export { Card, Cell, LineText, ButtonOutline, ViewSalePrice, ViewNetSize, ViewLe
          ViewLeaseDeposit,
          ViewLeasePrice,
          ViewNetSquareLeasePrice,
-         ViewNumOfPeopleLiving
+         ViewNumOfPeopleLiving,
+         ViewAverageResponseTime,
+         ViewLeaseTaxInclusive ,
     };
 

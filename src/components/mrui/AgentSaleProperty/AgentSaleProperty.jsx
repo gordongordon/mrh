@@ -4,26 +4,9 @@ import PropTypes from 'prop-types';
 // import Carousel from '../Carousel/index';
 
 import {
-  Avatar,
-  Star,
-  Row,
-  Column,
-  Small,
-  Sticky,
-  Label,
-  Pre,
-  Checkbox,
   BackgroundImage,
-  Border,
-  Divider,
-  Group,
-  Heading,
   Flex,
-  Box,
-  Absolute,
-  Relative,
-  Text,
-  Tooltip
+  Text
 } from "rebass";
 
 import MrCard from '../MrCard';
@@ -99,7 +82,7 @@ export class AgentSaleProperty extends React.Component {
           </MrCard.LineText>
           <MrCard.SalePrice value={p.salePrice} />
           <MrCard.NetSize value={p.netSize} />
-          <MrCard.NetSquarePrice value={13000} />
+          <MrCard.NetSquarePrice value={p.sellerNetSquarePrice} />
           <MrCard.Partition room={1} bathRoom={1} livingRoom={1} />
           <MrCard.LineText>
             <Text f={3}>特徵</Text>
@@ -112,7 +95,7 @@ export class AgentSaleProperty extends React.Component {
             <Text f={3}>其他</Text>
           </MrCard.LineText>
           <MrCard.School primary={95} secondary="馬鞍山區" />
-          <MrCard.EarlyTimeToView value={p.earlyTimeToView} />
+          <MrCard.EarlyTimeToView value={p.earlyTimeToViewLabel} />
           <MrCard.DayListed value={p.dayListed} />
           <MrCard.MonthlyPayment value={19389} />
           <MrCard.LineText>

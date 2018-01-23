@@ -312,7 +312,7 @@ export class Property {
 
   @computed
   get jobNatureLabel() {
-    return "職業" + LABEL_JOBNATURE[this.jobNature] + "/";
+    return "職業" + LABEL_JOBNATURE[this.jobNature] + "";
   }
 
   @computed
@@ -430,13 +430,13 @@ export class Property {
   @computed
   get dueDayLabel() {
     const time = this.getTimeInNum(this.dueDay);
-    return time.Months + "月" + time.Days + "日交吉/";
+    return time.Months + "月" + time.Days + "日";
   }
 
   @computed
   get earlyTimeToViewLabel() {
     const time = this.getTimeInNum(this.earlyTimeToView);
-    return time.Months + "月" + time.Days + "日後可睇樓/";
+    return time.Months + "月" + time.Days + "日";
   }
 
   @computed
@@ -513,6 +513,17 @@ export class Property {
      }
 
      const squarePrice = this.buyBudgetMax / this.netSizeMin;
+     return squarePrice.toFixed(0);
+  }
+
+  @computed
+  get sellerNetSquarePrice() {
+    //debugger
+     if ( (this.salePrice<= 0 ) || ( this.netSize <= 0) )  {
+       return 0;
+     }
+
+     const squarePrice = this.salePrice / this.netSize;
      return squarePrice.toFixed(0);
   }
 

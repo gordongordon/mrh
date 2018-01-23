@@ -41,7 +41,9 @@ import {
     ViewNetSquareLeasePrice,
     ViewLeasePrice,
     ViewLeaseDeposit,
-    ViewNumOfPeopleLiving
+    ViewNumOfPeopleLiving,
+    ViewAverageResponseTime,
+    ViewLeaseTaxInclusive
 }
     from '../Elements';
 
@@ -92,9 +94,11 @@ MrCard.LeasePrice = ViewLeasePrice;
 MrCard.LeaseDeposit = ViewLeaseDeposit;
 MrCard.NetSquareLeasePrice = ViewNetSquareLeasePrice;
 MrCard.NumOfPeopleLiving = ViewNumOfPeopleLiving;
+MrCard.AverageResponseTime = ViewAverageResponseTime;
+MrCard.LeaseTaxInclusive = ViewLeaseTaxInclusive;
 
 MrCard.defaultProps = {
-    theme: defaultTheme,
+    // theme: defaultTheme,
 };
 
 export default MrCard;

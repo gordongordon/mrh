@@ -138,12 +138,12 @@ export class Propertyhk extends Property {
         console.log("child_removed - request.size", request.size);
       });
 
-      Promise.all([addPromise, changePromise, removePromise]).then(function(results) {
-        console.log( 'propertyhk init successful');
-        return request;
-      }).catch( error => {
-        console.log( 'propertyhk can\'t be inited' );
-      })
+      // Promise.all([addPromise, changePromise, removePromise]).then(function(results) {
+      //   console.log( 'propertyhk init successful');
+      //   return request;
+      // }).catch( error => {
+      //   console.log( 'propertyhk can\'t be inited' );
+      // })
 
     return request;
   };

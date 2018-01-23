@@ -1,29 +1,12 @@
 import React from 'react';
 import defaultTheme from '../theme';
 import PropTypes from 'prop-types';
-import Carousel from '../Carousel/index';
+// import Carousel from '../Carousel/index';
 
 import {
-  Avatar,
-  Star,
-  Row,
-  Column,
-  Small,
-  Sticky,
-  Label,
-  Pre,
-  Checkbox,
   BackgroundImage,
-  Border,
-  Divider,
-  Group,
-  Heading,
   Flex,
-  Box,
-  Absolute,
-  Relative,
-  Text,
-  Tooltip
+  Text
 } from "rebass";
 
 import MrCard from '../MrCard';
@@ -48,7 +31,7 @@ export class AgentRentProperty extends React.Component {
     //  this.props.property.realTime = moment( t );
 
     // Will be active while production
-    //this.props.property.setTimeStamp();
+    this.props.property.setTimeStamp();
 
     //    console.log( 'realTime will mount', this.props.property.realTime)
   }
@@ -119,35 +102,40 @@ Exit window     *
             <Text f={3}>租客資料</Text>
           </MrCard.LineText>
 
-          <MrCard.JobNature value={p.jobNature} />
+      
           <MrCard.Income value={p.income} />
-          <MrCard.NumOfPeopleLiving value={p.numOfPeopleLiving} />
-          <MrCard.Partition value={p.Partition} />
+          <MrCard.JobNature value={p.jobNatureLabel} />
+
+
 
           <MrCard.LineText>
             <Text f={3}>要求</Text>
           </MrCard.LineText>
-          <MrCard.HasHomeHardware value={p.hasHomeHardware} />
+          <MrCard.NumOfPeopleLiving value={p.numOfPeopleLiving} />
           <MrCard.IsPetAllowed value={p.isPetAllowed} />
-          <MrCard.LeasePeriod value={p.leasePeriod} />
+          <MrCard.LeasingPeriod value={p.leasingPeriod} />
+
           <MrCard.LineText>
             <Text f={3}>時間</Text>
           </MrCard.LineText>
-          <MrCard.LeasingPeriod value={p.leasingPeriod} />
-          <MrCard.DueDay value={p.dueDay} />
-          <MrCard.EarlyTimeToView value={p.earlyTimeToView}  />
+
+          <MrCard.EarlyTimeToView value={p.earlyTimeToViewLabel}  />
+          <MrCard.DueDay value={p.dueDayLabel} />
           <MrCard.DayListed value={p.dayListed} />
+
           <MrCard.LineText>
-            
-            <Text f={3}>聯絡方式</Text>{" "}
+            <Text f={3}>聯絡方式</Text>
           </MrCard.LineText>
+
           <MrCard.AgentID value="E-3348778" />
           <MrCard.Avatar src="http://www.kowsinn.com/dc03.jpeg" />
           <MrCard.ContactName value={p.contactName}/>
           <MrCard.AgentStar value={3} />
+
           <MrCard.LineText>
             <Text f={3}>下一步行動</Text>
           </MrCard.LineText>
+
           <MrCard.Cell px={2} py={1} width={1} align="center">
             <MrCard.ButtonOutline
               width={7 / 22}
