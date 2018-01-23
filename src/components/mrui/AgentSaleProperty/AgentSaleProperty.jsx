@@ -16,7 +16,7 @@ export class AgentSaleProperty extends React.Component {
   constructor(props) {
     super(props);
 
-    this.triggetNext = this.triggetNext.bind(this);
+    // this.triggetNext = this.triggetNext.bind(this);
 
     // this.state = {
     //     value: null,
@@ -74,7 +74,7 @@ export class AgentSaleProperty extends React.Component {
 
     return (
       <MrCard w={19 / 20}>
-        <MrCard.UserSaleHeading location={p.addressLocationLabel} building={p.nameOfBuildingLabel} recordNumber={1} />
+        <MrCard.AgentSaleHeading location={p.addressLocationLabel} building={p.nameOfBuildingLabel} recordNumber={1} />
         {BackgroundImage && <BackgroundImage ratio={2 / 5} src="http://www.kowsinn.com/dc02.jpg" />}
         <Flex wrap mx={1} my={1}>
           <MrCard.LineText>
@@ -136,22 +136,6 @@ export class AgentSaleProperty extends React.Component {
   }
 }
 
-
-
-{/* <Title className="cmui-Title">迎海 Double Cove</Title>
-                <SubTitle className="cmui-SubTitle">烏溪沙路8號 地區：馬鞍山</SubTitle>
-                <Content>
-                <ContentItem>最少實用面積: </ContentItem><ContentItem left>330</ContentItem>
-                <ContentItem>付出預算上限:</ContentItem><ContentItem left>$800</ContentItem>
-                <ContentItem>你會唔會養物:</ContentItem><ContentItem left>會</ContentItem>
-                <ContentItem>冇樓睇租左俾人會唔會買: </ContentItem><ContentItem left>330</ContentItem>
-                <ContentItem>間隔::</ContentItem><ContentItem left> Studio</ContentItem>
-                </Content>
-                <Button className="cmui-Button" onClick={ () => onClick() } first>Set Phone </Button>
-                <Button className="cmui-Button" onClick={ () => onClick() } first>Text Me </Button>
-                <Button className="cmui-Button" onClick={ () => onClick() } first> Call 96181448 </Button> */}
-
-
 AgentSaleProperty.propTypes = {
   steps: PropTypes.object,
   triggerNextStep: PropTypes.func,
@@ -173,78 +157,3 @@ AgentSaleProperty.defaultProps = {
   isFirst: false,
   isLast: false,
 };
-
-{/* <GenericContainer className="cmui-GenericContainer">
-               <Title className="cmui-Title">Title</Title>
-               <SubTitle className="cmui-SubTitle">SubTitle</SubTitle>
-               <Content className="cmui-Content">Content</Content>
-               <Footer className="cmui-Footer">Footer</Footer>
-           </GenericContainer> */}
-
-//    <Carousel.GenericContainer 
-//    className="cmui-GenericContainer"
-//    opened="true"
-//    width="100%">
-//     <Carousel.Title className="cmui-Title" isFirst={isFirst} isLast={isLast}>{p.addressLocationLabel}/{p.nameOfBuildingLabel}</Carousel.Title>
-//     <Carousel.SubTitle className="cmui-SubTitle">{p.roleName} : {p.contactNameLabel}</Carousel.SubTitle>
-//     <Carousel.Content>
-//     <Carousel.LineText> Agent Sale Property </Carousel.LineText>
-//     <Carousel.ContentItem>: {p.partitionLabel}</Carousel.ContentItem>
-//     <Carousel.ContentItem>: {p.salePriceLabel}</Carousel.ContentItem>
-//     <Carousel.ContentItem>: {p.isPetAllowedLabel}</Carousel.ContentItem>
-//     <Carousel.ContentItem>: {p.isViewAbleLabel}</Carousel.ContentItem>
-//     <Carousel.ContentItem>: {p.levelLabel}</Carousel.ContentItem>
-//     <Carousel.ContentItem>: {p.roleName}</Carousel.ContentItem>
-//     <Carousel.ContentItem>: {p.howFresh}</Carousel.ContentItem>
-//     <Carousel.ContentItem>: {p.netSizeLabel}</Carousel.ContentItem>
-//     <Carousel.ContentItem>: {p.dayListed}</Carousel.ContentItem>
-//     <Carousel.ContentItem>: {p.isSaleWithLeaseLabel}</Carousel.ContentItem>
-//     <Carousel.ContentItem>: {p.dueDayLabel}</Carousel.ContentItem>
-//     <Carousel.ContentItem>: {p.earlyTimeToViewLabel}</Carousel.ContentItem>
-//     <Carousel.ContentItem>f:{p.fbid}-r:{p.relatedFbid}</Carousel.ContentItem>
-//     <Carousel.Toggle/>
-//     </Carousel.Content>
-//     {
-//         onCall && <Carousel.Button className="cmui-Button" onClick={ () => onCall( p.contactPhone ) } first> { p.contactPhone} </Carousel.Button>
-//     }
-//     {
-//         onTriggetNext && <Carousel.Button className="cmui-Button" onClick={ () => onTriggetNext() } first> triggetNext </Carousel.Button>
-//     }
-// </Carousel.GenericContainer>
-
-
-
-
-{/* <Carousel.GenericContainer 
-           className="cmui-GenericContainer"
-           opened="true"
-           width="100%">
-            <Carousel.Title className="cmui-Title" isFirst={isFirst} isLast={isLast}>{p.addressLocationLabel}/{p.nameOfBuildingLabel}</Carousel.Title>
-            <Carousel.SubTitle className="cmui-SubTitle">{p.roleName} : {p.contactNameLabel}</Carousel.SubTitle>
-            <Carousel.Content>
-            <Carousel.LineText> Agent Sale Property </Carousel.LineText>
-            <Carousel.ContentItem>: {p.partitionLabel}</Carousel.ContentItem>
-            <Carousel.ContentItem>: {p.salePriceLabel}</Carousel.ContentItem>
-            <Carousel.ContentItem>: {p.isPetAllowedLabel}</Carousel.ContentItem>
-            <Carousel.ContentItem>: {p.isViewAbleLabel}</Carousel.ContentItem>
-            <Carousel.ContentItem>: {p.levelLabel}</Carousel.ContentItem>
-            <Carousel.ContentItem>: {p.roleName}</Carousel.ContentItem>
-            <Carousel.ContentItem>: {p.howFresh}</Carousel.ContentItem>
-            <Carousel.ContentItem>: {p.netSizeLabel}</Carousel.ContentItem>
-            <Carousel.ContentItem>: {p.dayListed}</Carousel.ContentItem>
-            <Carousel.ContentItem>: {p.isSaleWithLeaseLabel}</Carousel.ContentItem>
-            <Carousel.ContentItem>: {p.dueDayLabel}</Carousel.ContentItem>
-            <Carousel.ContentItem>: {p.earlyTimeToViewLabel}</Carousel.ContentItem>
-            <Carousel.ContentItem>f:{p.fbid}-r:{p.relatedFbid}</Carousel.ContentItem>
-            <Carousel.Toggle/>
-            </Carousel.Content>
-            {
-                onCall && <Carousel.Button className="cmui-Button" onClick={ () => onCall( p.contactPhone ) } first> { p.contactPhone} </Carousel.Button>
-            }
-                            {
-                    onWhatsapp && <Carousel.Button className="cmui-Button" onClick={ () => onWhatsapp( p.contactPhone ) } first> Whatsapp { p.contactPhone} </Carousel.Button>
-                }
-            {
-                onTriggetNext && <Carousel.Button className="cmui-Button" onClick={ () => onTriggetNext() } first> triggetNext </Carousel.Button>
-            }
-        </Carousel.GenericContainer> */}

@@ -31,7 +31,7 @@ export class AgentLeaseProperty extends React.Component {
         //  this.props.property.realTime = moment( t );
 
         // Will be active while production
-        //this.props.property.setTimeStamp();
+        this.props.property.setTimeStamp();
     
         //    console.log( 'realTime will mount', this.props.property.realTime)
       }    

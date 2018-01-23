@@ -55,7 +55,6 @@ export class AgentRentProperty extends React.Component {
 收入範圍: $16k ~20k
 職業: 政府工
 
-
 ————要求————
 同居人數: 2
 養寵物: ✔
@@ -76,6 +75,7 @@ CALL 98765374
 Whatsapp 98765374
 Exit window     * 
    */
+
   render() {
     const onWhatsapp = this.props.onWhatsapp;
     const onCall = this.props.onCall;
@@ -87,26 +87,19 @@ Exit window     *
     const isFirst = this.props.isFirst;
     const isLast = this.props.isLast;
 
-
-
     return (
       <MrCard w={19 / 20}>
         <MrCard.AgentRentHeading location={p.addressLocationLabel} building={p.nameOfBuildingLabel} recordNumber={1} />
 
         {BackgroundImage && <BackgroundImage ratio={2 / 5} src="http://www.kowsinn.com/dc02.jpg" />}
-        
+
         <Flex wrap mx={1} my={1}>
-          
-          
           <MrCard.LineText>
             <Text f={3}>租客資料</Text>
           </MrCard.LineText>
 
-      
           <MrCard.Income value={p.income} />
           <MrCard.JobNature value={p.jobNatureLabel} />
-
-
 
           <MrCard.LineText>
             <Text f={3}>要求</Text>
@@ -119,7 +112,7 @@ Exit window     *
             <Text f={3}>時間</Text>
           </MrCard.LineText>
 
-          <MrCard.EarlyTimeToView value={p.earlyTimeToViewLabel}  />
+          <MrCard.EarlyTimeToView value={p.earlyTimeToViewLabel} />
           <MrCard.DueDay value={p.dueDayLabel} />
           <MrCard.DayListed value={p.dayListed} />
 
@@ -129,7 +122,7 @@ Exit window     *
 
           <MrCard.AgentID value="E-3348778" />
           <MrCard.Avatar src="http://www.kowsinn.com/dc03.jpeg" />
-          <MrCard.ContactName value={p.contactName}/>
+          <MrCard.ContactName value={p.contactName} />
           <MrCard.AgentStar value={3} />
 
           <MrCard.LineText>

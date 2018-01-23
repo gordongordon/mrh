@@ -312,7 +312,7 @@ export class Property {
 
   @computed
   get jobNatureLabel() {
-    return "職業" + LABEL_JOBNATURE[this.jobNature] + "";
+    return LABEL_JOBNATURE[this.jobNature];
   }
 
   @computed

@@ -2,9 +2,8 @@
 import React from "react";
 import defaultTheme from "../theme";
 import PropTypes from "prop-types";
-import moment from "moment";
+//import moment from "moment";
 
-//import Carousel from "../Carousel/index";
 import {
   BackgroundImage,
   Flex,
@@ -56,7 +55,7 @@ export class AgentBuyProperty extends React.Component {
 
     return (
       <MrCard w={19 / 20}>
-        <MrCard.UserBuyHeading location={p.addressLocationLabel} building={p.nameOfBuildingLabel} recordNumber={1} />
+        <MrCard.AgentBuyHeading location={p.addressLocationLabel} building={p.nameOfBuildingLabel} recordNumber={1} />
         {isBackgroundImage && BackgroundImage && <BackgroundImage ratio={2 / 5} src="http://www.kowsinn.com/dc02.jpg" />}
         {p.uid}
         <Flex wrap mx={1} my={1}>
@@ -64,27 +63,16 @@ export class AgentBuyProperty extends React.Component {
           <MrCard.LineText>
             <Text f={3}>重點 </Text>
           </MrCard.LineText>
+          <MrCard.EarlyTimeToView value={p.earlyTimeToViewLabel}  />
 
-          <MrCard.BuyBudgetMax value={p.buyBudgetMax} />
-          <MrCard.NetSizeMin value={p.netSizeMin} />
-          <MrCard.NetSquarePrice value={p.buyerNetSquarePrice} />
-          <MrCard.Partition room={p.numOfRoom} livingRoom={p.numOfLivingroom} bathRoom={p.numOfBathroom} />
 
           <MrCard.LineText>  <Text f={3}>特徵</Text> </MrCard.LineText>
-          <MrCard.IsPetAllowed value={p.isPetAllowed} />
-          <MrCard.Level value={p.levelLabel} />
-          <MrCard.IsViewAble value={p.isViewAble} />
-          <MrCard.IsSaleWithLease value={p.isSaleWithLease} />
 
           <MrCard.LineText>
             <Text f={3}>其他</Text>
           </MrCard.LineText>
-          <MrCard.School pramary={95} secondary="馬鞍山區" />
-          <MrCard.EarlyTimeToView value={p.earlyTimeToView}  />
           <MrCard.DayListed value={p.dayListed} />
 
-
-          <MrCard.MonthlyPayment value={19000} />
           <MrCard.LineText>
             <Text f={3}>聯絡方式</Text>
           </MrCard.LineText>
