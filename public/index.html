@@ -2,7 +2,6 @@
 <html lang="HK" data-scale="true">
 <head>
   <title>Mr.House</title>
-  <link rel="manifest" href="/manifest.json">
   <meta name="theme-color" content="#317EFB" />
   <!-- Chrome, Firefox OS and Opera -->
   <meta name="theme-color" content="#317EFB">
@@ -26,6 +25,17 @@
 
   <script src="/pace/pace.min.js"></script>
   <link href="/pace/themes/green/pace-theme-mac-osx.css" rel="stylesheet" />
+  <!-- WebPUsh -->
+  <link rel="manifest" href="/manifest.json" />
+<script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async=""></script>
+<script>
+  var OneSignal = window.OneSignal || [];
+  OneSignal.push(function() {
+    OneSignal.init({
+      appId: "d4400f32-5062-449a-b626-987fbb9ca715",
+    });
+  });
+</script>
   <!-- 
   <script>
     if ('serviceWorker' in navigator) {

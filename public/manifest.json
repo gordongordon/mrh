@@ -1,6 +1,8 @@
 {
   "short_name": "Mr.House",
   "name": "Mr.House",
+  "gcm_sender_id": "482941778795",
+  "gcm_sender_id_comment": "Do not change the GCM Sender ID"
   "icons": [
     {
       "src": "launcher-icon-1x.png",
