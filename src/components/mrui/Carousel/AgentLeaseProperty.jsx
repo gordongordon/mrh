@@ -11,12 +11,12 @@ import {
 
   import MrCard from '../MrCard';
 
-  export const AgentLeaseProperty = ( { onWhatsapp, onCall, onTriggetNext, p  } ) => (
+  export const AgentLeaseProperty = ( { onWhatsapp, onCall, onTriggetNext, p,isBackgroundImage  } ) => (
 
       <MrCard w={19 / 20}>
       <MrCard.AgentLeaseHeading location={p.addressLocationLabel} building={p.nameOfBuildingLabel} recordNumber={1} />
 
-        {BackgroundImage && <BackgroundImage ratio={2 / 5} src="http://www.kowsinn.com/dc02.jpg" />}
+        {isBackgroundImage && <BackgroundImage ratio={2 / 5} src="http://www.kowsinn.com/dc02.jpg" />}
         <Flex wrap mx={1} my={1}>
           <MrCard.LineText>
             <Text f={3}>重點</Text>
@@ -56,7 +56,7 @@ import {
           <MrCard.Cell px={2} py={1} width={1} align="center">
             {onCall &&
               <MrCard.ButtonOutline
-                onClick={() => onCall(property.contactPhone)}
+                onClick={() => onCall(p.contactPhone)}
                 width={7 / 22}
                 children={p.contactPhone}
                 f={5}
@@ -66,7 +66,7 @@ import {
             {onWhatsapp &&
               <MrCard.ButtonOutline
 
-                onClick={() => onWhatsapp(property.contactPhone)}
+                onClick={() => onWhatsapp(p.contactPhone)}
                 mx={1}
                 width={7 / 22}
                 children="Whatsapp"

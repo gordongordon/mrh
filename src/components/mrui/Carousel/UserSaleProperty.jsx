@@ -12,10 +12,10 @@ import {
 
 import MrCard from '../MrCard';
 
-export const UserSaleProperty = ( { onWhatsapp, onCall, onTriggetNext, p  } ) => (
+export const UserSaleProperty = ( { onWhatsapp, onCall, onTriggetNext, p,isBackgroundImage, onResponse, index  } ) => (
       <MrCard w={19 / 20}>
-        <MrCard.UserSaleHeading location={p.addressLocationLabel} building={p.nameOfBuildingLabel} recordNumber={1} />
-        {BackgroundImage && <BackgroundImage ratio={2 / 5} src="http://www.kowsinn.com/dc02.jpg" />}
+        <MrCard.UserSaleHeading location={p.addressLocationLabel} building={p.nameOfBuildingLabel} recordNumber={index} />
+        {isBackgroundImage && <BackgroundImage ratio={2 / 5} src="http://www.kowsinn.com/dc02.jpg" />}
         <Flex wrap mx={1} my={1}>
           <MrCard.LineText>
             <Text f={3}>重點</Text>
@@ -49,6 +49,15 @@ export const UserSaleProperty = ( { onWhatsapp, onCall, onTriggetNext, p  } ) =>
             <Text f={3}>下一步行動</Text>
           </MrCard.LineText>
           <MrCard.Cell px={2} py={1} width={1} align="center">
+          {onResponse &&
+              <MrCard.ButtonOutline
+                onClick={() => onResponse(p)}
+                width={7 / 22}
+                children="Response Now!"
+                f={5}
+                color="#F55869"
+              />
+            }            
             {onCall &&
               <MrCard.ButtonOutline
                 onClick={() => onCall(p.contactPhone)}

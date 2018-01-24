@@ -6,6 +6,8 @@ import {propertys} from 'userModelView';
 import {ListOfMatchOldSalePropertys} from '../listOfMatch/listOfMatchOldSalePropertys';
 import { SingleSaleUserMatchViewWrapper } from "../singlePropertyView/singleSaleUserMatchView";
 import {observer } from "mobx-react";
+import MobxStore from "mobxStore";
+import views from "views";
 //import {AgentBuyProperty as ItemView } from "react-simple-chatbot";
 //import {AgentBuyProperty as ItemView } from "../mrui/AgentBuyProperty/AgentBuyProperty";
 //import AgentBuyProperty from "../mrui/AgentBuyProperty/AgentBuyProperty";
@@ -25,18 +27,34 @@ export default class SlickRentProperty extends React.Component {
       trigger: false
     };
     this.display = this.display.bind(this);
+    this.onResponse = this.onResponse.bind( this );
+
   }
 
 
   componentDidMount() {
     // simulate img loading
-    setTimeout(() => {
-      this.setState({
-        data: ['AiyWuByWklrrUDlFignR', 'TekJlZRVCjLFexlOCuWn', 'IJOtIlfsYdTyaDTRVrLI'],
-      });
-    }, 100);
+    // setTimeout(() => {
+    //   this.setState({
+    //     data: ['AiyWuByWklrrUDlFignR', 'TekJlZRVCjLFexlOCuWn', 'IJOtIlfsYdTyaDTRVrLI'],
+    //   });
+    // }, 100);
   }
 
+  
+  /**
+   * Response to property, with filerID
+   */
+  onResponse( property ) {
+    console.log( 'onResponse');
+
+    MobxStore.app.passByRef = property ;
+    MobxStore.router.goTo(views.leaseAgentForm, {
+      keyID: property.fbid,
+      typeTo: property.typeTo,
+      filterID: this.props.filterID
+    })
+  }
 
   display( propertys ) {
     const list = propertys;
@@ -64,6 +82,8 @@ export default class SlickRentProperty extends React.Component {
           isLast={false}
           index={count}
           isBackgroundImage={false}
+          onResponse={this.onResponse}
+          
         />
       );      
     } else 
@@ -76,6 +96,7 @@ export default class SlickRentProperty extends React.Component {
           isLast={false}
           index={count}
           isBackgroundImage={false}
+          onResponse={this.onResponse}
           
         />
       );      

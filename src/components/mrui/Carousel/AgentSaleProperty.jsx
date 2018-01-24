@@ -10,10 +10,10 @@ import {
 
 import MrCard from '../MrCard';
 
-export const AgentSaleProperty = ( { onWhatsapp, onCall, onTriggetNext, p  } ) => (
+export const AgentSaleProperty = ( { onWhatsapp, onCall, onTriggetNext, p,isBackgroundImage  } ) => (
       <MrCard w={19 / 20}>
         <MrCard.AgentSaleHeading location={p.addressLocationLabel} building={p.nameOfBuildingLabel} recordNumber={1} />
-        {BackgroundImage && <BackgroundImage ratio={2 / 5} src="http://www.kowsinn.com/dc02.jpg" />}
+        {isBackgroundImage && <BackgroundImage ratio={2 / 5} src="http://www.kowsinn.com/dc02.jpg" />}
         <Flex wrap mx={1} my={1}>
           <MrCard.LineText>
             <Text f={3}>重點</Text>

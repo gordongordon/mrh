@@ -1,13 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Heading, Relative, Absolute, Pre } from 'rebass';
+import { Heading, Relative, Absolute, Pre,  Label} from 'rebass';
 
 const ViewUserBuyHeading = ({ location, building, recordNumber }) => (
     <Heading p={1} f='1rem' color="white" bg={["blue", "#F55869"]}>
             想買樓盤: {location} , {building}
             <Relative>
                 <Absolute bottom right>
-                    <Pre>編號:MOS-{recordNumber} </Pre>
+                <Label f={3}>LLLL編號:MOS-{recordNumber} </Label>
                 </Absolute>
             </Relative>
     </Heading>);

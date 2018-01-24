@@ -31,11 +31,11 @@ export default class SlickAgentRentProperty extends React.Component {
 
   componentDidMount() {
     // simulate img loading
-    setTimeout(() => {
-      this.setState({
-        data: ['AiyWuByWklrrUDlFignR', 'TekJlZRVCjLFexlOCuWn', 'IJOtIlfsYdTyaDTRVrLI'],
-      });
-    }, 100);
+    // setTimeout(() => {
+    //   this.setState({
+    //     data: ['AiyWuByWklrrUDlFignR', 'TekJlZRVCjLFexlOCuWn', 'IJOtIlfsYdTyaDTRVrLI'],
+    //   });
+    // }, 100);
   }
 
   triggetNext() {
@@ -136,6 +136,8 @@ export default class SlickAgentRentProperty extends React.Component {
           onCall={this.onCall}
           onTriggetNext={this.triggetNext}
           onSharePhone={this.onSharePhone}
+          isBackgroundImage={true}
+
           isFirst={true}
           isLast={false}
         />
@@ -153,6 +155,8 @@ export default class SlickAgentRentProperty extends React.Component {
           onCall={this.onCall}
           onTriggetNext={this.triggetNext}
           onSharePhone={this.onSharePhone}
+          isBackgroundImage={true}
+
           isFirst={false}
           isLast={false}
           

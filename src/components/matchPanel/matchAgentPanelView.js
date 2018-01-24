@@ -189,16 +189,16 @@ class MatchAgentPanelView extends React.Component {
     if (this.state.selectedSegmentIndex === 0 ) {
     switch ( selectedTab ) {
       //case 'buy' : return <ListOfMatchAgentBuyPropertys segment="filter" filter={filter} propertys={filter.buyRequest} filterID={MobxStore.router.params.keyID}/>;
-      case 'buy' : return <SlickBuyProperty keyID={MobxStore.router.params.keyID} propertys={filter.buyRequest}/>
+      case 'buy' : return <SlickBuyProperty keyID={MobxStore.router.params.keyID} propertys={filter.buyRequest} filterID={MobxStore.router.params.keyID} />
       break;
-      case 'sale' : return <SlickSaleProperty keyID={MobxStore.router.params.keyID} propertys={filter.saleRequest}/>
+      case 'sale' : return <SlickSaleProperty keyID={MobxStore.router.params.keyID} propertys={filter.saleRequest} filterID={MobxStore.router.params.keyID}/>
      // case 'sale': return <ListOfMatchAgentSalePropertys  segment="filter" filter={filter} propertys={filter.saleRequest} filterID={MobxStore.router.params.keyID}/>;
       break;
-      case 'rent' : return <SlickSaleProperty keyID={MobxStore.router.params.keyID} propertys={filter.rentRequest}/>
+      case 'rent' : return <SlickRentProperty keyID={MobxStore.router.params.keyID} propertys={filter.rentRequest} filterID={MobxStore.router.params.keyID}/>
       
       //case 'rent': return <ListOfMatchAgentRentPropertys segment="filter" filter={filter} propertys={filter.rentRequest} filterID={MobxStore.router.params.keyID}/>;
       break;
-      case 'lease' : return <SlickSaleProperty keyID={MobxStore.router.params.keyID} propertys={filter.leaseRequest}/>
+      case 'lease' : return <SlickLeaseProperty keyID={MobxStore.router.params.keyID} propertys={filter.leaseRequest} filterID={MobxStore.router.params.keyID}/>
 //      case 'lease': return <ListOfMatchAgentLeasePropertys segment="filter" filter={filter} propertys={filter.leaseRequest} filterID={MobxStore.router.params.keyID}/>;
       break;
     } } else {
