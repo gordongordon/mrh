@@ -12,48 +12,7 @@ import {
 
 import MrCard from '../MrCard';
 
-export class AgentBuyProperty extends React.Component {
-
-  static displayName = 'AgentBuyProperty';
-
-  constructor(props) {
-    super(props);
-
-    // this.triggetNext = this.triggetNext.bind(this);
-  }
-
-  // update property's timestamp in order to display howFresh..
-  componentWillMount() {
-    // Trigger dayListed Field! 
-    this.props.property.setTimeStamp();
-  }
-
-  // // For Chatbot Custom Component Return
-  // triggetNext() {
-  //   const label = "gordon";
-  //   console.log("triggetNext() ");
-  //   this.setState({ trigger: true }, () => {
-  //     this.props.triggerNextStep({ value: label, label: label });
-  //   });
-  // }
-
-
-  render() {
-    const onCall = this.props.onCall;
-    const onWhatsapp = this.props.onWhatsapp;
-    const onTriggetNext = this.props.onTriggetNext;
-    const index = this.props.index;
-    const isBackgroundImage = this.props.isBackgroundImage;
-
-    //const onSharePhone = this.props.onSharePhone;
-    //const status = this.props.status;
-    //const fStatus = this.props.fStatus;
-
-    const p = this.props.property;
-    const isFirst = this.props.isFirst;
-    const isLast = this.props.isLast;
-
-    return (
+export const AgentBuyProperty = ( { onWhatsapp, onCall, onTriggetNext, p  } ) => (
       <MrCard w={19 / 20}>
         <MrCard.AgentBuyHeading location={p.addressLocationLabel} building={p.nameOfBuildingLabel} recordNumber={1} />
         {isBackgroundImage && BackgroundImage && <BackgroundImage ratio={2 / 5} src="http://www.kowsinn.com/dc02.jpg" />}
@@ -116,30 +75,18 @@ export class AgentBuyProperty extends React.Component {
         </Flex>
       </MrCard>
     );
-  }
-}
 
 
 AgentBuyProperty.propTypes = {
-  steps: PropTypes.object,
-  triggerNextStep: PropTypes.func,
-  onWhatsapp: PropTypes.func,
-  onClick: PropTypes.func,
-  status: PropTypes.object,
-  fStatus: PropTypes.object,
-  property: PropTypes.object,
-  isFirst: PropTypes.bool,
-  isLast: PropTypes.bool,
-  isBackgroundImage: PropTypes.bool
+  onWhatsapp : PropTypes.func,
+  onCall : PropTypes.func,
+   onTriggetNext : PropTypes.func,
+    p : PropTypes.object, 
 };
 
 AgentBuyProperty.defaultProps = {
-  steps: undefined,
-  triggerNextStep: undefined,
-  status: undefined,
-  fStatus: undefined,
-  property: undefined,
-  isFirst: false,
-  isLast: false,
-  isBackgroundImage: true
+  onWhatsapp :  undefined,
+  onCall :  undefined,
+   onTriggetNext :  undefined,
+    p :  undefined,
 };

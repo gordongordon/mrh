@@ -131,7 +131,7 @@ export default class SlickAgentBuyProperty extends React.Component {
         <ItemView key={keyID}
           status={status}
           filter={filter}
-          property={property}
+          p={property}
           fStatus={fStatus}
           onWhatsapp={this.onWhatsapp}
           onCall={this.onCall}
@@ -148,7 +148,7 @@ export default class SlickAgentBuyProperty extends React.Component {
         <ItemView key={keyID}
           status={status}
           filter={filter}
-          property={property}
+          p={property}
           fStatus={fStatus}
           onWhatsapp={this.onWhatsapp}
           onCall={this.onCall}

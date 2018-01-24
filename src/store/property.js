@@ -285,6 +285,7 @@ export class Property {
 
   @computed
   get dayListed() {
+    this.setTimeStamp();
     const start = moment(this.createdAt);
     const end = moment(this.realTime);
     const sDiff = end.diff(start, "seconds");

@@ -11,78 +11,7 @@ import {
 
   import MrCard from '../MrCard';
 
-export class AgentLeaseProperty extends React.Component {
-    constructor( props ) {
-        super( props );
-
-        //this.triggetNext = this.triggetNext.bind(this);
-
-        // this.state = {
-        //   value: null,
-        //   trigger: false
-        // };
-        
-    }
-
-    // update property's timestamp in order to display howFresh.. 
-    componentWillMount() {
-        //const p = this.props;
-        //    const t = moment().format('YYYY-MM-DD HH:mm:ss');
-        //  this.props.property.realTime = moment( t );
-
-        // Will be active while production
-        this.props.property.setTimeStamp();
-    
-        //    console.log( 'realTime will mount', this.props.property.realTime)
-      }    
-
-    // // For Chatbot Custom Component Return 
-    // triggetNext() {
-        
-    //     const label = 'gordon';
-    //     console.log( 'triggetNext() ');
-    //     this.setState({ trigger: true }, () => {
-    //       this.props.triggerNextStep( { value: label, label : label });
-
-    //     });
-
-    // }
-
-    render() {
-        const onWhatsapp = this.props.onWhatsapp;
-        const onCall = this.props.onCall;
-        const onTriggetNext = this.props.onTriggetNext;
-        const isBackgroundImage = this.props.isBackgroundImage;
-
-        // const onSharePhone = this.props.onSharePhone;
-        //const status  = this.props.status;
-        //const fStatus = this.props.fStatus;
-        const p = this.props.property;
-        const isFirst = this.props.isFirst;
-        const isLast = this.props.isLast;
-        
-
-        // 出租樓盤: 名城, 大圍
-
-        // ————重點————
-        // 租金(元): $13,000
-        // 實用面積(呎): 344
-        // 單位間隔: 2房1廳
-        // ————特徵————
-        // 養寵物: ✔
-        // 傢俬: ✔
-        // 七日免租期：✔
-        // ———— 時間————
-        // 最快睇樓: 1月20日
-        // 入住日期：1月27日
-        // 更新時間: 5分鐘前
-        // ————聯絡方式————
-        // 代理人：Gordon 
-        // CALL 98765374
-        // Whatsapp 98765374
-        // Exit window
-        
-        return (
+  export const AgentLeaseProperty = ( { onWhatsapp, onCall, onTriggetNext, p  } ) => (
 
       <MrCard w={19 / 20}>
       <MrCard.AgentLeaseHeading location={p.addressLocationLabel} building={p.nameOfBuildingLabel} recordNumber={1} />
@@ -125,52 +54,50 @@ export class AgentLeaseProperty extends React.Component {
             <Text f={3}>下一步行動</Text>
           </MrCard.LineText>
           <MrCard.Cell px={2} py={1} width={1} align="center">
-            <MrCard.ButtonOutline
-              width={7 / 22}
-              children="96181448"
-              f={5}
-              color="#F55869"
-            />
-            <MrCard.ButtonOutline
-              mx={1}
-              width={7 / 22}
-              children="Whatsapp"
-              f={5}
-              color="#F55869"
-            />
-            <MrCard.ButtonOutline
+            {onCall &&
+              <MrCard.ButtonOutline
+                onClick={() => onCall(property.contactPhone)}
+                width={7 / 22}
+                children={p.contactPhone}
+                f={5}
+                color="#F55869"
+              />
+            }
+            {onWhatsapp &&
+              <MrCard.ButtonOutline
+
+                onClick={() => onWhatsapp(property.contactPhone)}
+                mx={1}
+                width={7 / 22}
+                children="Whatsapp"
+                f={5}
+                color="#F55869"
+              />
+            }
+            {onTriggetNext && <MrCard.ButtonOutline
+              onClick={() => onTriggetNext()}
               width={7 / 22}
               children="Home"
               f={5}
               color="#F55869"
             />
+            }
           </MrCard.Cell>
         </Flex>
       </MrCard>
         );
 
-    }
-}
 
 AgentLeaseProperty.propTypes = {
-    steps: PropTypes.object,
-    triggerNextStep: PropTypes.func,
-    onWhatsapp : PropTypes.func,
-    onClick : PropTypes.func,
-    status  : PropTypes.object,
-    fStatus : PropTypes.object,
-    property: PropTypes.object,
-    isFirst : PropTypes.bool,
-    isLast  : PropTypes.bool,
-  };
-  
-AgentLeaseProperty.defaultProps = {
-    steps: undefined,
-    triggerNextStep: undefined,
-    status  : undefined,
-    fStatus : undefined,
-    property: undefined,
-    isFirst : false,
-    isLast  : false,
-  };
+  onWhatsapp : PropTypes.func,
+  onCall : PropTypes.func,
+   onTriggetNext : PropTypes.func,
+    p : PropTypes.object, 
+};
 
+AgentLeaseProperty.defaultProps = {
+  onWhatsapp :  undefined,
+  onCall :  undefined,
+   onTriggetNext :  undefined,
+    p :  undefined,
+};
