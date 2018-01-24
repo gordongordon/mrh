@@ -99,6 +99,8 @@ export default class SlickAgentLeaseProperty extends React.Component {
 
     var count = 0;
     list.forEach((property, keyID) => {
+      property.setTimeStamp();
+      
       //let status = inDirectCall.get( keyID);
 //      let status = property.getStatus(filter.fbid).get();      
       const fStatus = filter.getStatus(property.fbid).get();

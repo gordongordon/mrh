@@ -10,12 +10,12 @@ import {observer } from "mobx-react";
 //import {AgentBuyProperty as ItemView } from "../mrui/AgentBuyProperty/AgentBuyProperty";
 //import AgentBuyProperty from "../mrui/AgentBuyProperty/AgentBuyProperty";
 
-import { UserBuyProperty as ItemView } from "../mrui/Carousel/UserBuyProperty";
+import { UserRentProperty as ItemView } from "../mrui/Carousel/UserRentProperty";
 //const ItemView = AgentBuyProperty;
 const prompt = Modal.prompt;
 
 @observer
-export default class SlickBuyProperty extends React.Component {
+export default class SlickRentProperty extends React.Component {
   constructor( props ) {
     super( props )
     this.state = {
@@ -54,6 +54,7 @@ export default class SlickBuyProperty extends React.Component {
     var count = 0;
     list.forEach((property, keyID) => {
       property.setTimeStamp();
+
 
       if ( count == 0 ) {
       element.push(
@@ -112,12 +113,12 @@ export default class SlickBuyProperty extends React.Component {
   }
 }
 
-SlickBuyProperty.propTypes = {
-  //steps: PropTypes.object,
+SlickRentProperty.propTypes = {
+   //steps: PropTypes.object,
   //triggerNextStep: PropTypes.func,
 };
 
-SlickBuyProperty.defaultProps = {
+SlickRentProperty.defaultProps = {
   //steps: undefined,
   //triggerNextStep: undefined,
 };

@@ -261,8 +261,6 @@ class FormBuyAgentPropertyAntMobile extends React.Component {
           maxDate={maxDate}
         >
         <List.Item arrow="horizontal">最快幾時可以樓睇</List.Item>
-
-
        </DatePicker>
 
        <Picker  data={PARTITION}
@@ -319,28 +317,6 @@ class FormBuyAgentPropertyAntMobile extends React.Component {
                         />}
 
                 >要求有樓睇</List.Item>
-
-                <InputItem
-                  {...getFieldProps('contactName', {
-                    initialValue : property.contactName,
-                  }) }
-                  type="text"
-                  placeholder="請輸入姓名"
-                  clear
-                >姓名</InputItem>
-
-                <InputItem
-                  clear
-                  {...getFieldProps('contactPhone', {
-                    initialValue : property.contactPhone
-                  })}
-                  type="phone"
-                  placeholder="請輸入電話"
-                >聯絡手機</InputItem>
-
-
-
-
         <List.Item
               extra={<Button type="ghost" size="large" inline onClick={this.submit}>獲得匹配</Button>}
               multipleLine

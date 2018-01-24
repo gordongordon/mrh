@@ -172,7 +172,7 @@ export class Property {
     return this.text !== "";
   }
 
-  @action
+@action
   setTimeStamp() {
     const t = moment().format("YYYY-MM-DD HH:mm:ss");
     this.realTime = moment(t);
@@ -285,7 +285,7 @@ export class Property {
 
   @computed
   get dayListed() {
-    this.setTimeStamp();
+    //this.setTimeStamp();
     const start = moment(this.createdAt);
     const end = moment(this.realTime);
     const sDiff = end.diff(start, "seconds");

@@ -24,6 +24,8 @@ import { agentModel } from 'agentModelView';
 //import {SingleRentPropertyForMatchViewWrapper} from 'singleRentPropertyForMatchView'
 import { ControlAgentViewWrapper } from "../control/controlAgentView";
 
+
+// Views by listing
 import ListOfMatchAgentBuyPropertys from "../listOfMatch/listOfMatchAgentBuyPropertys";
 import ListOfMatchAgentSalePropertys from "../listOfMatch/listOfMatchAgentSalePropertys";
 import ListOfMatchAgentRentPropertys from "../listOfMatch/listOfMatchAgentRentPropertys";
@@ -38,10 +40,12 @@ import { Fb } from "firebase-store";
 import views from "views";
 
 /**
- * Handling Carousel 
+ * Views by Carousel  
  */
 import SlickBuyProperty from "../chatbot/slickBuyProperty";
 import SlickSaleProperty from "../chatbot/slickSaleProperty";
+import SlickLeaseProperty from "../chatbot/slickLeaseProperty";
+import SlickRentProperty from "../chatbot/slickRentProperty";
 
 
 
@@ -190,9 +194,12 @@ class MatchAgentPanelView extends React.Component {
       case 'sale' : return <SlickSaleProperty keyID={MobxStore.router.params.keyID} propertys={filter.saleRequest}/>
      // case 'sale': return <ListOfMatchAgentSalePropertys  segment="filter" filter={filter} propertys={filter.saleRequest} filterID={MobxStore.router.params.keyID}/>;
       break;
-      case 'rent': return <ListOfMatchAgentRentPropertys segment="filter" filter={filter} propertys={filter.rentRequest} filterID={MobxStore.router.params.keyID}/>;
+      case 'rent' : return <SlickSaleProperty keyID={MobxStore.router.params.keyID} propertys={filter.rentRequest}/>
+      
+      //case 'rent': return <ListOfMatchAgentRentPropertys segment="filter" filter={filter} propertys={filter.rentRequest} filterID={MobxStore.router.params.keyID}/>;
       break;
-      case 'lease': return <ListOfMatchAgentLeasePropertys segment="filter" filter={filter} propertys={filter.leaseRequest} filterID={MobxStore.router.params.keyID}/>;
+      case 'lease' : return <SlickSaleProperty keyID={MobxStore.router.params.keyID} propertys={filter.leaseRequest}/>
+//      case 'lease': return <ListOfMatchAgentLeasePropertys segment="filter" filter={filter} propertys={filter.leaseRequest} filterID={MobxStore.router.params.keyID}/>;
       break;
     } } else {
       switch ( selectedTab ) {

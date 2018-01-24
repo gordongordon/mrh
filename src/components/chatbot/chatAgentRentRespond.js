@@ -20,6 +20,7 @@ import Key from './key';
 //import Slick from './slick';
 //  import { SlickBuyProperty as Carouse } from './slickAgentBuyProperty';
 import SlickAgentRentProperty from './slickAgentRentProperty';
+
   //import RCarouse from './rcarousel';
 //import Generic from './chatbot-message-ui';
 

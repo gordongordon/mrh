@@ -1,6 +1,6 @@
 // src/blocks/Card/index.js
 import React from "react";
-import defaultTheme from "../theme";
+//import defaultTheme from "../theme";
 import PropTypes from "prop-types";
 //import moment from "moment";
 
@@ -14,24 +14,30 @@ import MrCard from '../MrCard';
 
 export const UserSaleProperty = ( { onWhatsapp, onCall, onTriggetNext, p  } ) => (
       <MrCard w={19 / 20}>
-        <MrCard.AgentBuyHeading location={p.addressLocationLabel} building={p.nameOfBuildingLabel} recordNumber={1} />
+        <MrCard.UserSaleHeading location={p.addressLocationLabel} building={p.nameOfBuildingLabel} recordNumber={1} />
         {BackgroundImage && <BackgroundImage ratio={2 / 5} src="http://www.kowsinn.com/dc02.jpg" />}
-        {p.uid}
         <Flex wrap mx={1} my={1}>
-
           <MrCard.LineText>
-            <Text f={3}>重點 </Text>
+            <Text f={3}>重點</Text>
           </MrCard.LineText>
-          <MrCard.EarlyTimeToView value={p.earlyTimeToViewLabel}  />
-
-
-          <MrCard.LineText>  <Text f={3}>特徵</Text> </MrCard.LineText>
-
+          <MrCard.SalePrice value={p.salePrice} />
+          <MrCard.NetSize value={p.netSize} />
+          <MrCard.NetSquarePrice value={p.sellerNetSquarePrice} />
+          <MrCard.Partition room={p.numOfRoom} bathRoom={p.numOfBathroom} livingRoom={p.numOfLivingroom} />
+          <MrCard.LineText>
+            <Text f={3}>特徵</Text>
+          </MrCard.LineText>
+          <MrCard.Level value={p.levelLabel} />
+          <MrCard.IsPetAllowed value={p.isPetAllowed} />
+          <MrCard.IsViewAble value={p.isViewAble} />
+          <MrCard.IsSaleWithLease value={p.isSaleWithLease} />
           <MrCard.LineText>
             <Text f={3}>其他</Text>
           </MrCard.LineText>
+          <MrCard.School primary={95} secondary="馬鞍山區" />
+          <MrCard.EarlyTimeToView value={p.earlyTimeToViewLabel} />
           <MrCard.DayListed value={p.dayListed} />
-
+          <MrCard.MonthlyPayment value={19389} />
           <MrCard.LineText>
             <Text f={3}>聯絡方式</Text>
           </MrCard.LineText>
@@ -73,7 +79,7 @@ export const UserSaleProperty = ( { onWhatsapp, onCall, onTriggetNext, p  } ) =>
             }
           </MrCard.Cell>
         </Flex>
-      </MrCard>
+        </MrCard>
     );
 
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import defaultTheme from '../theme';
+//import defaultTheme from '../theme';
 import PropTypes from 'prop-types';
 // import Carousel from '../Carousel/index';
 

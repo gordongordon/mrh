@@ -53,6 +53,8 @@ export default class SlickSaleProperty extends React.Component {
 
     var count = 0;
     list.forEach((property, keyID) => {
+      property.setTimeStamp();
+
 
       if ( count == 0 ) {
       element.push(

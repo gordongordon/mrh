@@ -1,6 +1,6 @@
 // src/blocks/Card/index.js
 import React from "react";
-import defaultTheme from "../theme";
+//import defaultTheme from "../theme";
 import PropTypes from "prop-types";
 //import moment from "moment";
 
@@ -14,7 +14,7 @@ import MrCard from '../MrCard';
 
 export const UserBuyProperty = ( { onWhatsapp, onCall, onTriggetNext, p  } ) => (
       <MrCard w={19 / 20}>
-        <MrCard.UserAgentBuyHeading location={p.addressLocationLabel} building={p.nameOfBuildingLabel} recordNumber={1} />
+        <MrCard.UserBuyHeading location={p.addressLocationLabel} building={p.nameOfBuildingLabel} recordNumber={1} />
         {BackgroundImage && <BackgroundImage ratio={2 / 5} src="http://www.kowsinn.com/dc02.jpg" />}
         {p.uid}
         <Flex wrap mx={1} my={1}>
