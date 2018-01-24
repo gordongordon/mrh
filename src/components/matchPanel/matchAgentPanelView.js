@@ -41,6 +41,7 @@ import views from "views";
  * Handling Carousel 
  */
 import SlickBuyProperty from "../chatbot/slickBuyProperty";
+import SlickSaleProperty from "../chatbot/slickSaleProperty";
 
 
 
@@ -186,7 +187,8 @@ class MatchAgentPanelView extends React.Component {
       //case 'buy' : return <ListOfMatchAgentBuyPropertys segment="filter" filter={filter} propertys={filter.buyRequest} filterID={MobxStore.router.params.keyID}/>;
       case 'buy' : return <SlickBuyProperty keyID={MobxStore.router.params.keyID} propertys={filter.buyRequest}/>
       break;
-      case 'sale': return <ListOfMatchAgentSalePropertys  segment="filter" filter={filter} propertys={filter.saleRequest} filterID={MobxStore.router.params.keyID}/>;
+      case 'sale' : return <SlickSaleProperty keyID={MobxStore.router.params.keyID} propertys={filter.saleRequest}/>
+     // case 'sale': return <ListOfMatchAgentSalePropertys  segment="filter" filter={filter} propertys={filter.saleRequest} filterID={MobxStore.router.params.keyID}/>;
       break;
       case 'rent': return <ListOfMatchAgentRentPropertys segment="filter" filter={filter} propertys={filter.rentRequest} filterID={MobxStore.router.params.keyID}/>;
       break;

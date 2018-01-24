@@ -6,8 +6,9 @@ import {propertys} from 'userModelView';
 import {ListOfMatchOldSalePropertys} from '../listOfMatch/listOfMatchOldSalePropertys';
 import { SingleSaleUserMatchViewWrapper } from "../singlePropertyView/singleSaleUserMatchView";
 import {observer } from "mobx-react";
-import { AgentSaleProperty as ItemView } from "../mrui/AgentSaleProperty/AgentSaleProperty";
+// import { AgentSaleProperty as ItemView } from "../mrui/AgentSaleProperty/AgentSaleProperty";
 
+import { AgentSaleProperty as ItemView } from "../mrui/Carousel/AgentSaleProperty";
 
 const prompt = Modal.prompt;
 

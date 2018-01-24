@@ -10,7 +10,8 @@ import {observer } from "mobx-react";
 //import {AgentBuyProperty as ItemView } from "../mrui/AgentBuyProperty/AgentBuyProperty";
 //import AgentBuyProperty from "../mrui/AgentBuyProperty/AgentBuyProperty";
 
-import { AgentBuyProperty as ItemView } from "../mrui/AgentBuyProperty/AgentBuyProperty";
+import { AgentBuyProperty as ItemView } from "../mrui/Carousel/AgentBuyProperty";
+
 //const ItemView = AgentBuyProperty;
 const prompt = Modal.prompt;
 
