@@ -218,26 +218,33 @@ function sendToken(email, token, hostname , displayName, protocal) {
     to: email,
     from: "webmaster@mr.house",
     subject: "Mr.House - Passwordless login Now!",
-    text: `hi, ${displayName}
-    Welcome to Mr.House!
-    Click and confirm that you want to sign in to Mr.House. This link will expire in five minutes:
+    text: `你好，${displayName}: 
+    歡迎來到Mr.House! 
+    請按此連結進入你的Mr.House帳戶。帳戶儲存了你過往的請求，快看看有沒有任何新信息。
+    此連結將會在5分鐘後到期：
     ${url}
-    If you are having any issues with your account, please don't hesitate to contact us by replying to this mail.
-    
-    Thanks!
-    Mr.House`,
-    html: `hi, ${displayName} 
+    多謝你選用Mr.House 。
+
+Have a nice day! 
+
+=========================
+
+請注意：請不要回覆此電郵，你收到此電郵因為你曾經登記過Mr.House帳戶。如有任何問題請聯絡info@mr.house。`,
+
+    html: `你好， ${displayName}: 
     <br />
-    Welcome to Mr.House!
+    歡迎來到Mr.House! 
     <br />
     <p>
     <strong>
-    Click and confirm that you want to sign in to Mr.House This link will expire in five minutes: <br>
+    請按此連結進入你的Mr.House帳戶。帳戶儲存了你過往的請求，快看看有沒有任何新信息。
+    此連結將會在5分鐘後到期： <br>
     <a href="${url}"> ${url} </a>
     </strong>
     </p>
+    <p>=========================</p>
     <br />
-    <Small>You’re receiving this email because you have an account in mrhouse. If you are not sure why you’re receiving this, please contact us. </Small>`
+    <Small>請注意：請不要回覆此電郵，你收到此電郵因為你曾經登記過Mr.House帳戶。如有任何問題請聯絡info@mr.house。 </Small>`
   };
 
   console.log( msg );

@@ -116,7 +116,7 @@ export default class SlickBuyProperty extends React.Component {
     return (
         <Carousel
           className="my-carousel"
-          autoplay={true}
+          autoplay={false}
           dots={false}
           selectedIndex={0}
           swipeSpeed={3}

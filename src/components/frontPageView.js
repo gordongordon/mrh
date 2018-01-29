@@ -100,7 +100,7 @@ render ()  {
        <Button type="ghost" onClick={ () => goTo( views.actionSheetExample, store.app.params, store )}> actionSheet </Button>
     <WhiteSpace />
     <WhiteSpace />
-       <Button type="primary" onClick={ () => goTo( views.chatMatching, store.app.params, store )}> ChatMatching </Button>
+       <Button type="primary" onClick={ () => goTo( views.agentLogin, store.app.params, store )}> Agent Login </Button>
     <WhiteSpace />
     <WhiteSpace />
        <Button type="primary" onClick={ () => goTo( views.mrHouse, store.app.params, store )}> Mr.House Chatbot </Button>
