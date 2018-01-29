@@ -7,7 +7,7 @@ const ViewUserLeaseHeading = ({ location, building, recordNumber }) => (
         出租樓盤: {location} , {building}
             <Relative>
                 <Absolute bottom right>
-                    <Label f={3}>LLLL編號:MOS-{recordNumber} </Label>
+                    <Label f={3}>編號:MOS-{recordNumber} </Label>
                 </Absolute>
             </Relative>
     </Heading>);
