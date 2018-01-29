@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Checkbox } from 'rebass';
 import styled from 'styled-components';
 
-const MrCheckbox = styled(Checkbox).attrs({
+const MrCheckbox = Checkbox.extend.attrs({
     type: 'checkbox',
     readonly : 'readonly',
     check: 'true',

@@ -21,9 +21,6 @@ const LineText = styled.span`
 	margin: 0px 8px;
  }  
 
-
- 
-
 `;
 
 LineText.defaultProps = {

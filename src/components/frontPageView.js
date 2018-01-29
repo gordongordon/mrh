@@ -10,6 +10,7 @@ import views from 'views';
 //import {FrontPageTabBar} from 'frontPageTabBar'
 import {inject, observer} from 'mobx-react';
 // import MrHouse from 'chatbot/mrHouse';
+import FormAgentLogin from './form/formAgentLogin';
 
 
 @inject("store") @observer
@@ -73,6 +74,7 @@ render ()  {
     <div>
   <WingBlank>
     <WhiteSpace />
+    <FormAgentLogin />
     <WhiteSpace />
     <WhiteSpace />
     <Button type="primary" onClick={ () => this.loadingToast( store, goTo ) }>買 家</Button>

@@ -2,7 +2,7 @@ import styled from 'styled-components';
 // import theme from './theme';
 import {Box} from 'rebass';
 
-const Cell = styled(Box)`
+const Cell = Box.extend`
     border-radius: 5px;
     color:  #808080;
     padding-left: 6px;
