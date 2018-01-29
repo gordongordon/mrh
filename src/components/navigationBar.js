@@ -13,6 +13,7 @@ import {
 import MobxStore from "mobxStore";
 import views from "views";
 import { Fb } from "firebase-store";
+import {Login, Logout, FormAdd} from 'grommet-icons';
 
 const Item = Popover.Item;
 
@@ -159,7 +160,7 @@ export default class NavigationBar extends React.Component {
     if (isLogin) {
       return (
         <span key="2" onClick={this.onLogout}>
-          登出
+          <Logout/> 登出
         </span>
       );
     } else {
@@ -200,7 +201,7 @@ export default class NavigationBar extends React.Component {
               alignItems: "center"
             }}
           >
-            <span>請登入</span>
+            <span><Login/> 請登入</span>
           </div>
         </Popover>
       );
@@ -242,7 +243,7 @@ export default class NavigationBar extends React.Component {
           leftContent={[<div key="1">{this.loginItem()}</div>]}
           rightContent={[
             <span key="2" onClick={this.showActionSheet}>
-              +
+              <FormAdd size='large' color="red"/>
             </span>
           ]}
         >

@@ -3,6 +3,7 @@ import React from "react";
 import defaultTheme from "../theme";
 import PropTypes from "prop-types";
 //import moment from "moment";
+import { Home } from 'grommet-icons';
 
 import {
   BackgroundImage,
@@ -69,7 +70,7 @@ export const AgentBuyProperty = ( { onWhatsapp, onCall, onTriggetNext, p,isBackg
               children="Home"
               f={5}
               color="#F55869"
-            />
+            ><Home color="#F55869" size='large'/></MrCard.ButtonOutline>
             }
           </MrCard.Cell>
         </Flex>
