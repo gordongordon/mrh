@@ -62,6 +62,9 @@ import Loadable from 'react-loadable';
 //import Loading from  'loading'
 //import LoadableVisibility from 'react-loadable-visibility/react-loadable'
 
+import FormAgentLogin from './form/formAgentLogin';
+
+
 function MyLoadingComponent(props) {
   if (props.isLoading) {
     // While our other component is loading...
@@ -718,7 +721,18 @@ const views = {
     beforeExit: (route, params) => {
     }
   }),
+/**
+ * Agent 
+ */
 
+agentLogin: new Route({
+  path: '/FormAgentLogin',
+  component: <FormAgentLogin />,
+  onEnter: (route, params, store, queryParams) => {
+  },
+  beforeExit: (route, params) => {
+  }
+}),
 
   // bmi: new Route({
   //   path: '/bmi',

@@ -268,12 +268,12 @@ class AskChatbotSignIn extends React.Component {
       {
         // welcome
         id: "getUserSignIn",
-        message: "Welcome to Passwordless login!",
+        message: "多謝你再次使用mr.house。",
         trigger: "getEmail"
       },
       {
         id: "getEmail",
-        message: "please input your email!",
+        message: "請輸入你的電郵去登入你的帳戶。",
         trigger: "getEmailUserInput"
       },
       {
@@ -287,17 +287,17 @@ class AskChatbotSignIn extends React.Component {
         //
         id: "validaEmailUserInput",
         message: ({ previousValue, steps }) => {
-          return `你選擇左 (Email) 「${previousValue} 」!`;
+          return `「${previousValue} 」是否正確? !`;
         },
         trigger: "validaEmailBoolean"
       },
       {
         id: "validaEmailBoolean",
         options: [
-          { value: "true", label: "👍🏻係", trigger: "followUp" },
+          { value: "true", label: "👍🏻正確", trigger: "followUp" },
           {
             value: "false",
-            label: "👎🏻唔係",
+            label: "👎🏻要更改",
             trigger: "update-getEmailUserInput"
           }
         ]
@@ -312,9 +312,24 @@ class AskChatbotSignIn extends React.Component {
         message : ({ previousValue, steps }) => {
           const email = steps.getEmailUserInput.value;
           this.handleLogin( email );
-          return `Please Open 「${email} 」, then click a link  ${window.location.protocol}//${window.location.host}/list/xxx from mr.house to login without password!`;
+          return `Ok, Mr.house 啱啱發了電郵給你[${email}]，請你打開"歡迎來到Mr House"的電郵並按附屬的一次性連結。`;
         },
         delay: 1000,
+        trigger: "examplelink"
+      },
+      {
+        id: "examplelink",
+        message: `e.g. ${window.location.protocol}//${window.location.host}/list/xxx `,
+        trigger: 'followUp2'
+      },
+      {
+        id: "followUp2",
+        message : "連結會直接帶你前往到你的帳戶，你即可翻查你過往的請求有沒有新訊息 。",
+        trigger: "followUp3"
+      },
+      {
+        id: "followUp3",
+        message : "溫馨提示：mr.house不需要密碼去登入平台。下次登入時，你只需再輸入電郵地址然後一個新的連結會發送給你。",
         trigger: "stop"
       }
     ];

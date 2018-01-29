@@ -46,10 +46,7 @@ import {
           <MrCard.LineText>
             <Text f={3}>聯絡方式</Text>
           </MrCard.LineText>
-          <MrCard.AgentID value="E-3348778" />
-          <MrCard.Avatar src="http://www.kowsinn.com/dc03.jpeg" />
           <MrCard.ContactName value={p.contactName}/>
-          <MrCard.AgentStar value={3} />
           <MrCard.LineText>
             <Text f={3}>下一步行動</Text>
           </MrCard.LineText>
