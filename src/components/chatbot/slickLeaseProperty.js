@@ -12,7 +12,9 @@ import views from "views";
 //import {AgentBuyProperty as ItemView } from "../mrui/AgentBuyProperty/AgentBuyProperty";
 //import AgentBuyProperty from "../mrui/AgentBuyProperty/AgentBuyProperty";
 
-import { UserLeaseProperty as ItemView } from "../mrui/Carousel/UserLeaseProperty";
+//import { UserLeaseProperty as ItemView } from "../mrui/Carousel/UserLeaseProperty";
+import { LeaseBasic as ItemView } from "../mrui/ViewProperty/LeaseBasic";
+
 //const ItemView = AgentBuyProperty;
 const prompt = Modal.prompt;
 
@@ -117,7 +119,15 @@ export default class SlickLeaseProperty extends React.Component {
     const localpropertys = this.props.propertys;
     
     return (
-        <Carousel
+      <div>
+        {this.display(localpropertys)}
+      </div>
+
+     );
+  }
+}
+
+        {/* <Carousel
           className="my-carousel"
           autoplay={false}
           dots={false}
@@ -127,11 +137,7 @@ export default class SlickLeaseProperty extends React.Component {
           afterChange={index => console.log('slide to', index)}
         >
         {this.display(localpropertys)}
-      </Carousel>
-
-     );
-  }
-}
+      </Carousel> */}
 
 SlickLeaseProperty.propTypes = {
   //steps: PropTypes.object,

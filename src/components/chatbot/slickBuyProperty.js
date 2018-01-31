@@ -13,7 +13,8 @@ import views from "views";
 //import {AgentBuyProperty as ItemView } from "../mrui/AgentBuyProperty/AgentBuyProperty";
 //import AgentBuyProperty from "../mrui/AgentBuyProperty/AgentBuyProperty";
 
-import { UserBuyProperty as ItemView } from "../mrui/Carousel/UserBuyProperty";
+//import { UserBuyProperty as ItemView } from "../mrui/Carousel/UserBuyProperty";
+import { BuyBasic as ItemView } from "../mrui/ViewProperty/BuyBasic";
 //const ItemView = AgentBuyProperty;
 const prompt = Modal.prompt;
 

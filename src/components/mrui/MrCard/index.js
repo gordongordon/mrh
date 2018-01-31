@@ -52,7 +52,11 @@ import { Card as ext } from 'rebass';
 const MrCard = styled(ext) `
     border-radius: 15px;
     background-color: white;   
-    box-shadow: 4px;
+    box-shadow: 0 0.125rem 0.25rem rgba(0,0,0,.125);
+    margin-top : 0;
+    margin-bottom: 0.5rem;
+    margin-left : auto;
+    margin-right : auto;
 `
 
 MrCard.Cell = Cell;
