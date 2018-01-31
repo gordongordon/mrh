@@ -13,7 +13,7 @@ import {
 
   export const UserLeaseProperty = ( { onWhatsapp, onCall, onTriggetNext, p ,isBackgroundImage, onResponse, index } ) => (
 
-      <MrCard w={19 / 20}>
+      <MrCard w={19 / 20} onClick={() => onResponse && onResponse(p)}>
       <MrCard.UserLeaseHeading location={p.addressLocationLabel} building={p.nameOfBuildingLabel} recordNumber={index} />
 
         {isBackgroundImage && <BackgroundImage ratio={2 / 5} src="http://www.kowsinn.com/dc02.jpg" />}
@@ -50,16 +50,7 @@ import {
           <MrCard.LineText>
             <Text f={3}>下一步行動</Text>
           </MrCard.LineText>
-          <MrCard.Cell px={2} py={1} width={1} align="center">
-          {onResponse &&
-              <MrCard.ButtonOutline
-                onClick={() => onResponse(p)}
-                width={7 / 22}
-                children="Response Now!"
-                f={5}
-                color="#F55869"
-              />
-            }            
+          <MrCard.Cell px={2} py={1} width={1} align="center">         
             {onCall &&
               <MrCard.ButtonOutline
                 onClick={() => onCall(property.contactPhone)}

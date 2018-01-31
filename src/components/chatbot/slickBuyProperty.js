@@ -46,8 +46,7 @@ export default class SlickBuyProperty extends React.Component {
   onResponse( property ) {
     console.log( 'onResponse');
 
-    MobxStore.app.passByRef = property ;
-    debugger        
+    MobxStore.app.passByRef = property ;      
     MobxStore.router.goTo(views.saleAgentForm, {
       keyID: property.fbid,
       typeTo: property.typeTo,
@@ -114,21 +113,25 @@ export default class SlickBuyProperty extends React.Component {
     const localpropertys = this.props.propertys;
     
     return (
-        <Carousel
-          className="my-carousel"
-          autoplay={false}
-          dots={false}
-          selectedIndex={0}
-          swipeSpeed={3}
-          beforeChange={(from, to) => console.log(`slide from ${from} to ${to}`)}
-          afterChange={index => console.log('slide to', index)}
-        >
+        <div>
         {this.display(localpropertys)}
-      </Carousel>
+        </div>
 
      );
   }
 }
+
+{/* <Carousel
+className="my-carousel"
+autoplay={false}
+dots={false}
+selectedIndex={0}
+swipeSpeed={3}
+beforeChange={(from, to) => console.log(`slide from ${from} to ${to}`)}
+afterChange={index => console.log('slide to', index)}
+>
+{this.display(localpropertys)}
+</Carousel> */}
 
 SlickBuyProperty.propTypes = {
   //steps: PropTypes.object,

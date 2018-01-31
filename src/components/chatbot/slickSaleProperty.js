@@ -119,21 +119,26 @@ export default class SlickSaleProperty extends React.Component {
     const localpropertys = this.props.propertys;
     
     return (
-        <Carousel
-          className="my-carousel"
-          autoplay={false}
-          dots={false}
-          selectedIndex={0}
-          swipeSpeed={3}
-          beforeChange={(from, to) => console.log(`slide from ${from} to ${to}`)}
-          afterChange={index => console.log('slide to', index)}
-        >
+        <div>
         {this.display(localpropertys)}
-      </Carousel>
+        </div>
+ 
 
      );
   }
 }
+
+{/* <Carousel
+className="my-carousel"
+autoplay={false}
+dots={false}
+selectedIndex={0}
+swipeSpeed={3}
+beforeChange={(from, to) => console.log(`slide from ${from} to ${to}`)}
+afterChange={index => console.log('slide to', index)}
+>
+{this.display(localpropertys)}
+</Carousel> */}
 
 SlickSaleProperty.propTypes = {
   //steps: PropTypes.object,
