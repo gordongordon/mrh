@@ -203,13 +203,17 @@ class MatchAgentPanelView extends React.Component {
       break;
     } } else {
       switch ( selectedTab ) {
-        case 'buy' : return <ListOfMatchAgentBuyPropertys segment="case" filter={filter} propertys={filter.buyCase} filterID={MobxStore.router.params.keyID}/>;
+        case 'buy' : return <SlickBuyProperty keyID={MobxStore.router.params.keyID} propertys={filter.buyRequest} filterID={MobxStore.router.params.keyID} />
+//        case 'buy' : return <ListOfMatchAgentBuyPropertys segment="case" filter={filter} propertys={filter.buyCase} filterID={MobxStore.router.params.keyID}/>;
         break;
-        case 'sale': return <ListOfMatchAgentSalePropertys segment="case" filter={filter} propertys={filter.saleCase} filterID={MobxStore.router.params.keyID}/>;
+        case 'sale' : return <SlickSaleProperty keyID={MobxStore.router.params.keyID} propertys={filter.saleRequest} filterID={MobxStore.router.params.keyID}/>
+ //       case 'sale': return <ListOfMatchAgentSalePropertys segment="case" filter={filter} propertys={filter.saleCase} filterID={MobxStore.router.params.keyID}/>;
         break;
-        case 'rent': return <ListOfMatchAgentRentPropertys segment="case" filter={filter} propertys={filter.rentCase} filterID={MobxStore.router.params.keyID}/>;
+        case 'rent' : return <SlickRentProperty keyID={MobxStore.router.params.keyID} propertys={filter.rentRequest} filterID={MobxStore.router.params.keyID}/>
+ //       case 'rent': return <ListOfMatchAgentRentPropertys segment="case" filter={filter} propertys={filter.rentCase} filterID={MobxStore.router.params.keyID}/>;
         break;
-        case 'lease': return <ListOfMatchAgentLeasePropertys segment="case" filter={filter} propertys={filter.leaseCase} filterID={MobxStore.router.params.keyID}/>;
+        case 'lease' : return <SlickLeaseProperty keyID={MobxStore.router.params.keyID} propertys={filter.leaseRequest} filterID={MobxStore.router.params.keyID}/>
+//        case 'lease': return <ListOfMatchAgentLeasePropertys segment="case" filter={filter} propertys={filter.leaseCase} filterID={MobxStore.router.params.keyID}/>;
         break;
       }  
       // switch ( selectedTab ) {

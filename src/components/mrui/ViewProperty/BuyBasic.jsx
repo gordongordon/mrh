@@ -26,8 +26,8 @@ export const BuyBasic = ( { onWhatsapp, onCall, onTriggetNext, p, isBackgroundIm
         <MrCard.LineText>
             <Text f={4}>{p.contactName}</Text>
           </MrCard.LineText>
-          <MrCard.SalePrice f={3} value={p.buyBudgetMax} />
-          <MrCard.NetSize f={3} value={p.netSizeMin} />
+          <MrCard.BuyBudgetMax f={3} value={p.buyBudgetMax} />
+          <MrCard.NetSizeMin f={3} value={p.netSizeMin} />
           <MrCard.NetSquarePrice f={3} value={p.sellerNetSquarePrice} />
           <MrCard.Partition f={3} room={p.numOfRoom} bathRoom={p.numOfBathroom} livingRoom={p.numOfLivingroom} />
 

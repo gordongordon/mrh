@@ -44,6 +44,8 @@ if (isIPhone) {
 @inject("store") @observer
 class SingleBuyCaseView extends React.Component {
 
+  static displayName = 'SingleBuyCaseView';
+  
   constructor(props) {
     super(props);
 
